@@ -1,0 +1,68 @@
+# Initial Prompt
+
+We are competing in the Tech for Change 2026 hackathon.
+Theme:
+"Tech for Change brings UQ students together to design practical, socially responsible ICT solutions for real-world regional challenges. Through a one-day bootcamp, mentoring, teamwork, and final pitches, students build employability skills while creating ideas for meaningful social impact."
+Team:
+
+•  2 Engineering/Mathematics students
+•  1 Computer Science/Mathematics student
+•  2 Engineering/Master of Engineering students
+  Time available:
+•  8 hours to design, build an MVP, and prepare the final presentation.
+  Judging Criteria:
+•  Problem Definition (supported by evidence): 20%
+•  Strategy/Solution: 50%
+•  What Does Success Look Like?: 10%
+•  Delivery and Presentation: 20%
+  Generate 15 hackathon ideas that are highly likely to score well against this rubric.
+  For each idea, provide:
+
+1. Project Name
+
+2. Problem Definition (20%)
+
+•  Define the regional problem.
+•  Include supporting evidence, statistics, or trends where possible.
+•  Explain why the problem is important.
+
+3. Strategy / Solution (50%)
+
+•  Explain the ICT solution in detail.
+•  Describe the user journey.
+•  Explain why this solution is better than existing approaches.
+•  List the core technologies (AI, GIS, computer vision, optimisation, IoT, etc.).
+•  Clearly define what can realistically be built in an 8-hour MVP.
+
+4. Success Metrics (10%)
+
+Provide measurable KPIs such as:
+
+•  Time saved
+•  Cost reduction
+•  Increased accessibility
+•  Number of users helped
+•  Accuracy improvements
+•  Environmental impact
+•  Other relevant metrics
+
+5. Presentation Potential (20%)
+
+•  Why this project would make an impressive live demo.
+•  What judges would see in a 2–3 minute pitch.
+•  What "wow factor" the project has.
+
+6. Difficulty (1–10)
+
+7. Innovation (1–10)
+
+8. Social Impact (1–10)
+
+9. Feasibility in 8 Hours (1–10)
+
+Finally:
+
+•  Rank all ideas from strongest to weakest.
+•  Recommend the best five.
+•  Explain how each recommended idea scores against each judging criterion.
+•  Prioritise ideas that are unique, memorable, technically feasible in one day, and capable of impressing judges during a live demonstration rather than ideas that require extensive backend infrastructure.
