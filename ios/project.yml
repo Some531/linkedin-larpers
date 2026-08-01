@@ -18,6 +18,9 @@ targets:
     platform: iOS
     sources:
       - HandaPH
+    scheme:
+      testTargets:
+        - HandaPHUITests
     info:
       path: HandaPH/Info.plist
       properties:
@@ -32,3 +35,13 @@ targets:
         CFBundleURLTypes:
           - CFBundleURLName: ph.rdy.handa
             CFBundleURLSchemes: [handaph]
+  HandaPHUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: true
+    sources:
+      - HandaPHUITests
+    dependencies:
+      - target: HandaPH

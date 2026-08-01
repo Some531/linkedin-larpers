@@ -6,13 +6,27 @@ SMS reaches every handset; the link in the SMS opens this app for detail.
 
 ## Build
 
-Requires Xcode 16+ (iOS 17 SDK). The project file is generated, not committed:
+Requires Xcode 16+ (iOS 17 SDK). `HandaPH.xcodeproj` is committed, so:
+
+```sh
+open ios/HandaPH.xcodeproj
+```
+
+The project file is *generated* from `project.yml`. If you add/remove files
+or targets, edit `project.yml` and regenerate rather than editing the
+project in Xcode's UI:
 
 ```sh
 brew install xcodegen   # once
-cd ios
-xcodegen generate
-open HandaPH.xcodeproj
+cd ios && xcodegen generate
+```
+
+Run the UI smoke tests (first-run language flow, SMS deep link, glossary
+search) with Cmd-U, or:
+
+```sh
+xcodebuild -project HandaPH.xcodeproj -scheme HandaPH \
+  -destination 'platform=iOS Simulator,name=iPhone 16 Pro' test
 ```
 
 No external packages — the first cut builds with the system SDK only.
