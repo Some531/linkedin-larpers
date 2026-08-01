@@ -135,7 +135,7 @@ final class AssistantEngine: ObservableObject {
     }
 
     /// Keyword retrieval over the glossary, matching in the user's language
-    /// AND English (same behaviour as the Meanings tab search).
+    /// AND English (same behaviour as the Glossary tab search).
     static func retrieve(_ question: String, language: AppLanguage) -> [GlossaryTerm] {
         let words = question.lowercased()
             .components(separatedBy: CharacterSet.alphanumerics.inverted)
@@ -194,7 +194,7 @@ final class AssistantEngine: ObservableObject {
         """
         You are the PhilAlert AI Assistant, the in-app guide of PhilAlert, a disaster-preparedness app \
         for the Philippines. You help users understand hazard terms and find \
-        things in the app (tabs: Alerts, Map, Meanings, My Plan, Settings; the \
+        things in the app (tabs: Alerts, Map, Glossary, My Plan, Settings; the \
         Map holds evacuation centres and the household profile).
 
         Rules, in order:

@@ -66,7 +66,7 @@ enum L10n {
     // entirely until a speaker contributes — visible, not silent.
     private static let tables: [AppLanguage: [Key: String]] = [
         .english: [
-            .tabAlerts: "Alerts", .tabMap: "Map", .tabGlossary: "Meanings",
+            .tabAlerts: "Alerts", .tabMap: "Map", .tabGlossary: "Glossary",
             .tabPlan: "My Plan", .tabSettings: "Settings",
             .alertsTitle: "Alerts", .noAlerts: "No alerts for your area right now.",
             .whatToDoNow: "What to do now", .moreDetail: "More detail",
@@ -74,7 +74,7 @@ enum L10n {
             .happeningNow: "HAPPENING NOW", .expectedSoon: "EXPECTED SOON",
             .prepare: "PREPARE", .allClear: "ALL CLEAR",
             .severityDanger: "DANGER", .severityWarning: "WARNING", .severityAdvisory: "ADVISORY",
-            .glossaryTitle: "Meanings", .glossarySubtitle: "Hazard words explained in plain language.",
+            .glossaryTitle: "Glossary", .glossarySubtitle: "Hazard words explained in plain language.",
             .whatItIs: "What it is", .whatToDo: "What to do",
             .planTitle: "My Plan", .planSubtitle: "Prepare before a disaster. Tick what you have done.",
             .mapTitle: "Map", .youAreHere: "You are here",

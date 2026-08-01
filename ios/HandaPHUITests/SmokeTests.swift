@@ -175,8 +175,8 @@ final class SmokeTests: XCTestCase {
         app.launchArguments = ["-appLanguage", "en"]
         app.launch()
 
-        app.tabBars.buttons["Meanings"].tap()
-        XCTAssertTrue(app.navigationBars["Meanings"].waitForExistence(timeout: 5))
+        app.tabBars.buttons["Glossary"].tap()
+        XCTAssertTrue(app.navigationBars["Glossary"].waitForExistence(timeout: 5))
 
         let searchField = app.searchFields.firstMatch
         // The search bar starts collapsed; swipe down until it is hittable.
