@@ -1,5 +1,10 @@
 # Linkedin-Larpers
 
+<p align="center">
+  <img src="docs/app-icon.jpg" alt="PhilAlert logo" width="140">
+</p>
+<p align="center"><strong>PhilAIert</strong> — read it again: the AI was there all along.</p>
+
 # Branches: 
 - imira (backend)
 - hamza (frontend)
@@ -99,9 +104,12 @@ https://www.openstreetmap.org/export#map=4/6.49/139.66
 
 ---
 
-# HandaPH — App Documentation
+# PhilAlert — App Documentation
 
-*"Handa" — Tagalog for ready/prepared.* iOS app (SwiftUI, iOS 17+), built in `ios/`.
+*Displayed as **PhilAIert** — a capital I where the second l sits, visually
+identical in a sans-serif face, so "AI" is embedded in the name.* iOS app
+(SwiftUI, iOS 17+), built in `ios/` (project folder retains the original
+working title HandaPH).
 Open `ios/HandaPH.xcodeproj` in Xcode 16+ and press ⌘R (see `ios/README.md` for
 demo commands: fake GPS, SMS deep link, tests).
 
