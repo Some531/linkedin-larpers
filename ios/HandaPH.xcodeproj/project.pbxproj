@@ -14,6 +14,7 @@
 		2DAB28869CF96CC60DF1B0A8 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5EAD4AB52F52D318CD15DE /* OnboardingView.swift */; };
 		439FD7C84EC1135A8A8C32AA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A9817A6B78AB819E163E1F /* RootView.swift */; };
 		44BC0E25355C1D8CA239FC28 /* HandaPHApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC067D063C5F51F29BA09B7 /* HandaPHApp.swift */; };
+		4767A249F554082A318FCE4A /* SMSPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706E1AAA9D326DF176717BD3 /* SMSPreviewView.swift */; };
 		51EB28749C4B068707A535A9 /* HouseholdProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2C5E42FF3BD70BCD7A4231 /* HouseholdProfileView.swift */; };
 		59A1CD2589136F18FDF44837 /* AssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E595F0514F20CF20D6FA92 /* AssistantView.swift */; };
 		793C62DD1BEF5A0EDEB1F2F5 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42831632607ECDECFF00C88 /* AppState.swift */; };
@@ -56,6 +57,7 @@
 		5F5EAD4AB52F52D318CD15DE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		628876B8FBFB217058FB2619 /* SpeechToText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToText.swift; sourceTree = "<group>"; };
 		633D96B3C035342C89A33D43 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		706E1AAA9D326DF176717BD3 /* SMSPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSPreviewView.swift; sourceTree = "<group>"; };
 		7C66C0E0CEE9DEDC8BE4508B /* AssistantEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantEngine.swift; sourceTree = "<group>"; };
 		88E4521D11DFDB180035BEED /* CheckInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInView.swift; sourceTree = "<group>"; };
 		8E678C8BF4A28198D06B4548 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				88E4521D11DFDB180035BEED /* CheckInView.swift */,
+				706E1AAA9D326DF176717BD3 /* SMSPreviewView.swift */,
 			);
 			path = CheckIn;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				8EE108BDC5DD951483FD890C /* OSMData.swift in Sources */,
 				2DAB28869CF96CC60DF1B0A8 /* OnboardingView.swift in Sources */,
 				439FD7C84EC1135A8A8C32AA /* RootView.swift in Sources */,
+				4767A249F554082A318FCE4A /* SMSPreviewView.swift in Sources */,
 				1DA67C63BD8AF97BBC9E329F /* SettingsView.swift in Sources */,
 				DC9F658CCB4E0C0F292EA96C /* SpeechService.swift in Sources */,
 				AA77D2C3FBCE03369A5DD19A /* SpeechToText.swift in Sources */,

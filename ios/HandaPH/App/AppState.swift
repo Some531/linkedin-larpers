@@ -33,6 +33,9 @@ final class AppState: ObservableObject {
     /// Alert opened via SMS deep link; RootView presents it when set.
     @Published var deepLinkedAlert: HazardAlert?
 
+    /// Demo: presents the Messages-style SMS preview (handaph://sms-demo).
+    @Published var showSMSDemo = false
+
     /// False until the first-launch language screen has been completed.
     @Published var hasChosenLanguage: Bool
 
@@ -63,6 +66,10 @@ final class AppState: ObservableObject {
     func handle(url: URL) {
         let scheme = url.scheme?.lowercased()
         let host = url.host()?.lowercased()
+        if scheme == "handaph", host == "sms-demo" {
+            showSMSDemo = true
+            return
+        }
         let token: String?
         if scheme == "handaph", host == "a" {
             token = url.pathComponents.dropFirst().first

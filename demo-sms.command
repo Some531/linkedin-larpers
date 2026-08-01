@@ -17,15 +17,13 @@ open -a Simulator
 xcrun simctl launch "$SIM" ph.rdy.HandaPH >/dev/null 2>&1
 sleep 2
 
-# 3. Fire the storm-surge alert link (this is 'tapping the SMS link').
-if xcrun simctl openurl "$SIM" "handaph://a/7Kq2"; then
+# 3. Show the SMS on screen (Messages-style preview inside the app).
+if xcrun simctl openurl "$SIM" "handaph://sms-demo"; then
     echo ""
-    echo "✅ Link sent. Look at the Simulator window:"
+    echo "✅ Look at the Simulator window:"
     echo "   - If iOS asks 'Open in PhilAIert?', click Open."
-    echo "   - The storm-surge alert page appears in the app."
-    echo ""
-    echo "NOTE: this opens the alert INSIDE the app — the simulator cannot"
-    echo "show a fake SMS bubble; narrate it as 'the resident taps the link'."
+    echo "   - You will SEE the SMS as a message bubble from PAGASA-ALERT."
+    echo "   - Tap the blue link in the bubble -> the alert opens."
 else
     echo ""
     echo "❌ Something failed. Is the app installed? Open Xcode and press ⌘R once,"

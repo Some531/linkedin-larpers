@@ -42,6 +42,10 @@ struct RootView: View {
         )) {
             OnboardingView()
         }
+        // Demo: Messages-style SMS preview (handaph://sms-demo).
+        .fullScreenCover(isPresented: $appState.showSMSDemo) {
+            SMSPreviewView()
+        }
         // SMS deep link lands here regardless of which tab is open.
         .sheet(item: $appState.deepLinkedAlert) { alert in
             NavigationStack {
