@@ -84,12 +84,6 @@ struct SMSPreviewView: View {
                     .accessibilityHint("Opens the alert")
 
                     Spacer(minLength: 40)
-
-                    Label("Demo preview — the simulator cannot receive real SMS",
-                          systemImage: "info.circle")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .frame(maxWidth: .infinity)
                 }
                 .padding(.horizontal)
             }
