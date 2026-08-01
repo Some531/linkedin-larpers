@@ -1,0 +1,94 @@
+PhilAIert — pitch script concepts, slide by slide
+Target length: 3–4 minutes (~20–25 seconds per slide).
+The slides carry the headline + evidence; the script carries the depth and the emotion.
+
+------------------------------------------------------------------
+SLIDE 1 · TITLE  (~10s)
+- Introduce team and app name; point out the name trick if it fits naturally
+  ("PhilAlert — with AI quietly inside it").
+- One sentence framing: this is about warnings that work for the people
+  the current system misses.
+
+SLIDE 2 · THE PROBLEM  (~25s)
+- The Philippines faces every major natural hazard, every year.
+- The deaths are not from missing warnings — they come from mismanagement,
+  low awareness and misinformation around the warnings that DO exist.
+- Name the audience precisely: culturally and linguistically diverse people
+  who are physically inside the warning zone but effectively invisible to
+  the warning system (language, literacy, social network).
+- State the goal: no one left behind for the language they speak.
+
+SLIDE 3 · TYPHOON HAIYAN 2013  (~30s)
+- This is the evidence slide — tell it as a story, not a list.
+- Warnings were issued, and people still died: shelters already flooded,
+  the storm ~3 hours early, severity that didn't translate (6 m forecast
+  vs up to 17 m reality — people simply didn't know what "storm surge" meant
+  in their own language).
+- Families searched for each other instead of evacuating.
+- Land the thesis: the failure was in the LAST METRE of communication —
+  receive, understand, believe, act. That's the gap we close.
+
+SLIDE 4 · OUR MISSION  (~20s)
+- Read the mission sentence — access, understand, trust, act.
+- Don't walk through all six principle cards; gesture at them and pick two
+  to voice (suggest: Accessibility first + Build trust).
+- Bridge line: "Here's what that looks like in a person's hands." → demo arc.
+
+SLIDE 5 · FIRST OPEN (onboarding GIF)  (~25s)
+- Talk over the GIF: a Waray-speaking lola opens the app for the first time.
+- Every language is written in itself with a greeting — she recognises hers
+  without help, without English.
+- The age step: the app adapts to HER (60+ = bigger text, alerts read aloud).
+- Key idea to voice: accessibility is the entry door, not a settings menu.
+
+SLIDE 6 · RECEIVE (SMS → alert GIF + alert detail)  (~30s)
+- The moment that matters: an alert arrives as a plain SMS — works on any
+  phone, no app required, no data required.
+- One tap opens the exact alert: severity, place, three numbered actions.
+  No feeds, no scrolling, no information overload (call back to Haiyan).
+- "I'm Safe" one-tap family SMS — directly answers the Haiyan failure of
+  families searching for each other instead of evacuating.
+
+SLIDE 7 · UNDERSTAND (accessibility GIF + glossary)  (~25s)
+- The Haiyan lesson: people heard "storm surge" and didn't move.
+- Glossary explains what it IS and what to DO, in plain language, offline.
+- Pictograms and colour carry meaning across language and literacy levels;
+  voice reads everything aloud.
+- AI assistant: ask in your own words/dialect — answers only from verified
+  content, so it can inform but never invent a warning.
+
+SLIDE 8 · ACT (map GIF + household sheet)  (~30s)
+- Knowing is not enough — people need to know where to GO.
+- The map shows only what matters near you (relevance radius), walking
+  routes and arrival times to open evacuation centres and food shelters.
+- Household details (elderly, young children, limited mobility) change the
+  advice — and stay on the phone. Say the privacy line out loud.
+- Built for broken networks: last saved map keeps working offline.
+
+SLIDE 9 · TRUST  (~30s)
+- The deepest point of the pitch: a warning only works if it is believed.
+- Post-Haiyan corruption hearings (US$228 M) damaged confidence in
+  government channels — cite The Borgen Project.
+- Our answer: NGO backing (Philippine Red Cross), barangay officials
+  co-signing alerts (a name people know), transparent sourcing, honestly
+  labelled translations, no AI-written warnings, location never leaves
+  the phone.
+- Voice the principle: we borrow trust from the people who already have it.
+
+SLIDE 10 · WHAT SUCCESS LOOKS LIKE  (~20s)
+- Success is not downloads — it is a warning people follow.
+- Three beats: people act on alerts and spread the word; the gap between
+  receiving and understanding shrinks to seconds; nobody is left behind for
+  speaking Waray instead of English.
+- Close on the line: "PhilAIert — no one left behind."
+
+------------------------------------------------------------------
+NOTES FOR THE SPEAKERS
+- The GIFs on slides 5–8 auto-play in slideshow mode (PowerPoint). Rehearse
+  so your words land while the loop shows the moment you're describing.
+- Deliberately NOT in the deck (keep it that way in the talk unless asked):
+  risk-index mathematics, tech stack, feature inventory. If judges ask how
+  personalisation works, answer in one line: "location + hazard zone +
+  household profile, computed on the device."
+- Rubric mapping: slides 2–3 = Problem Definition (evidence), 4–9 =
+  Strategy/Solution, 10 = What Success Looks Like.
