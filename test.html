@@ -1,74 +1,3455 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My App</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
-    }
+    <meta charset="UTF-8">
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      padding: 20px 50px;
-      background: white;
-    }
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    .hero {
-      text-align: center;
-      padding: 100px 20px;
-    }
+    <title>SafeSignal Philippines</title>
 
-    .hero h1 {
-      font-size: 50px;
-      margin-bottom: 20px;
-    }
 
-    .hero p {
-      font-size: 20px;
-      color: #666;
-    }
+    <!-- Leaflet -->
 
-    button {
-      padding: 12px 25px;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      background: #007bff;
-      color: white;
-      cursor: pointer;
-    }
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
 
-    button:hover {
-      background: #0056b3;
-    }
-  </style>
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+
+            box-sizing: border-box;
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+
+        body {
+
+            font-family:
+
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background: #f1f5f9;
+
+            color: #172033;
+
+            min-height: 100vh;
+
+        }
+
+
+        button,
+        select {
+
+            font: inherit;
+
+        }
+
+
+        button {
+
+            cursor: pointer;
+
+        }
+
+
+        /* =========================================
+           ACCESSIBILITY
+        ========================================= */
+
+        body.large-text {
+
+            font-size: 120%;
+
+        }
+
+
+        body.large-text
+        h1 {
+
+            font-size: 2.5rem;
+
+        }
+
+
+        body.large-text
+        button {
+
+            padding: 16px;
+
+        }
+
+
+        /* =========================================
+           SCREENS
+        ========================================= */
+
+        .screen {
+
+            display: none;
+
+        }
+
+
+        .screen.active {
+
+            display: block;
+
+        }
+
+
+        /* =========================================
+           ONBOARDING
+        ========================================= */
+
+        #onboarding {
+
+            min-height: 100vh;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 30px;
+
+            background:
+
+                linear-gradient(
+
+                    135deg,
+
+                    #e0f2fe,
+
+                    #f8fafc
+
+                );
+
+        }
+
+
+        #onboarding.active {
+
+            display: flex;
+
+        }
+
+
+        .onboarding-card {
+
+            width: 100%;
+
+            max-width: 700px;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 24px;
+
+            box-shadow:
+
+                0 15px 50px
+
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.12
+                );
+
+            text-align: center;
+
+        }
+
+
+        .brand-icon {
+
+            font-size: 60px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .onboarding-card
+        h1 {
+
+            font-size: 42px;
+
+            color: #075985;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .onboarding-card
+        p {
+
+            color: #64748b;
+
+            margin-bottom: 30px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .language-grid {
+
+            display: grid;
+
+            grid-template-columns:
+
+                repeat(
+                    2,
+                    1fr
+                );
+
+            gap: 12px;
+
+        }
+
+
+        .language-button {
+
+            padding: 20px;
+
+            background: #f8fafc;
+
+            border: 2px solid #e2e8f0;
+
+            border-radius: 14px;
+
+            transition: 0.2s;
+
+        }
+
+
+        .language-button:hover {
+
+            border-color: #0284c7;
+
+            background: #f0f9ff;
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        /* =========================================
+           MAIN APP
+        ========================================= */
+
+        #app {
+
+            display: none;
+
+        }
+
+
+        #app.active {
+
+            display: block;
+
+        }
+
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .header {
+
+            height: 72px;
+
+            background: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 24px;
+
+            box-shadow:
+
+                0 2px 10px
+
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.08
+                );
+
+            position: relative;
+
+            z-index: 2000;
+
+        }
+
+
+        .logo {
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+            color: #075985;
+
+        }
+
+
+        .header-controls {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        select {
+
+            padding: 9px 12px;
+
+            border-radius: 9px;
+
+            border: 1px solid #cbd5e1;
+
+            background: white;
+
+        }
+
+
+        .header-button {
+
+            padding: 9px 12px;
+
+            border: 1px solid #cbd5e1;
+
+            background: white;
+
+            border-radius: 9px;
+
+        }
+
+
+        .connection {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            font-size: 13px;
+
+        }
+
+
+        .connection-dot {
+
+            width: 9px;
+
+            height: 9px;
+
+            background: #22c55e;
+
+            border-radius: 50%;
+
+        }
+
+
+        .connection.offline
+        .connection-dot {
+
+            background: #f59e0b;
+
+        }
+
+
+        /* =========================================
+           DASHBOARD
+        ========================================= */
+
+        .dashboard {
+
+            display: grid;
+
+            grid-template-columns:
+
+                330px
+                1fr
+                350px;
+
+            height:
+
+                calc(
+                    100vh - 72px
+                );
+
+        }
+
+
+        /* =========================================
+           LEFT PANEL
+        ========================================= */
+
+        .left-panel {
+
+            background: white;
+
+            border-right:
+
+                1px solid #e2e8f0;
+
+            overflow-y: auto;
+
+            padding: 20px;
+
+        }
+
+
+        .panel-title {
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .panel-subtitle {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        /* =========================================
+           RISK CARD
+        ========================================= */
+
+        .risk-card {
+
+            border-radius: 16px;
+
+            padding: 20px;
+
+            margin-bottom: 20px;
+
+            color: white;
+
+        }
+
+
+        .risk-card.imminent {
+
+            background:
+
+                linear-gradient(
+
+                    135deg,
+
+                    #b91c1c,
+
+                    #ef4444
+
+                );
+
+        }
+
+
+        .risk-card.prepare {
+
+            background:
+
+                linear-gradient(
+
+                    135deg,
+
+                    #b45309,
+
+                    #f59e0b
+
+                );
+
+        }
+
+
+        .risk-card.monitor {
+
+            background:
+
+                linear-gradient(
+
+                    135deg,
+
+                    #047857,
+
+                    #10b981
+
+                );
+
+        }
+
+
+        .risk-label {
+
+            font-size: 12px;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                1px;
+
+            opacity: 0.9;
+
+        }
+
+
+        .risk-title {
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+            margin: 7px 0;
+
+        }
+
+
+        .risk-description {
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* =========================================
+           ACTION CARD
+        ========================================= */
+
+        .action-card {
+
+            background: #f8fafc;
+
+            border:
+
+                1px solid #e2e8f0;
+
+            border-radius: 15px;
+
+            padding: 18px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .action-card h3 {
+
+            font-size: 16px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .action-list {
+
+            list-style: none;
+
+        }
+
+
+        .action-list li {
+
+            padding: 9px 0;
+
+            border-bottom:
+
+                1px solid #e2e8f0;
+
+            font-size: 14px;
+
+            line-height: 1.4;
+
+        }
+
+
+        .action-list li:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        /* =========================================
+           MAP
+        ========================================= */
+
+        .map-container {
+
+            position: relative;
+
+        }
+
+
+        #map {
+
+            width: 100%;
+
+            height: 100%;
+
+        }
+
+
+        .map-overlay {
+
+            position: absolute;
+
+            top: 20px;
+
+            left: 20px;
+
+            z-index: 1000;
+
+            background: white;
+
+            padding: 14px 18px;
+
+            border-radius: 12px;
+
+            box-shadow:
+
+                0 4px 15px
+
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.15
+                );
+
+        }
+
+
+        .map-overlay strong {
+
+            display: block;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .map-overlay span {
+
+            font-size: 13px;
+
+            color: #64748b;
+
+        }
+
+
+        /* =========================================
+           RIGHT PANEL
+        ========================================= */
+
+        .right-panel {
+
+            background: white;
+
+            border-left:
+
+                1px solid #e2e8f0;
+
+            overflow-y: auto;
+
+            padding: 20px;
+
+        }
+
+
+        .feed-header {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .live-badge {
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =========================================
+           ALERT ITEM
+        ========================================= */
+
+        .alert-item {
+
+            border:
+
+                1px solid #e2e8f0;
+
+            border-radius: 13px;
+
+            padding: 15px;
+
+            margin-bottom: 12px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .alert-item:hover {
+
+            border-color: #38bdf8;
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        .alert-top {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .alert-emoji {
+
+            font-size: 28px;
+
+        }
+
+
+        .alert-title {
+
+            font-weight: 700;
+
+        }
+
+
+        .alert-status {
+
+            display: inline-block;
+
+            margin-top: 5px;
+
+            padding: 4px 7px;
+
+            border-radius: 5px;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+        }
+
+
+        .status-imminent {
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+
+        }
+
+
+        .status-prepare {
+
+            background: #fef3c7;
+
+            color: #92400e;
+
+        }
+
+
+        .status-monitor {
+
+            background: #dcfce7;
+
+            color: #166534;
+
+        }
+
+
+        .alert-location {
+
+            font-size: 13px;
+
+            color: #64748b;
+
+            margin-top: 7px;
+
+        }
+
+
+        .alert-time {
+
+            font-size: 11px;
+
+            color: #94a3b8;
+
+            margin-top: 8px;
+
+        }
+
+
+        /* =========================================
+           MODAL
+        ========================================= */
+
+        .modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.55
+                );
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            z-index: 5000;
+
+            padding: 20px;
+
+        }
+
+
+        .modal.show {
+
+            display: flex;
+
+        }
+
+
+        .modal-card {
+
+            background: white;
+
+            width: 100%;
+
+            max-width: 500px;
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            box-shadow:
+
+                0 20px 60px
+
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.3
+                );
+
+        }
+
+
+        .modal-icon {
+
+            font-size: 55px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .modal-card h2 {
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .modal-location {
+
+            color: #64748b;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .modal-message {
+
+            line-height: 1.6;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .modal-actions {
+
+            display: flex;
+
+            gap: 10px;
+
+        }
+
+
+        .primary-button {
+
+            flex: 1;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #0284c7;
+
+            color: white;
+
+            font-weight: 700;
+
+        }
+
+
+        .secondary-button {
+
+            padding: 13px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 10px;
+
+            background: white;
+
+        }
+
+
+        /* =========================================
+           OFFLINE BANNER
+        ========================================= */
+
+        .offline-banner {
+
+            position: fixed;
+
+            bottom: 20px;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            background: #1e293b;
+
+            color: white;
+
+            padding: 12px 20px;
+
+            border-radius: 30px;
+
+            z-index: 4000;
+
+            display: none;
+
+            font-size: 13px;
+
+        }
+
+
+        .offline-banner.show {
+
+            display: block;
+
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media
+        (max-width: 1100px) {
+
+            .dashboard {
+
+                grid-template-columns:
+
+                    280px
+                    1fr;
+
+            }
+
+
+            .right-panel {
+
+                display: none;
+
+            }
+
+        }
+
+
+        @media
+        (max-width: 750px) {
+
+            .header {
+
+                height: auto;
+
+                min-height: 70px;
+
+                flex-wrap: wrap;
+
+                gap: 10px;
+
+                padding: 12px;
+
+            }
+
+
+            .header-controls {
+
+                width: 100%;
+
+                overflow-x: auto;
+
+            }
+
+
+            .dashboard {
+
+                display: block;
+
+                height: auto;
+
+            }
+
+
+            .left-panel {
+
+                border: none;
+
+            }
+
+
+            .map-container {
+
+                height: 500px;
+
+            }
+
+
+            .right-panel {
+
+                display: block;
+
+                border: none;
+
+            }
+
+
+            .language-grid {
+
+                grid-template-columns:
+
+                    1fr;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-  <nav>
-    <h2>MyApp</h2>
-    <button onclick="getStarted()">Get Started</button>
-  </nav>
 
-  <section class="hero">
-    <h1>Welcome to MyApp</h1>
-    <p>A simple landing page for our hackathon project.</p>
-    <button onclick="getStarted()">Get Started</button>
-  </section>
+    <!-- =========================================
+         ONBOARDING
+    ========================================== -->
 
-  <script>
-    function getStarted() {
-      alert("Welcome to MyApp!");
-    }
-  </script>
+    <section
+        id="onboarding"
+        class="screen active"
+    >
+
+        <div class="onboarding-card">
+
+            <div class="brand-icon">
+
+                🌊
+
+            </div>
+
+
+            <h1>
+
+                SafeSignal Philippines
+
+            </h1>
+
+
+            <p>
+
+                Emergency information designed
+                to help you receive, understand,
+                believe and act on warnings.
+
+            </p>
+
+
+            <h3
+                style="
+                    margin-bottom: 15px;
+                "
+            >
+
+                Choose your language
+
+            </h3>
+
+
+            <div class="language-grid">
+
+
+                <button
+                    class="language-button"
+                    onclick="
+                        chooseLanguage(
+                            'English'
+                        )
+                    "
+                >
+
+                    🇬🇧 English
+
+                </button>
+
+
+                <button
+                    class="language-button"
+                    onclick="
+                        chooseLanguage(
+                            'Tagalog'
+                        )
+                    "
+                >
+
+                    🇵🇭 Tagalog
+
+                    <br>
+
+                    <small>
+                        Filipino
+                    </small>
+
+                </button>
+
+
+                <button
+                    class="language-button"
+                    onclick="
+                        chooseLanguage(
+                            'Cebuano'
+                        )
+                    "
+                >
+
+                    🇵🇭 Cebuano
+
+                    <br>
+
+                    <small>
+                        Bisaya / Binisaya
+                    </small>
+
+                </button>
+
+
+                <button
+                    class="language-button"
+                    onclick="
+                        chooseLanguage(
+                            'Ilocano'
+                        )
+                    "
+                >
+
+                    🇵🇭 Ilocano
+
+                    <br>
+
+                    <small>
+                        Ilokano
+                    </small>
+
+                </button>
+
+
+                <button
+                    class="language-button"
+                    onclick="
+                        chooseLanguage(
+                            'Hiligaynon'
+                        )
+                    "
+                >
+
+                    🇵🇭 Hiligaynon
+
+                    <br>
+
+                    <small>
+                        Ilonggo
+                    </small>
+
+                </button>
+
+
+                <button
+                    class="language-button"
+                    onclick="
+                        chooseLanguage(
+                            'Bikol'
+                        )
+                    "
+                >
+
+                    🇵🇭 Bikol
+
+                    <br>
+
+                    <small>
+                        Central Bikol / Bicolano
+                    </small>
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         MAIN APP
+    ========================================== -->
+
+    <main
+        id="app"
+        class="screen"
+    >
+
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+
+            <div class="logo">
+
+                🌊 SafeSignal
+
+            </div>
+
+
+            <div class="header-controls">
+
+
+                <!-- REGION -->
+
+                <select
+                    id="regionSelect"
+                    onchange="changeRegion()"
+                >
+
+                    <option value="all">
+
+                        🇵🇭 All Philippines
+
+                    </option>
+
+                    <option value="ncr">
+
+                        National Capital Region
+
+                    </option>
+
+                    <option value="region7">
+
+                        Region VII – Central Visayas
+
+                    </option>
+
+                    <option value="region8">
+
+                        Region VIII – Eastern Visayas
+
+                    </option>
+
+                    <option value="region11">
+
+                        Region XI – Davao
+
+                    </option>
+
+                </select>
+
+
+                <!-- LARGE TEXT -->
+
+                <button
+                    class="header-button"
+                    onclick="
+                        toggleLargeText()
+                    "
+                    title="Increase text size"
+                >
+
+                    A+
+
+                </button>
+
+
+                <!-- SPEAK -->
+
+                <button
+                    class="header-button"
+                    onclick="
+                        speakCurrentRisk()
+                    "
+                    title="Read current risk aloud"
+                >
+
+                    🔊
+
+                </button>
+
+
+                <!-- CONNECTION -->
+
+                <div
+                    class="connection"
+                    id="connectionStatus"
+                >
+
+                    <span
+                        class="
+                            connection-dot
+                        "
+                    ></span>
+
+                    <span
+                        id="connectionText"
+                    >
+
+                        Online
+
+                    </span>
+
+                </div>
+
+
+                <!-- DEMO OFFLINE -->
+
+                <button
+                    class="header-button"
+                    onclick="
+                        toggleOffline()
+                    "
+                >
+
+                    📡
+
+                </button>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- DASHBOARD -->
+
+        <div class="dashboard">
+
+
+            <!-- =================================
+                 LEFT PANEL
+            ================================== -->
+
+            <aside class="left-panel">
+
+
+                <div class="panel-title">
+
+                    Your Safety Dashboard
+
+                </div>
+
+
+                <div
+                    class="panel-subtitle"
+                    id="regionText"
+                >
+
+                    Monitoring all Philippines
+
+                </div>
+
+
+
+                <!-- RISK -->
+
+                <div
+                    id="riskCard"
+                    class="
+                        risk-card
+                        monitor
+                    "
+                >
+
+                    <div
+                        class="risk-label"
+                    >
+
+                        Current status
+
+                    </div>
+
+
+                    <div
+                        class="risk-title"
+                        id="riskTitle"
+                    >
+
+                        Monitor
+
+                    </div>
+
+
+                    <div
+                        class="risk-description"
+                        id="riskDescription"
+                    >
+
+                        No immediate threat
+                        is currently affecting
+                        your selected region.
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ACTION -->
+
+                <div class="action-card">
+
+
+                    <h3>
+
+                        🧭 What should I do?
+
+                    </h3>
+
+
+                    <ul
+                        class="action-list"
+                        id="actionList"
+                    >
+
+                        <li>
+
+                            ✅ Keep your phone
+                            charged.
+
+                        </li>
+
+
+                        <li>
+
+                            📻 Monitor official
+                            emergency updates.
+
+                        </li>
+
+
+                        <li>
+
+                            🎒 Know your nearest
+                            safe location.
+
+                        </li>
+
+                    </ul>
+
+
+                </div>
+
+
+
+                <!-- OFFLINE INFO -->
+
+                <div class="action-card">
+
+
+                    <h3>
+
+                        📡 Offline Safety
+
+                    </h3>
+
+
+                    <p
+                        style="
+                            font-size: 13px;
+                            line-height: 1.5;
+                            color: #64748b;
+                        "
+                    >
+
+                        Core safety information
+                        remains available when
+                        your connection is lost.
+
+                    </p>
+
+
+                    <button
+                        class="primary-button"
+                        style="
+                            margin-top: 12px;
+                        "
+                        onclick="
+                            openGlossary()
+                        "
+                    >
+
+                        📖 Hazard glossary
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- SMS PREVIEW -->
+
+                <div class="action-card">
+
+
+                    <h3>
+
+                        📱 SMS Alert Preview
+
+                    </h3>
+
+
+                    <p
+                        id="smsPreview"
+                        style="
+                            font-size: 13px;
+                            line-height: 1.5;
+                            margin-top: 10px;
+                        "
+                    >
+
+                        🟢 MONITOR —
+                        No immediate danger.
+                        Continue monitoring
+                        official updates.
+
+                    </p>
+
+                </div>
+
+
+            </aside>
+
+
+
+            <!-- =================================
+                 MAP
+            ================================== -->
+
+            <section class="map-container">
+
+
+                <div
+                    class="map-overlay"
+                >
+
+                    <strong
+                        id="mapRegion"
+                    >
+
+                        🇵🇭 Philippines
+
+                    </strong>
+
+
+                    <span>
+
+                        OpenStreetMap
+                        demonstration
+
+                    </span>
+
+                </div>
+
+
+                <div id="map"></div>
+
+
+            </section>
+
+
+
+            <!-- =================================
+                 ALERT FEED
+            ================================== -->
+
+            <aside class="right-panel">
+
+
+                <div class="feed-header">
+
+
+                    <div>
+
+                        <div
+                            class="panel-title"
+                        >
+
+                            Emergency Alerts
+
+                        </div>
+
+
+                        <div
+                            class="
+                                panel-subtitle
+                            "
+                            style="
+                                margin: 0;
+                            "
+                        >
+
+                            Verified demo alerts
+
+                        </div>
+
+                    </div>
+
+
+                    <span
+                        class="live-badge"
+                    >
+
+                        LIVE
+
+                    </span>
+
+
+                </div>
+
+
+                <div
+                    id="alertFeed"
+                ></div>
+
+
+            </aside>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =========================================
+         ALERT MODAL
+    ========================================== -->
+
+    <div
+        id="alertModal"
+        class="modal"
+    >
+
+
+        <div class="modal-card">
+
+
+            <div
+                class="modal-icon"
+                id="modalIcon"
+            >
+
+                🌊
+
+            </div>
+
+
+            <h2
+                id="modalTitle"
+            >
+
+                Emergency Alert
+
+            </h2>
+
+
+            <div
+                class="modal-location"
+                id="modalLocation"
+            >
+
+                Philippines
+
+            </div>
+
+
+            <p
+                class="modal-message"
+                id="modalMessage"
+            >
+
+                Emergency information.
+
+            </p>
+
+
+            <div
+                class="modal-actions"
+            >
+
+
+                <button
+                    class="primary-button"
+                    onclick="
+                        speakCurrentAlert()
+                    "
+                >
+
+                    🔊 Read aloud
+
+                </button>
+
+
+                <button
+                    class="secondary-button"
+                    onclick="
+                        closeModal()
+                    "
+                >
+
+                    Close
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         GLOSSARY MODAL
+    ========================================== -->
+
+    <div
+        id="glossaryModal"
+        class="modal"
+    >
+
+
+        <div class="modal-card">
+
+
+            <h2>
+
+                📖 Hazard Guide
+
+            </h2>
+
+
+            <p
+                style="
+                    margin: 15px 0;
+                    line-height: 1.6;
+                "
+            >
+
+                These explanations are
+                available offline.
+
+            </p>
+
+
+            <div
+                class="action-card"
+            >
+
+                <strong>
+
+                    🌊 Tsunami
+
+                </strong>
+
+
+                <p
+                    style="
+                        margin-top: 7px;
+                        font-size: 14px;
+                        line-height: 1.5;
+                    "
+                >
+
+                    A series of powerful ocean
+                    waves that can reach coastal
+                    areas after an underwater
+                    earthquake or other event.
+
+                </p>
+
+            </div>
+
+
+            <div
+                class="action-card"
+            >
+
+                <strong>
+
+                    🌧️ Flood
+
+                </strong>
+
+
+                <p
+                    style="
+                        margin-top: 7px;
+                        font-size: 14px;
+                        line-height: 1.5;
+                    "
+                >
+
+                    Water covering land that is
+                    normally dry. Move to higher
+                    ground when instructed.
+
+                </p>
+
+            </div>
+
+
+            <div
+                class="action-card"
+            >
+
+                <strong>
+
+                    🌀 Typhoon
+
+                </strong>
+
+
+                <p
+                    style="
+                        margin-top: 7px;
+                        font-size: 14px;
+                        line-height: 1.5;
+                    "
+                >
+
+                    A powerful tropical storm
+                    with strong winds and heavy
+                    rainfall.
+
+                </p>
+
+            </div>
+
+
+            <button
+                class="secondary-button"
+                style="
+                    width: 100%;
+                "
+                onclick="
+                    closeGlossary()
+                "
+            >
+
+                Close
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         OFFLINE BANNER
+    ========================================== -->
+
+    <div
+        id="offlineBanner"
+        class="offline-banner"
+    >
+
+        📡 Offline mode —
+        showing cached safety information
+
+    </div>
+
+
+
+    <!-- LEAFLET -->
+
+    <script
+        src="
+        https://unpkg.com/leaflet@1.9.4/dist/leaflet.js
+        "
+    ></script>
+
+
+
+    <script>
+
+
+        /* =========================================
+           STATE
+        ========================================= */
+
+        let selectedLanguage =
+            "English";
+
+
+        let selectedRegion =
+            "all";
+
+
+        let isOffline =
+            false;
+
+
+        let map = null;
+
+
+        let currentAlert =
+            null;
+
+
+        let alertMarkers =
+            [];
+
+
+
+        /* =========================================
+           REGION DATA
+        ========================================= */
+
+        const regions = {
+
+
+            all: {
+
+                name:
+                    "All Philippines",
+
+                lat:
+                    12.8797,
+
+                lng:
+                    121.7740,
+
+                zoom:
+                    6
+
+            },
+
+
+            ncr: {
+
+                name:
+                    "National Capital Region",
+
+                lat:
+                    14.5995,
+
+                lng:
+                    120.9842,
+
+                zoom:
+                    10
+
+            },
+
+
+            region7: {
+
+                name:
+                    "Region VII – Central Visayas",
+
+                lat:
+                    10.3157,
+
+                lng:
+                    123.8854,
+
+                zoom:
+                    9
+
+            },
+
+
+            region8: {
+
+                name:
+                    "Region VIII – Eastern Visayas",
+
+                lat:
+                    11.0000,
+
+                lng:
+                    125.0000,
+
+                zoom:
+                    8
+
+            },
+
+
+            region11: {
+
+                name:
+                    "Region XI – Davao",
+
+                lat:
+                    7.1907,
+
+                lng:
+                    125.4553,
+
+                zoom:
+                    9
+
+            }
+
+        };
+
+
+
+        /* =========================================
+           DEMO ALERTS
+           
+           IMPORTANT:
+           These are demo alerts only.
+           Real warnings should come from
+           verified backend data.
+        ========================================= */
+
+        const alerts = [
+
+
+            {
+
+                id:
+                    1,
+
+                hazard:
+                    "fire",
+
+                emoji:
+                    "🔥",
+
+                title:
+                    "Fire Emergency",
+
+                status:
+                    "imminent",
+
+                region:
+                    "ncr",
+
+                location:
+                    "Manila",
+
+                lat:
+                    14.5995,
+
+                lng:
+                    120.9842,
+
+                message:
+                    "A fire emergency has been reported in the area. Avoid the affected zone and follow instructions from local authorities.",
+
+                actions: [
+
+                    "🚶 Move away from the affected area.",
+
+                    "🚒 Follow instructions from emergency responders.",
+
+                    "📱 Check official updates before returning."
+
+                ]
+
+            },
+
+
+            {
+
+                id:
+                    2,
+
+                hazard:
+                    "tsunami",
+
+                emoji:
+                    "🌊",
+
+                title:
+                    "Tsunami Warning",
+
+                status:
+                    "imminent",
+
+                region:
+                    "region8",
+
+                location:
+                    "Eastern Samar",
+
+                lat:
+                    11.6000,
+
+                lng:
+                    125.0000,
+
+                message:
+                    "A tsunami threat has been identified. Move away from the coast and toward higher ground immediately if instructed.",
+
+                actions: [
+
+                    "🏃 Move inland or to higher ground.",
+
+                    "🌊 Stay away from beaches and coastal areas.",
+
+                    "📻 Follow official evacuation instructions."
+
+                ]
+
+            },
+
+
+            {
+
+                id:
+                    3,
+
+                hazard:
+                    "flood",
+
+                emoji:
+                    "🌧️",
+
+                title:
+                    "Flood Warning",
+
+                status:
+                    "prepare",
+
+                region:
+                    "region7",
+
+                location:
+                    "Cebu City",
+
+                lat:
+                    10.3157,
+
+                lng:
+                    123.8854,
+
+                message:
+                    "Heavy rainfall may cause flooding in low-lying areas. Prepare to move to safer ground if conditions worsen.",
+
+                actions: [
+
+                    "🎒 Prepare essential items.",
+
+                    "🚗 Avoid driving through floodwater.",
+
+                    "🏠 Move to higher ground if instructed."
+
+                ]
+
+            },
+
+
+            {
+
+                id:
+                    4,
+
+                hazard:
+                    "storm",
+
+                emoji:
+                    "🌀",
+
+                title:
+                    "Typhoon Monitoring",
+
+                status:
+                    "monitor",
+
+                region:
+                    "region11",
+
+                location:
+                    "Davao Region",
+
+                lat:
+                    7.1907,
+
+                lng:
+                    125.4553,
+
+                message:
+                    "A weather system is being monitored. No immediate evacuation is currently required.",
+
+                actions: [
+
+                    "🔋 Keep devices charged.",
+
+                    "📻 Monitor official weather updates.",
+
+                    "🎒 Review your emergency plan."
+
+                ]
+
+            }
+
+        ];
+
+
+
+        /* =========================================
+           LANGUAGE
+        ========================================= */
+
+        function chooseLanguage(
+            language
+        ) {
+
+
+            selectedLanguage =
+                language;
+
+
+            document
+                .getElementById(
+                    "onboarding"
+                )
+                .classList
+                .remove(
+                    "active"
+                );
+
+
+            document
+                .getElementById(
+                    "app"
+                )
+                .classList
+                .add(
+                    "active"
+                );
+
+
+            initializeMap();
+
+
+            renderAlerts();
+
+
+        }
+
+
+
+        /* =========================================
+           MAP
+        ========================================= */
+
+        function initializeMap() {
+
+
+            if (map) {
+
+                return;
+
+            }
+
+
+            map = L.map(
+                "map"
+            ).setView(
+
+                [
+
+                    regions.all.lat,
+
+                    regions.all.lng
+
+                ],
+
+                regions.all.zoom
+
+            );
+
+
+            L.tileLayer(
+
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+                {
+
+                    maxZoom:
+                        19,
+
+                    attribution:
+                        "© OpenStreetMap contributors"
+
+                }
+
+            ).addTo(
+                map
+            );
+
+
+            addHospitals();
+
+
+            renderMapMarkers();
+
+        }
+
+
+
+        /* =========================================
+           HOSPITALS
+        ========================================= */
+
+        function addHospitals() {
+
+
+            const hospitals = [
+
+
+                {
+
+                    name:
+                        "Philippine General Hospital",
+
+                    lat:
+                        14.5794,
+
+                    lng:
+                        120.9850
+
+                },
+
+
+                {
+
+                    name:
+                        "Cebu Doctors' University Hospital",
+
+                    lat:
+                        10.3167,
+
+                    lng:
+                        123.8932
+
+                },
+
+
+                {
+
+                    name:
+                        "Davao Doctors Hospital",
+
+                    lat:
+                        7.0707,
+
+                    lng:
+                        125.6087
+
+                }
+
+            ];
+
+
+            hospitals.forEach(
+
+                hospital => {
+
+
+                    L.marker(
+
+                        [
+
+                            hospital.lat,
+
+                            hospital.lng
+
+                        ]
+
+                    )
+
+                    .addTo(
+                        map
+                    )
+
+                    .bindPopup(
+
+                        `🏥 <strong>${hospital.name}</strong>`
+
+                    );
+
+                }
+
+            );
+
+        }
+
+
+
+        /* =========================================
+           MAP MARKERS
+        ========================================= */
+
+        function renderMapMarkers() {
+
+
+            alertMarkers.forEach(
+
+                marker =>
+
+                    map.removeLayer(
+                        marker
+                    )
+
+            );
+
+
+            alertMarkers = [];
+
+
+            const filtered =
+
+                getFilteredAlerts();
+
+
+            filtered.forEach(
+
+                alert => {
+
+
+                    const marker =
+
+                        L.marker(
+
+                            [
+
+                                alert.lat,
+
+                                alert.lng
+
+                            ]
+
+                        )
+
+                        .addTo(
+                            map
+                        );
+
+
+                    marker.bindPopup(`
+
+                        <strong>
+
+                            ${alert.emoji}
+
+                            ${alert.title}
+
+                        </strong>
+
+                        <br><br>
+
+                        📍 ${alert.location}
+
+                        <br><br>
+
+                        ${alert.message}
+
+                    `);
+
+
+                    alertMarkers.push(
+                        marker
+                    );
+
+                }
+
+            );
+
+        }
+
+
+
+        /* =========================================
+           REGION
+        ========================================= */
+
+        function changeRegion() {
+
+
+            selectedRegion =
+
+                document
+                    .getElementById(
+                        "regionSelect"
+                    )
+                    .value;
+
+
+            const region =
+
+                regions[
+                    selectedRegion
+                ];
+
+
+            document
+                .getElementById(
+                    "regionText"
+                )
+                .textContent =
+
+                "Monitoring " +
+
+                region.name;
+
+
+            document
+                .getElementById(
+                    "mapRegion"
+                )
+                .textContent =
+
+                "📍 " +
+
+                region.name;
+
+
+            map.flyTo(
+
+                [
+
+                    region.lat,
+
+                    region.lng
+
+                ],
+
+                region.zoom,
+
+                {
+
+                    duration:
+                        1.5
+
+                }
+
+            );
+
+
+            renderAlerts();
+
+
+            renderMapMarkers();
+
+        }
+
+
+
+        /* =========================================
+           FILTER ALERTS
+        ========================================= */
+
+        function getFilteredAlerts() {
+
+
+            if (
+                selectedRegion ===
+                "all"
+            ) {
+
+                return alerts;
+
+            }
+
+
+            return alerts.filter(
+
+                alert =>
+
+                    alert.region ===
+                    selectedRegion
+
+            );
+
+        }
+
+
+
+        /* =========================================
+           RENDER ALERT FEED
+        ========================================= */
+
+        function renderAlerts() {
+
+
+            const feed =
+
+                document
+                    .getElementById(
+                        "alertFeed"
+                    );
+
+
+            feed.innerHTML = "";
+
+
+            const filtered =
+
+                getFilteredAlerts();
+
+
+            if (
+                filtered.length ===
+                0
+            ) {
+
+
+                feed.innerHTML = `
+
+                    <div
+                        style="
+                            text-align:center;
+                            padding:30px;
+                            color:#64748b;
+                        "
+                    >
+
+                        ✅
+
+                        <br><br>
+
+                        No active alerts
+                        for this region.
+
+                    </div>
+
+                `;
+
+
+                updateRisk(
+                    null
+                );
+
+
+                return;
+
+            }
+
+
+            filtered.forEach(
+
+                alert => {
+
+
+                    const item =
+
+                        document
+                            .createElement(
+                                "div"
+                            );
+
+
+                    item.className =
+                        "alert-item";
+
+
+                    item.innerHTML = `
+
+                        <div
+                            class="
+                                alert-top
+                            "
+                        >
+
+                            <span
+                                class="
+                                    alert-emoji
+                                "
+                            >
+
+                                ${alert.emoji}
+
+                            </span>
+
+
+                            <div>
+
+                                <div
+                                    class="
+                                        alert-title
+                                    "
+                                >
+
+                                    ${alert.title}
+
+                                </div>
+
+
+                                <span
+                                    class="
+                                        alert-status
+                                        status-${alert.status}
+                                    "
+                                >
+
+                                    ${alert.status
+                                        .toUpperCase()}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="
+                                alert-location
+                            "
+                        >
+
+                            📍 ${alert.location}
+
+                        </div>
+
+
+                        <div
+                            class="
+                                alert-time
+                            "
+                        >
+
+                            Verified demo alert
+
+                        </div>
+
+                    `;
+
+
+                    item.onclick =
+
+                        () =>
+
+                            openAlert(
+                                alert
+                            );
+
+
+                    feed.appendChild(
+                        item
+                    );
+
+                }
+
+            );
+
+
+            updateRisk(
+                filtered[0]
+            );
+
+        }
+
+
+
+        /* =========================================
+           RISK
+        ========================================= */
+
+        function updateRisk(
+            alert
+        ) {
+
+
+            const card =
+
+                document
+                    .getElementById(
+                        "riskCard"
+                    );
+
+
+            const title =
+
+                document
+                    .getElementById(
+                        "riskTitle"
+                    );
+
+
+            const description =
+
+                document
+                    .getElementById(
+                        "riskDescription"
+                    );
+
+
+            const actions =
+
+                document
+                    .getElementById(
+                        "actionList"
+                    );
+
+
+            const sms =
+
+                document
+                    .getElementById(
+                        "smsPreview"
+                    );
+
+
+            card.className =
+
+                "risk-card";
+
+
+            if (
+                !alert
+            ) {
+
+
+                card.classList.add(
+                    "monitor"
+                );
+
+
+                title.textContent =
+                    "Monitor";
+
+
+                description.textContent =
+
+                    "No immediate threat " +
+
+                    "is currently affecting " +
+
+                    "your selected region.";
+
+
+                actions.innerHTML = `
+
+                    <li>
+                        ✅ Keep your phone charged.
+                    </li>
+
+                    <li>
+                        📻 Monitor official updates.
+                    </li>
+
+                    <li>
+                        🎒 Know your safe location.
+                    </li>
+
+                `;
+
+
+                sms.textContent =
+
+                    "🟢 MONITOR — " +
+
+                    "No immediate danger. " +
+
+                    "Continue monitoring official updates.";
+
+
+                return;
+
+            }
+
+
+            card.classList.add(
+                alert.status
+            );
+
+
+            title.textContent =
+
+                alert.status
+                    .charAt(0)
+                    .toUpperCase() +
+
+                alert.status
+                    .slice(1);
+
+
+            description.textContent =
+
+                alert.message;
+
+
+            actions.innerHTML =
+
+                alert.actions
+
+                    .map(
+
+                        action =>
+
+                            `<li>${action}</li>`
+
+                    )
+
+                    .join("");
+
+
+            const smsStatus =
+
+                alert.status ===
+                "imminent"
+
+                    ?
+
+                "🔴 IMMINENT"
+
+                    :
+
+                alert.status ===
+                "prepare"
+
+                    ?
+
+                "🟠 PREPARE"
+
+                    :
+
+                "🟢 MONITOR";
+
+
+            sms.textContent =
+
+                smsStatus +
+
+                " — " +
+
+                alert.title +
+
+                " in " +
+
+                alert.location +
+
+                ". " +
+
+                alert.actions[0];
+
+        }
+
+
+
+        /* =========================================
+           OPEN ALERT
+        ========================================= */
+
+        function openAlert(
+            alert
+        ) {
+
+
+            currentAlert =
+                alert;
+
+
+            document
+                .getElementById(
+                    "modalIcon"
+                )
+                .textContent =
+
+                alert.emoji;
+
+
+            document
+                .getElementById(
+                    "modalTitle"
+                )
+                .textContent =
+
+                alert.title;
+
+
+            document
+                .getElementById(
+                    "modalLocation"
+                )
+                .textContent =
+
+                "📍 " +
+
+                alert.location;
+
+
+            document
+                .getElementById(
+                    "modalMessage"
+                )
+                .textContent =
+
+                alert.message;
+
+
+            document
+                .getElementById(
+                    "alertModal"
+                )
+                .classList
+                .add(
+                    "show"
+                );
+
+
+            map.flyTo(
+
+                [
+
+                    alert.lat,
+
+                    alert.lng
+
+                ],
+
+                10,
+
+                {
+
+                    duration:
+                        1.2
+
+                }
+
+            );
+
+        }
+
+
+
+        /* =========================================
+           CLOSE MODAL
+        ========================================= */
+
+        function closeModal() {
+
+
+            document
+                .getElementById(
+                    "alertModal"
+                )
+                .classList
+                .remove(
+                    "show"
+                );
+
+        }
+
+
+
+        /* =========================================
+           TEXT TO SPEECH
+        ========================================= */
+
+        function speakCurrentAlert() {
+
+
+            if (
+                !currentAlert
+            ) {
+
+                return;
+
+            }
+
+
+            const text =
+
+                currentAlert.title +
+
+                ". " +
+
+                currentAlert.location +
+
+                ". " +
+
+                currentAlert.message;
+
+
+            const speech =
+
+                new SpeechSynthesisUtterance(
+                    text
+                );
+
+
+            speech.lang =
+                "en-US";
+
+
+            window.speechSynthesis
+                .speak(
+                    speech
+                );
+
+        }
+
+
+
+        function speakCurrentRisk() {
+
+
+            const title =
+
+                document
+                    .getElementById(
+                        "riskTitle"
+                    )
+                    .textContent;
+
+
+            const description =
+
+                document
+                    .getElementById(
+                        "riskDescription"
+                    )
+                    .textContent;
+
+
+            const speech =
+
+                new SpeechSynthesisUtterance(
+
+                    title +
+
+                    ". " +
+
+                    description
+
+                );
+
+
+            window.speechSynthesis
+                .speak(
+                    speech
+                );
+
+        }
+
+
+
+        /* =========================================
+           LARGE TEXT
+        ========================================= */
+
+        function toggleLargeText() {
+
+
+            document.body
+                .classList
+                .toggle(
+                    "large-text"
+                );
+
+        }
+
+
+
+        /* =========================================
+           OFFLINE MODE
+        ========================================= */
+
+        function toggleOffline() {
+
+
+            isOffline =
+                !isOffline;
+
+
+            const banner =
+
+                document
+                    .getElementById(
+                        "offlineBanner"
+                    );
+
+
+            const connection =
+
+                document
+                    .getElementById(
+                        "connectionStatus"
+                    );
+
+
+            const text =
+
+                document
+                    .getElementById(
+                        "connectionText"
+                    );
+
+
+            if (
+                isOffline
+            ) {
+
+
+                banner
+                    .classList
+                    .add(
+                        "show"
+                    );
+
+
+                connection
+                    .classList
+                    .add(
+                        "offline"
+                    );
+
+
+                text.textContent =
+                    "Offline";
+
+
+                /*
+                 * In the real application:
+                 *
+                 * - Load cached map tiles
+                 * - Load cached alerts
+                 * - Load offline glossary
+                 * - Load offline translations
+                 * - Keep core safety instructions
+                 *
+                 * This demo keeps the existing
+                 * data available to simulate
+                 * that behaviour.
+                 */
+
+            } else {
+
+
+                banner
+                    .classList
+                    .remove(
+                        "show"
+                    );
+
+
+                connection
+                    .classList
+                    .remove(
+                        "offline"
+                    );
+
+
+                text.textContent =
+                    "Online";
+
+            }
+
+        }
+
+
+
+        /* =========================================
+           GLOSSARY
+        ========================================= */
+
+        function openGlossary() {
+
+
+            document
+                .getElementById(
+                    "glossaryModal"
+                )
+                .classList
+                .add(
+                    "show"
+                );
+
+        }
+
+
+
+        function closeGlossary() {
+
+
+            document
+                .getElementById(
+                    "glossaryModal"
+                )
+                .classList
+                .remove(
+                    "show"
+                );
+
+        }
+
+
+
+        /* =========================================
+           REAL BACKEND INTEGRATION
+           
+           Future API contract:
+           
+           GET /api/regions
+           GET /api/alerts?region=ncr
+           GET /api/risk?lat=...&lng=...
+           GET /api/hospitals?lat=...&lng=...
+           
+           The frontend functions above can
+           consume the returned JSON instead
+           of the demo "alerts" array.
+        ========================================= */
+
+
+    </script>
+
 
 </body>
+
 </html>
