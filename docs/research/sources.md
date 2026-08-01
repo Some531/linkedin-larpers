@@ -134,6 +134,81 @@ reporting of an underlying inquiry.
 - AHRQ PSNet — [Alert Fatigue](https://psnet.ahrq.gov/primer/alert-fatigue) (clinical analogue: ~30% drop in acceptance per repetition)
 - EBSCO — [Alarm Fatigue research starter](https://www.ebsco.com/research-starters/environmental-sciences/alarm-fatigue)
 
+## Philippines / Asia-Pacific
+
+### Risk profile and language
+- WorldRiskIndex 2025 via Manila Bulletin — [Philippines tops WorldRiskIndex 2025 as world's most disaster-prone country](https://mb.com.ph/2025/09/26/philippines-tops-worldriskindex-2025-as-worlds-most-disaster-prone-country) (rank 1 of 193; score 46.56; 21st consecutive year)
+- GMA News — [PH most disaster-prone country — 2025 report](https://www.gmanetwork.com/news/topstories/nation/960359/philippines-most-disaster-prone-country-2025/story/)
+- BusinessWorld — [WorldRiskIndex 2025: Philippines remains world's most at-risk country](https://www.bworldonline.com/infographics/2025/09/25/700715/worldriskindex-2025-philippines-remains-worlds-most-at-risk-country-for-disasters/) (province-level scores)
+- Congressional PBRD — [INFORM Risk Index facts and figures, Nov 2025](https://cpbrd.congress.gov.ph/wp-content/uploads/2025/11/FF2025-60-INFORM-RISK-INDEX.pdf)
+- Manila Bulletin — [Living in a city that both hosts and endangers language diversity](https://mb.com.ph/2025/08/20/living-in-a-city-that-both-hosts-and-endangers-language-diversity) (175 living Indigenous languages, 59 endangered)
+- GMA News — [Philippines ranked 7th most affected country by extreme weather in 2024](https://www.gmanetwork.com/news/scitech/weather/965730/philippines-extreme-weather/story/)
+
+### Typhoon Haiyan / Yolanda 2013 — the storm surge terminology failure
+- ScienceDirect / IJDRR — [Analysis of early warning systems: the case of super-typhoon Haiyan](https://www.sciencedirect.com/science/article/abs/pii/S2212420915301771) **(primary academic source for the comprehension failure)**
+- AMS Weather, Climate and Society — [A Textual Processing Model of Risk Communication: Lessons from Typhoon Haiyan](https://journals.ametsoc.org/view/journals/wcas/8/4/wcas-d-16-0023_1.xml) (officials translating advisories into Waray on the fly; "same routine text" finding)
+- Coastal Engineering Journal — [Storm Surge Awareness in the Philippines Prior to Typhoon Haiyan: A Comparative Analysis with Tsunami Awareness](https://www.tandfonline.com/doi/abs/10.1142/S057856341640009X) (tsunami awareness exceeded storm surge awareness)
+- Devex — [Storm surge: lost in translation and interpretation](https://www.devex.com/news/storm-surge-lost-in-translation-and-interpretation-82311) **(paywalled/403 on fetch — locate a copy before quoting)**
+- Rappler — ['Storm surge' not explained enough – PAGASA official](https://www.rappler.com/environment/disasters/43735-yolandaph-haiyan-preparedness-philippines/) (source of the PAGASA admission)
+- Inquirer — [Storm surge, other terms to be made simple](https://newsinfo.inquirer.net/653084/storm-surge-other-terms-to-be-made-simple) (PAGASA working with linguists afterwards)
+- ScienceDirect — [Devastating storm surges of Typhoon Haiyan](https://www.sciencedirect.com/science/article/abs/pii/S2212420914000922)
+- AMS BAMS — [Repeat Storm Surge Disasters of Typhoon Haiyan and Its 1897 Predecessor](https://journals.ametsoc.org/view/journals/bams/97/1/bams-d-14-00245.1.xml)
+- SEI — [A decade after Typhoon Haiyan: reflections from a survivor](https://www.sei.org/perspectives/a-decade-after-typhoon-haiyan-reflections-from-a-survivor/)
+- UNDRR — [Ten years after Haiyan: building back better in the Philippines](https://www.undrr.org/news/ten-years-after-haiyan-building-back-better-philippines)
+
+> **Accuracy note.** Haiyan death tolls vary by source and by whether the missing are
+> included (commonly ~6,300 confirmed, ~7,350 including missing). Say "over 6,000
+> confirmed" unless citing NDRRMC directly.
+
+### Typhoon Rai / Odette 2021 — connectivity collapse
+- Inquirer — [Power, telco services down in 22 provinces](https://newsinfo.inquirer.net/1529068/power-telco-services-down-in-22-provinces) (135 municipalities lost telecoms; 40 still down)
+- ReliefWeb / OCHA — [Typhoon Rai (Odette) Flash Update No. 3, 20 December 2021](https://reliefweb.int/report/philippines/philippines-typhoon-raiodette-flash-update-no-3-20-december-2021-8-pm-local-time) (227 municipalities without power; 9% restored)
+- ReliefWeb / OCHA — [Flash Update #2, 17 December 2021](https://reliefweb.int/report/philippines/typhoon-rai-odette-philippines-flash-update-2-17-december-2021)
+- WFP Emergency Telecommunications Cluster — [Philippines: Super Typhoon Rai/Odette](https://www.etcluster.org/emergency/philippines-super-typhoon-raiodette)
+- Rappler — [87% of power lines restored post-Odette, but distribution a problem](https://www.rappler.com/business/ngcp-report-power-lines-post-typhoon-odette-december-29-2021/)
+- SunStar Cebu — [Typhoon Odette causes power, water and telco outages in Cebu](https://www.sunstar.com.ph/cebu/local-news/power-water-telco-services-down-in-cebu-after-odette)
+- Inquirer — [Power resilience is a critical need](https://newsinfo.inquirer.net/2174481/power-resilience-is-a-critical-need) (1.7M customers; 2–8 week restoration)
+- PDRF — [Electric, telco firms deploy personnel to restore power, connectivity](https://www.pdrf.org/news/electric-telco-firms-deploy-personnel-to-restore-power-connectivity-in-odette-hit-areas/)
+
+### Cebu earthquake, September 2025
+- PHIVOLCS — [Primer on the 30 September 2025 M6.9 Offshore Northern Cebu Earthquake](https://www.phivolcs.dost.gov.ph/press-release-primer-on-the-30-september-2025-magnitude-mw-6-9-offshore-northern-cebu-earthquake/) **(primary)**
+- PHIVOLCS — [Poster of the 30 September 2025 M6.9 event](https://www.phivolcs.dost.gov.ph/poster-of-the-30-september-2025-magnitude-6-9-offshore-northern-cebu-earthquake/)
+- Rappler — [LIVE UPDATES: Magnitude 6.9 Cebu earthquake](https://www.rappler.com/philippines/visayas/cebu-earthquake-updates-news-information-areas-affected-damage-aftershocks-september-2025/)
+- UNHCR Philippines — [Cebu Earthquake](https://www.unhcr.org/ph/cebu-earthquake)
+- Americares — [Philippines Bogo City, Cebu earthquake](https://www.americares.org/crisis-alerts/philippines-bogo-city-cebu-earthquake/)
+- PBS News — [Strong earthquake in central Philippines](https://www.pbs.org/newshour/world/strong-earthquake-in-central-philippines-kills-at-least-6-people-and-damages-houses-and-buildings) (early reporting; toll rose substantially — use PHIVOLCS/NDRRMC figures)
+
+### Typhoons Tino (Kalmaegi) and Uwan (Fung-wong), November 2025
+- OCHA — [Tropical Cyclones Kalmaegi/Tino and Fung-Wong/Uwan, Flash Update No. 2, 11 November 2025](https://www.unocha.org/publications/report/philippines/philippines-tropical-cyclones-kalmaegitino-and-fung-wonguwan-flash-update-no-2-11-november-11-pm-local-time) **(primary)**
+- OCHA — [Flash Update No. 1, 7 November 2025](https://www.unocha.org/publications/report/philippines/philippines-tropical-cyclones-kalmaegitino-and-fung-wonguwan-flash-update-no1-07-november-9-pm-local-time)
+- Inquirer — [From storms to earthquakes: how natural calamities affected Filipinos in 2025](https://newsinfo.inquirer.net/2158425/from-storms-to-earthquakes-how-natural-calamities-affected-filipinos-in-2025) (269 dead, 523 injured, 113 missing)
+- World Bank — [US$500 million released to assist the Philippines after Typhoon Kalmaegi (Tino)](https://www.worldbank.org/en/news/press-release/2025/11/28/world-bank-releases-us-500-million-to-assist-philippines-after-typhoon-kalmaegi-tino)
+- Rappler — [LIVE UPDATES: Typhoon Tino](https://www.rappler.com/philippines/weather/tropical-cyclone-tino-forecast-track-wind-signals-rain-damage-relief-updates-november-2025/) (landfall sequence incl. Borbon, Cebu)
+- IFRC GO — [Philippines: Typhoons and Floods 2024](https://go.ifrc.org/emergencies/7196)
+
+### Mount Pinatubo 1991 and the Aeta
+- USGS — [Pinatubo 1991 emergency management](https://volcanoes.usgs.gov/volcanic_ash/pinatubo_emergency_management.html) **(primary)**
+- USGS *Fire and Mud* — [Tayag et al., hazard communication chapter](https://pubs.usgs.gov/pinatubo/tayag)
+- ReliefWeb — [The cataclysmic 1991 eruption of Mount Pinatubo](https://reliefweb.int/report/philippines/cataclysmic-1991-eruption-mount-pinatubo-philippines)
+- ADRC — [Eruption of Mount Pinatubo, June 1991 recovery report](https://www.adrc.asia/publications/recovery_reports/pdf/Pinatubo.pdf)
+- PMC — [The Aeta–Pinatubo Loop](https://pmc.ncbi.nlm.nih.gov/articles/PMC3306361/) (disconnection of traditional knowledge from resources)
+- Mountain Research and Development — [Traditional Societies' Response to Volcanic Hazards in the Philippines](https://bioone.org/journals/mountain-research-and-development/volume-27/issue-4/mrd.0949/Traditional-Societies-Response-to-Volcanic-Hazards-in-the-Philippines/10.1659/mrd.0949.full)
+
+> **Accuracy note.** The 82% protective-action / 46% prompt-evacuation figures came via
+> secondary summary. Verify against the USGS *Fire and Mud* volume before quoting.
+
+### Philippine warning systems, barangay structure, Indigenous knowledge
+- LawPhil — [Republic Act No. 10639, Free Mobile Disaster Alerts Act (2014)](https://lawphil.net/statutes/repacts/ra2014/ra_10639_2014.html) **(primary legislation)**
+- Jur.ph — [IRR of RA 10639 (2015)](https://jur.ph/law/summary/implementing-rules-and-regulations-of-republic-act-no-10639-free-mobile-alerts-from-telecom-providers-during-disasters-and-calamities)
+- OECD (2025) — [Disaster Early Warning Systems and Private Sector Participation in ASEAN](https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/11/disaster-early-warning-systems-and-private-sector-participation-in-asean_4a161409/bc282563-en.pdf) (over-reliance on telecoms; PAGASA/DOST capability; Project NOAH)
+- Envisioning — [Multi-hazard early warning systems, Philippines](https://www.envisioning.com/research/grid/southeast-asia__philippines-disaster-early-warning)
+- ASEAN Magazine — [Building community-based disaster risk reduction and management: the Philippine experience](https://theaseanmagazine.asean.org/article/building-community-based-disaster-risk-reduction-and-management-the-philippine-experience/)
+- ScienceDirect / IJDRR — [Local-Indigenous knowledge on disaster risk reduction: insights from the Mamanwa Indigenous peoples in Basey, Samar after Typhoon Haiyan](https://www.sciencedirect.com/science/article/abs/pii/S2212420919309112)
+- SCIRP — [Integrating the local and Indigenous knowledge (LiNK) of Barangays Dolo and Manzana in local DRR and CCA planning](https://www.scirp.org/journal/paperinformation?paperid=130192)
+- PMC — [Participatory capacities and vulnerabilities assessment: towards community-based early warning for deep-seated landslides](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6489152/)
+- arXiv — [An open data and geo-based information system for Philippine disaster risk](https://arxiv.org/pdf/2201.12544)
+- Green Climate Fund — [Philippines country case study report, March 2025](https://ieu.greenclimate.fund/sites/default/files/document/ips-evaluation-philippines-ccs-top-2.pdf)
+
 ---
 
 ## Gaps to close before the pitch
@@ -149,3 +224,11 @@ reporting of an underlying inquiry.
    articulation of our thesis; know it so we can differentiate.
 5. **Grenfell language-access claim** — only assert the Inquiry-process finding unless a
    direct citation for the stronger claim is found.
+6. **Get the Haiyan early-warning paper in full** (Leelawat / IJDRR, "Analysis of early
+   warning systems: the case of super-typhoon Haiyan). It is the evidentiary spine of
+   the Philippine pitch and should be read, not summarised second-hand.
+7. **Find the exact Waray wording** used in 2013, and what PAGASA uses now, if any
+   source documents it. A verified before/after phrasing would be the single most
+   powerful slide in the deck.
+8. **Confirm NDRRMC figures** for Haiyan, the Cebu earthquake and Typhoon Tino from
+   NDRRMC/PHIVOLCS situation reports rather than news summaries.

@@ -6,6 +6,7 @@ Problem Definition is 20% of the mark and is explicitly gated on evidence; Strat
 
 | Document | Contents |
 | --- | --- |
+| **[`philippines.md`](philippines.md)** | **Regional deep-dive — start here.** The Asia-Pacific community, hierarchy, connectivity, and the Haiyan terminology failure |
 | [`case-studies.md`](case-studies.md) | 10 real disasters — what happened, what failed, what it teaches |
 | [`issues.md`](issues.md) | Major issues, mapped to receive → understand → believe → act |
 | [`existing-solutions.md`](existing-solutions.md) | What already exists, and precisely where it stops |
@@ -13,6 +14,13 @@ Problem Definition is 20% of the mark and is explicitly gated on evidence; Strat
 | [`sources.md`](sources.md) | Full citations, with accuracy cautions and open questions |
 
 ---
+
+> **Brief updated 1 Aug 2026.** The community must now be **in the Asia-Pacific region**,
+> and the brief adds **hierarchy in remote communities**, **connectivity**, **trust and
+> accessibility**, and a concrete feature set. The Philippines research in
+> [`philippines.md`](philippines.md) is the response to that; the Australian and
+> international material below remains the comparative evidence base and is where the
+> cross-cutting patterns come from.
 
 ## The one-paragraph argument
 
@@ -27,6 +35,27 @@ built.** For culturally and linguistically diverse communities, every one of tho
 steps is harder, and the failures compound.
 
 ---
+
+## The Philippines case, in five lines
+
+1. **World's most disaster-prone country for 21 consecutive years** (WorldRiskIndex 2025,
+   1st of 193, score 46.56). ~20 typhoons a year, ~20 earthquakes a day, **175 living
+   Indigenous languages**.
+2. **Haiyan, 2013.** The forecast was right, the warning was issued, people received it —
+   and over 6,000 died, because the warning said **"storm surge"**, a term Waray-speaking
+   residents did not know, while officials improvised translations on the fly. Survivors
+   describe it as a **tsunami** — a word they already had.
+3. **Odette, 2021.** 135 municipalities lost telecoms, 227 lost power, restoration took
+   **two to eight weeks and longer in remote areas**. The national alerting law routes
+   everything through mobile networks. **Offline-first is a requirement, not a feature.**
+4. **Northern Cebu, 2025.** M6.9 earthquake on 30 September (74 dead); Typhoon Tino made
+   landfall in the same corridor **five weeks later** (269 dead nationally). Compound
+   disasters are the real operating environment.
+5. **The structural opportunity.** Every Filipino barangay has a statutory, trusted local
+   leader — the trusted-messenger layer Australia lacks. **It has no tooling.** That is
+   the gap.
+
+Full detail and community options in [`philippines.md`](philippines.md).
 
 ## Ten findings worth knowing cold
 

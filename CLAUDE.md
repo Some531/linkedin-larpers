@@ -11,6 +11,10 @@ One day (8 hours) to design a solution, build an MVP, and pitch it.
 linguistically diverse (CALD) and hard-to-reach communities** — people who are
 physically present in a warning zone but effectively invisible to the warning system.
 
+The community must be **in the Asia-Pacific region** and clearly defined. Working
+assumption: **the Philippines** — see [`docs/research/philippines.md`](docs/research/philippines.md)
+for why, and for the candidate communities.
+
 Judging rubric (this drives every decision):
 
 | Criterion | Weight |
@@ -55,6 +59,34 @@ explicitly in the pitch — the brief asks for it.
   fatigue, and information overload are in scope.
 - **Translation is not the whole problem.** Meaning is lost through translation
   (e.g. "tsunami", "watch and act" have no clean equivalent in many languages).
+- **Address hierarchy in remote communities.** In the Philippines that means the
+  barangay structure and, for Indigenous communities, customary authority alongside it.
+- **Connectivity is a hard constraint, not a caveat.** Typhoon Odette (2021) left 135
+  municipalities without telecoms and took two to eight weeks to restore power, longer
+  in remote areas. **Assume no signal and no mains power for the response phase.**
+  Every feature needs a defined offline behaviour.
+- **The solution must be based on a community need**, and the brief asks how it would
+  operate practically, and what alternatives were considered. Answer all three.
+
+## Feature set from the brief
+
+The brief now names features. Treat these as the intended direction, and see
+`docs/research/philippines.md` §6 for how each is justified and where to sharpen it.
+
+- **Live map** — location permission, ~1 km radius, zoom, highlighted landmarks
+  (hospitals), elevation used for personalised tsunami/surge risk. Open-source data.
+- **Risk determination** — government/open datasets for the user's country and region,
+  plus personal location, producing personalised plans. *For the Philippines this means
+  PAGASA, PHIVOLCS and Project NOAH — not the ABS.*
+- **Chatbot** — for navigation questions and for explaining unfamiliar terms. *This is
+  the Haiyan intervention: "what is a storm surge" is the question that killed 6,000
+  people. It must work offline for core hazard terms.*
+- **Accessibility** — enlarged text, disability and elderly support, several languages,
+  text-to-speech.
+- **Risk classification SMS** — traffic-lighted, emoji to denote hazard type, explicit
+  about which phase it refers to (imminent vs happening now), concise and jargon-free,
+  with a link to the app for detail.
+- **Symbols** to convey meaning where language cannot.
 
 ## Repository layout
 
@@ -64,6 +96,7 @@ Idea Prompting         Original ideation + team execution prompts
 CLAUDE.md              This file
 docs/research/         Evidence base — read before proposing anything
   README.md              Index and executive summary
+  philippines.md         Asia-Pacific deep-dive: community, hierarchy, connectivity
   case-studies.md        Real disasters, what failed, sourced
   issues.md              Major issues mapped to receive/understand/believe/act
   existing-solutions.md  What already exists and where it stops short
