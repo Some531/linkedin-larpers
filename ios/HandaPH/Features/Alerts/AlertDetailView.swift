@@ -28,7 +28,7 @@ struct AlertDetailView: View {
 
                 VStack(alignment: .leading, spacing: 8) {
                     HStack(spacing: 8) {
-                        Text(alert.hazard.emoji).accessibilityHidden(true)
+                        HazardIcon(hazard: alert.hazard, tint: Theme.color(for: alert.severity), size: 32)
                         Text(hazardName.text)
                             .font(.headline)
                             .foregroundStyle(.secondary)
@@ -62,7 +62,7 @@ struct AlertDetailView: View {
                 }
                 .padding(Theme.cardPadding)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: Theme.cornerRadius))
+                .background(Theme.card, in: RoundedRectangle(cornerRadius: Theme.cornerRadius))
 
                 VStack(alignment: .leading, spacing: 8) {
                     Text(L10n.t(.moreDetail, language))
@@ -83,6 +83,7 @@ struct AlertDetailView: View {
             }
             .padding()
         }
+        .themedScreen()
         .navigationTitle(hazardName.text)
         .navigationBarTitleDisplayMode(.inline)
     }

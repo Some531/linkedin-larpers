@@ -14,21 +14,24 @@ struct HouseholdProfileView: View {
         NavigationStack {
             Form {
                 Section {
-                    row("👵", .profileElderly, $profileStore.profile.hasElderly)
-                    row("🧒", .profileChildren, $profileStore.profile.hasYoungChildren)
-                    row("♿", .profileMobility, $profileStore.profile.hasLimitedMobility)
-                    row("🌊", .profileCoast, $profileStore.profile.nearCoastOrRiver)
-                    row("🏠", .profileSingleStorey, $profileStore.profile.singleStorey)
+                    row("person.badge.clock", .profileElderly, $profileStore.profile.hasElderly)
+                    row("figure.and.child.holdinghands", .profileChildren, $profileStore.profile.hasYoungChildren)
+                    row("figure.roll", .profileMobility, $profileStore.profile.hasLimitedMobility)
+                    row("water.waves", .profileCoast, $profileStore.profile.nearCoastOrRiver)
+                    row("house.fill", .profileSingleStorey, $profileStore.profile.singleStorey)
                 } footer: {
                     Text(L10n.t(.profileSubtitle, language))
                 }
+                .listRowBackground(Theme.card)
 
                 Section {
                     Label(L10n.t(.privacyNote, language), systemImage: "lock.fill")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
+                .listRowBackground(Theme.card)
             }
+            .themedScreen()
             .navigationTitle(L10n.t(.profileTitle, language))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -39,11 +42,13 @@ struct HouseholdProfileView: View {
         }
     }
 
-    private func row(_ emoji: String, _ key: L10n.Key, _ binding: Binding<Bool>) -> some View {
+    private func row(_ symbol: String, _ key: L10n.Key, _ binding: Binding<Bool>) -> some View {
         Toggle(isOn: binding) {
             HStack(spacing: 10) {
-                Text(emoji)
-                    .font(.title3)
+                Image(systemName: symbol)
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(Theme.brand)
+                    .frame(width: 28)
                     .accessibilityHidden(true)
                 Text(L10n.t(key, appState.language))
                     .font(.body)

@@ -14,6 +14,7 @@
 		439FD7C84EC1135A8A8C32AA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A9817A6B78AB819E163E1F /* RootView.swift */; };
 		44BC0E25355C1D8CA239FC28 /* HandaPHApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC067D063C5F51F29BA09B7 /* HandaPHApp.swift */; };
 		51EB28749C4B068707A535A9 /* HouseholdProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2C5E42FF3BD70BCD7A4231 /* HouseholdProfileView.swift */; };
+		59A1CD2589136F18FDF44837 /* AssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E595F0514F20CF20D6FA92 /* AssistantView.swift */; };
 		793C62DD1BEF5A0EDEB1F2F5 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42831632607ECDECFF00C88 /* AppState.swift */; };
 		7F5CD6CAD9E95851AEE7CB6B /* FixtureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A832C5F92FA2100E529ACAF7 /* FixtureStore.swift */; };
 		8409FBBC556C00C5550F7F33 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E678C8BF4A28198D06B4548 /* Models.swift */; };
@@ -24,6 +25,7 @@
 		D0ECE04843EECF9DC4415187 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B69C88BD3C96FD4FEF943A /* SmokeTests.swift */; };
 		D12ED2F04C41B44682BE1DD8 /* GlossaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E62CD2BEB8E84A8C06E6270 /* GlossaryView.swift */; };
 		DC9F658CCB4E0C0F292EA96C /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCD6334CCE3FE2CE9FD24C6 /* SpeechService.swift */; };
+		F3AEB86B34DAD24A9A3B47D6 /* AssistantEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66C0E0CEE9DEDC8BE4508B /* AssistantEngine.swift */; };
 		F65C14D5C4159F2BE947A750 /* AlertDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18D130A8A848F7137CBF702 /* AlertDetailView.swift */; };
 		FCFAAB3B95050BBCCEE83F26 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633D96B3C035342C89A33D43 /* Theme.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +50,7 @@
 		3719E9D48B76387598BCB2EA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3E62CD2BEB8E84A8C06E6270 /* GlossaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossaryView.swift; sourceTree = "<group>"; };
 		633D96B3C035342C89A33D43 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		7C66C0E0CEE9DEDC8BE4508B /* AssistantEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantEngine.swift; sourceTree = "<group>"; };
 		8E678C8BF4A28198D06B4548 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		96042DB5684DB2DFD5DA7F56 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		9B2CA4C4C395F575E6BF8560 /* HazardMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HazardMapView.swift; sourceTree = "<group>"; };
@@ -59,7 +62,9 @@
 		C297C5138730694D10ABDD05 /* HandaPHUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = HandaPHUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3B69C88BD3C96FD4FEF943A /* SmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeTests.swift; sourceTree = "<group>"; };
 		C931836AD4C82EE961DB0347 /* AlertsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsListView.swift; sourceTree = "<group>"; };
+		D5ED07FD4F67FC1587978F94 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		E18D130A8A848F7137CBF702 /* AlertDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDetailView.swift; sourceTree = "<group>"; };
+		F1E595F0514F20CF20D6FA92 /* AssistantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantView.swift; sourceTree = "<group>"; };
 		F42831632607ECDECFF00C88 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				2BE12B1D2F84E486A183A898 /* Alerts */,
+				94CB5EED4B5C8E7262660B6A /* Assistant */,
 				EDB90326E9D61BAA9365E840 /* Glossary */,
 				3532FEA7823C2F2F6F4F853A /* Map */,
 				B0A2D0A20493B69617979D02 /* Plan */,
@@ -132,6 +138,7 @@
 		481871B8F00C53AACDBD0303 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				689DAE5B52DD260AD6653B86 /* Assistant */,
 				D71BA779B014A46D78271251 /* Data */,
 				1A692EF8FCC7752781E258C1 /* DesignSystem */,
 				09B82B8E9F7B1604DAF64531 /* Localization */,
@@ -142,12 +149,28 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		689DAE5B52DD260AD6653B86 /* Assistant */ = {
+			isa = PBXGroup;
+			children = (
+				7C66C0E0CEE9DEDC8BE4508B /* AssistantEngine.swift */,
+			);
+			path = Assistant;
+			sourceTree = "<group>";
+		};
 		88D982E54F4EEDCF7331FE2C /* HandaPHUITests */ = {
 			isa = PBXGroup;
 			children = (
 				C3B69C88BD3C96FD4FEF943A /* SmokeTests.swift */,
 			);
 			path = HandaPHUITests;
+			sourceTree = "<group>";
+		};
+		94CB5EED4B5C8E7262660B6A /* Assistant */ = {
+			isa = PBXGroup;
+			children = (
+				F1E595F0514F20CF20D6FA92 /* AssistantView.swift */,
+			);
+			path = Assistant;
 			sourceTree = "<group>";
 		};
 		A50EA3F3298D645DE706176F /* Settings */ = {
@@ -181,6 +204,7 @@
 		BD36573F29124E2155F57FA0 = {
 			isa = PBXGroup;
 			children = (
+				EA788208802D8D5C9FDD3BB6 /* Config */,
 				B28EE2B1C78E87D172D742CD /* HandaPH */,
 				88D982E54F4EEDCF7331FE2C /* HandaPHUITests */,
 				3E9F91D69548253E3AA0401A /* Products */,
@@ -210,6 +234,14 @@
 				A832C5F92FA2100E529ACAF7 /* FixtureStore.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		EA788208802D8D5C9FDD3BB6 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				D5ED07FD4F67FC1587978F94 /* Secrets.xcconfig */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		EDB90326E9D61BAA9365E840 /* Glossary */ = {
@@ -321,6 +353,8 @@
 				F65C14D5C4159F2BE947A750 /* AlertDetailView.swift in Sources */,
 				0432A2652252715FB95C7E13 /* AlertsListView.swift in Sources */,
 				793C62DD1BEF5A0EDEB1F2F5 /* AppState.swift in Sources */,
+				F3AEB86B34DAD24A9A3B47D6 /* AssistantEngine.swift in Sources */,
+				59A1CD2589136F18FDF44837 /* AssistantView.swift in Sources */,
 				B7B18623635986050E21C2AD /* ChecklistView.swift in Sources */,
 				7F5CD6CAD9E95851AEE7CB6B /* FixtureStore.swift in Sources */,
 				D12ED2F04C41B44682BE1DD8 /* GlossaryView.swift in Sources */,
@@ -481,6 +515,7 @@
 		};
 		330B22BA8CE442FCBF8C7AAA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D5ED07FD4F67FC1587978F94 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -497,6 +532,7 @@
 		};
 		C79C255075141ECB1951C488 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D5ED07FD4F67FC1587978F94 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

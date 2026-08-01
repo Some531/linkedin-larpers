@@ -29,6 +29,7 @@ struct AlertsListView: View {
                     }
                 }
             }
+            .themedScreen()
             .navigationTitle(L10n.t(.alertsTitle, appState.language))
             .navigationDestination(for: String.self) { id in
                 if let alert = alerts.first(where: { $0.id == id }) {
@@ -52,8 +53,7 @@ struct AlertCard: View {
 
             VStack(alignment: .leading, spacing: 8) {
                 HStack(spacing: 8) {
-                    Text(alert.hazard.emoji)
-                        .accessibilityHidden(true)
+                    HazardIcon(hazard: alert.hazard, tint: Theme.color(for: alert.severity), size: 28)
                     Text(hazardName.text)
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.secondary)
@@ -74,7 +74,7 @@ struct AlertCard: View {
             }
             .padding(Theme.cardPadding)
         }
-        .background(Color(.secondarySystemGroupedBackground))
+        .background(Theme.card)
         .clipShape(RoundedRectangle(cornerRadius: Theme.cornerRadius))
         .overlay(
             RoundedRectangle(cornerRadius: Theme.cornerRadius)

@@ -16,6 +16,9 @@ targets:
   HandaPH:
     type: application
     platform: iOS
+    configFiles:
+      Debug: Config/Secrets.xcconfig
+      Release: Config/Secrets.xcconfig
     settings:
       base:
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
@@ -38,6 +41,7 @@ targets:
         CFBundleURLTypes:
           - CFBundleURLName: ph.rdy.handa
             CFBundleURLSchemes: [handaph]
+        ANTHROPIC_API_KEY: $(ANTHROPIC_API_KEY)
   HandaPHUITests:
     type: bundle.ui-testing
     platform: iOS

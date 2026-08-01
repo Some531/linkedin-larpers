@@ -47,8 +47,9 @@ struct HazardMapView: View {
                         Button {
                             appState.deepLinkedAlert = alert
                         } label: {
-                            Text(alert.hazard.emoji)
-                                .font(.title3)
+                            Image(systemName: alert.hazard.symbolName)
+                                .font(.callout.weight(.bold))
+                                .foregroundStyle(.white)
                                 .frame(width: 36, height: 36)
                                 .background(Theme.color(for: alert.severity), in: Circle())
                                 .overlay(Circle().strokeBorder(.white, lineWidth: 2))
@@ -198,7 +199,7 @@ struct PersonalRiskBanner: View {
         Button(action: onTap) {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 8) {
-                    Text(risk.severity.emoji)
+                    Image(systemName: risk.severity.symbolName)
                     Text("\(L10n.t(.yourArea, language)): \(severityLabel(language))")
                         .font(.subheadline.weight(.heavy))
                     Spacer()

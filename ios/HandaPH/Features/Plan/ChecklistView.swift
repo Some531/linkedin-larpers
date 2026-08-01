@@ -29,6 +29,7 @@ struct ChecklistView: View {
                             }
                             .frame(minHeight: Theme.minTapTarget)
                         }
+                        .listRowBackground(Theme.card)
                         .buttonStyle(.plain)
                         .accessibilityAddTraits(doneIDs.contains(item.id) ? .isSelected : [])
                         .accessibilityValue(L10n.t(doneIDs.contains(item.id) ? .doneStatus : .notDoneStatus, appState.language))
@@ -39,6 +40,7 @@ struct ChecklistView: View {
                         .textCase(nil)
                 }
             }
+            .themedScreen()
             .navigationTitle(L10n.t(.planTitle, appState.language))
         }
     }

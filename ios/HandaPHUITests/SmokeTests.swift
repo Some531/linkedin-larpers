@@ -74,7 +74,7 @@ final class SmokeTests: XCTestCase {
 
         // Open the household profile and mark an elderly member.
         app.buttons["An Amon Panimalay"].tap()
-        let elderlyToggle = app.switches["👵, May edaran (60+) ha balay"].firstMatch
+        let elderlyToggle = app.switches["May edaran (60+) ha balay"].firstMatch
         XCTAssertTrue(elderlyToggle.waitForExistence(timeout: 5))
         setSwitch(elderlyToggle, to: true)
         app.buttons["Padayon"].tap()
@@ -118,6 +118,35 @@ final class SmokeTests: XCTestCase {
             _ = XCTWaiter.wait(for: [XCTestExpectation(description: "settle")], timeout: 0.6)
         }
         XCTAssertEqual(element.value as? String, want, "Switch should be \(on ? "on" : "off")")
+    }
+
+    func testAssistantAnswersFromVerifiedCorpusOffline() {
+        let app = XCUIApplication()
+        app.launchArguments = ["-appLanguage", "en"]
+        app.launch()
+
+        app.buttons["Gabay"].tap()
+
+        let field = app.textFields.firstMatch
+        XCTAssertTrue(field.waitForExistence(timeout: 5))
+        field.tap()
+        field.typeText("what is a storm surge")
+        app.buttons["Send"].tap()
+
+        // No API key in CI/local test runs -> deterministic offline path,
+        // answering with the verified glossary entry.
+        let answer = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS 'Sea water pushed onto the land'")
+        ).firstMatch
+        XCTAssertTrue(answer.waitForExistence(timeout: 8),
+                      "Assistant should answer from the verified glossary offline")
+        XCTAssertTrue(app.staticTexts["retrieve"].firstMatch.exists,
+                      "Trace should show the retrieve stage")
+
+        let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        attachment.name = "gabay-assistant-offline"
+        attachment.lifetime = .keepAlways
+        add(attachment)
     }
 
     func testGlossarySearchFindsStormSurge() {

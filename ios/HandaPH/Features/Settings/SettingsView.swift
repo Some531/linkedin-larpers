@@ -59,6 +59,7 @@ struct SettingsView: View {
                     }
                 }
             }
+            .themedScreen()
             .navigationTitle(L10n.t(.settingsTitle, language))
             .sheet(isPresented: $showLanguagePicker) {
                 LanguagePickerView(isFirstRun: false)

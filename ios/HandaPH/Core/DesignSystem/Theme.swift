@@ -1,14 +1,47 @@
 import SwiftUI
 
-/// Design constants. Severity colours use the system palette so they adapt to
-/// dark mode and the system's increase-contrast setting; meaning is always
-/// carried by symbol + words as well, never colour alone.
+/// Design system. Brand palette: deep teal chrome on a warm sand background
+/// (dark mode: deep ocean). Severity colours stay reserved for actual risk —
+/// the chrome never shouts, so red still means something.
+/// Meaning is always carried by symbol + words as well, never colour alone.
 enum Theme {
     /// Minimum tappable square, per Apple HIG.
     static let minTapTarget: CGFloat = 44
 
     static let cornerRadius: CGFloat = 14
     static let cardPadding: CGFloat = 16
+
+    // MARK: Palette
+
+    /// Deep teal — buttons, links, selected tabs, the assistant.
+    static let brand = Color(red: 0.055, green: 0.35, blue: 0.39)
+
+    /// Warm sand screen background (dark: deep ocean).
+    static var background: Color {
+        Color(UIColor { trait in
+            trait.userInterfaceStyle == .dark
+                ? UIColor(red: 0.051, green: 0.094, blue: 0.114, alpha: 1)
+                : UIColor(red: 0.965, green: 0.945, blue: 0.906, alpha: 1)
+        })
+    }
+
+    /// Card surface on top of `background`.
+    static var card: Color {
+        Color(UIColor { trait in
+            trait.userInterfaceStyle == .dark
+                ? UIColor(red: 0.09, green: 0.16, blue: 0.19, alpha: 1)
+                : UIColor.white
+        })
+    }
+
+    /// Subtle surface for chips and secondary panels.
+    static var surface2: Color {
+        Color(UIColor { trait in
+            trait.userInterfaceStyle == .dark
+                ? UIColor(red: 0.12, green: 0.21, blue: 0.25, alpha: 1)
+                : UIColor(red: 0.93, green: 0.905, blue: 0.855, alpha: 1)
+        })
+    }
 
     static func color(for severity: Severity) -> Color {
         switch severity {
@@ -27,7 +60,35 @@ enum Theme {
     }
 }
 
+extension Severity {
+    /// SF Symbol carrying the severity independent of colour.
+    var symbolName: String {
+        switch self {
+        case .danger: "exclamationmark.octagon.fill"
+        case .warning: "exclamationmark.triangle.fill"
+        case .advisory: "info.circle.fill"
+        }
+    }
+}
+
 // MARK: - Shared components
+
+/// Hazard glyph in a tinted circle — SF Symbols, not emoji, so the icon
+/// weight matches the rest of the UI and renders in any Dynamic Type size.
+struct HazardIcon: View {
+    let hazard: HazardType
+    var tint: Color = Theme.brand
+    var size: CGFloat = 36
+
+    var body: some View {
+        Image(systemName: hazard.symbolName)
+            .font(.system(size: size * 0.45, weight: .bold))
+            .foregroundStyle(.white)
+            .frame(width: size, height: size)
+            .background(tint, in: Circle())
+            .accessibilityHidden(true)
+    }
+}
 
 /// Severity + phase banner: colour, symbol, and words together.
 struct SeverityBanner: View {
@@ -54,7 +115,7 @@ struct SeverityBanner: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            Text(severity.emoji)
+            Image(systemName: severity.symbolName)
             Text(severityLabel)
                 .fontWeight(.heavy)
             Spacer()
@@ -95,7 +156,7 @@ struct TranslationStateChip: View {
             .foregroundStyle(.secondary)
             .padding(.horizontal, 10)
             .padding(.vertical, 5)
-            .background(.quaternary, in: Capsule())
+            .background(Theme.surface2, in: Capsule())
     }
 }
 
@@ -123,5 +184,17 @@ struct SpeakButton: View {
         }
         .buttonStyle(.bordered)
         .accessibilityHint(L10n.t(.listenHint, language))
+    }
+}
+
+// MARK: - Screen scaffolding
+
+extension View {
+    /// Applies the app background behind any screen's content, including
+    /// Lists and Forms (whose own background is hidden).
+    func themedScreen() -> some View {
+        self
+            .scrollContentBackground(.hidden)
+            .background(Theme.background)
     }
 }

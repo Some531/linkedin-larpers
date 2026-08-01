@@ -2,8 +2,24 @@ import SwiftUI
 
 struct RootView: View {
     @EnvironmentObject private var appState: AppState
+    @State private var showAssistant = false
 
     var body: some View {
+        ZStack(alignment: .bottomTrailing) {
+            tabs
+            // Gabay — reachable from every tab, bottom right (Flux pattern).
+            AssistantButton { showAssistant = true }
+                .padding(.trailing, 16)
+                .padding(.bottom, 64)
+        }
+        .tint(Theme.brand)
+        .sheet(isPresented: $showAssistant) {
+            AssistantView()
+                .presentationDetents([.large, .medium])
+        }
+    }
+
+    private var tabs: some View {
         TabView {
             AlertsListView()
                 .tabItem { Label(L10n.t(.tabAlerts, appState.language), systemImage: "bell.badge.fill") }
@@ -47,8 +63,9 @@ struct LanguagePickerView: View {
     var body: some View {
         VStack(spacing: 24) {
             VStack(spacing: 8) {
-                Text("🇵🇭")
-                    .font(.system(size: 56))
+                Image(systemName: "globe.asia.australia.fill")
+                    .font(.system(size: 52))
+                    .foregroundStyle(Theme.brand)
                     .accessibilityHidden(true)
                 Text(L10n.t(.chooseLanguage, selection ?? appState.language))
                     .font(.title.weight(.bold))
@@ -80,7 +97,7 @@ struct LanguagePickerView: View {
                             .frame(minHeight: 56)
                             .background(
                                 RoundedRectangle(cornerRadius: Theme.cornerRadius)
-                                    .fill(selection == lang ? Color.accentColor.opacity(0.15) : Color(.secondarySystemBackground))
+                                    .fill(selection == lang ? Theme.brand.opacity(0.15) : Theme.card)
                             )
                         }
                         .buttonStyle(.plain)
@@ -103,6 +120,7 @@ struct LanguagePickerView: View {
             .padding(.horizontal)
             .padding(.bottom, 24)
         }
+        .background(Theme.background)
         .interactiveDismissDisabled(isFirstRun)
         .onAppear { if !isFirstRun { selection = appState.language } }
     }

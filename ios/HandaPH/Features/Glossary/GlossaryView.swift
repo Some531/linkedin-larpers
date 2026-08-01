@@ -36,14 +36,13 @@ struct GlossaryView: View {
                     ForEach(results) { term in
                         NavigationLink(value: term.id) {
                             HStack(spacing: 12) {
-                                Text(term.hazard.emoji)
-                                    .font(.title2)
-                                    .accessibilityHidden(true)
+                                HazardIcon(hazard: term.hazard, size: 32)
                                 Text(term.term.resolved(for: appState.language).text)
                                     .font(.body.weight(.semibold))
                             }
                             .frame(minHeight: Theme.minTapTarget)
                         }
+                        .listRowBackground(Theme.card)
                     }
                 } header: {
                     Text(L10n.t(.glossarySubtitle, appState.language))
@@ -51,6 +50,7 @@ struct GlossaryView: View {
                         .textCase(nil)
                 }
             }
+            .themedScreen()
             .navigationTitle(L10n.t(.glossaryTitle, appState.language))
             .searchable(text: $query, prompt: L10n.t(.searchPrompt, appState.language))
             .navigationDestination(for: String.self) { id in
@@ -75,9 +75,7 @@ struct GlossaryDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 HStack(spacing: 12) {
-                    Text(term.hazard.emoji)
-                        .font(.system(size: 44))
-                        .accessibilityHidden(true)
+                    HazardIcon(hazard: term.hazard, size: 52)
                     Text(name.text)
                         .font(.largeTitle.weight(.bold))
                 }
@@ -96,7 +94,7 @@ struct GlossaryDetailView: View {
                 }
                 .padding(Theme.cardPadding)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: Theme.cornerRadius))
+                .background(Theme.card, in: RoundedRectangle(cornerRadius: Theme.cornerRadius))
 
                 VStack(alignment: .leading, spacing: 8) {
                     Text(L10n.t(.whatToDo, language))
@@ -111,6 +109,7 @@ struct GlossaryDetailView: View {
             }
             .padding()
         }
+        .themedScreen()
         .navigationBarTitleDisplayMode(.inline)
     }
 }

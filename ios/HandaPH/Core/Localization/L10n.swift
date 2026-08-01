@@ -32,6 +32,10 @@ enum L10n {
         case profileTitle, profileSubtitle
         case profileElderly, profileChildren, profileMobility, profileCoast, profileSingleStorey
         case privacyNote
+        // Assistant (Gabay)
+        case assistantIntro, assistantOffline, assistantOfflineBadge
+        case assistantPlaceholder, assistantWorking, assistantNoMatch
+        case youAsked, send
     }
 
     /// Languages whose UI strings have not yet been reviewed by a community
@@ -87,6 +91,14 @@ enum L10n {
             .profileCoast: "House near coast or river",
             .profileSingleStorey: "Single-storey house",
             .privacyNote: "This stays on your phone only. It is never sent anywhere.",
+            .assistantIntro: "Ask me what a hazard word means, or where to find something in the app. I answer only from verified content.",
+            .assistantOffline: "No connection needed — I answer from the glossary stored on this phone.",
+            .assistantOfflineBadge: "verified · offline",
+            .assistantPlaceholder: "Ask about a word, e.g. storm surge…",
+            .assistantWorking: "working…",
+            .assistantNoMatch: "I don't have verified content about that. Check the Alerts tab for current warnings, or ask your barangay officials.",
+            .youAsked: "You asked",
+            .send: "Send",
         ],
         .tagalog: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulugan",
@@ -129,6 +141,14 @@ enum L10n {
             .profileCoast: "Bahay malapit sa dagat o ilog",
             .profileSingleStorey: "Isang palapag lang ang bahay",
             .privacyNote: "Nananatili ito sa inyong telepono lamang. Hindi ito ipinapadala kahit saan.",
+            .assistantIntro: "Itanong kung ano ang ibig sabihin ng isang salita, o kung saan makikita ang isang bahagi ng app. Sumasagot lamang ako mula sa beripikadong nilalaman.",
+            .assistantOffline: "Hindi kailangan ng koneksyon — sumasagot ako mula sa glossary na nasa teleponong ito.",
+            .assistantOfflineBadge: "beripikado · offline",
+            .assistantPlaceholder: "Magtanong, hal. daluyong ng bagyo…",
+            .assistantWorking: "gumagana…",
+            .assistantNoMatch: "Wala akong beripikadong nilalaman tungkol diyan. Tingnan ang Mga Alerto para sa kasalukuyang babala, o magtanong sa barangay.",
+            .youAsked: "Tinanong mo",
+            .send: "Ipadala",
         ],
         .cebuano: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulogan",
@@ -181,6 +201,14 @@ enum L10n {
             .profileCoast: "Balay harani ha dagat o salog",
             .profileSingleStorey: "Usa la ka andana an balay",
             .privacyNote: "Nagpapabilin ini ha imo telepono la. Diri ini iginpapadara bisan diin.",
+            .assistantIntro: "Pakiana ako kon ano an kahulogan hin usa nga pulong, o diin makikit-an an usa nga bahin han app. Nabaton la ako tikang ha beripikado nga sulod.",
+            .assistantOffline: "Diri kinahanglan hin koneksyon — nabaton ako tikang ha glossary nga aada hini nga telepono.",
+            .assistantOfflineBadge: "beripikado · offline",
+            .assistantPlaceholder: "Pakiana, sugad han dako nga balod…",
+            .assistantWorking: "nagtatrabaho…",
+            .assistantNoMatch: "Waray ako beripikado nga sulod mahitungod hito. Kitaa an Mga Alerto para han pahamangno yana, o pakiana ha barangay.",
+            .youAsked: "Iginpakiana mo",
+            .send: "Ipadara",
         ],
     ]
 }

@@ -31,6 +31,20 @@ xcodebuild -project HandaPH.xcodeproj -scheme HandaPH \
 
 No external packages — the first cut builds with the system SDK only.
 
+## Anthropic API key (Gabay assistant)
+
+Put your key in `ios/Config/Secrets.local.xcconfig` (git-ignored):
+
+```
+ANTHROPIC_API_KEY = sk-ant-...
+```
+
+Rebuild (⌘R). With a key, Gabay answers via Claude, grounded on the verified
+glossary and instructed to never compose warnings. Without one — or offline —
+it answers directly from the on-device corpus, deterministically. Demo note:
+a key inside an app binary is hackathon-grade; production proxies through the
+backend.
+
 ## Demo the deep link
 
 The SMS in the pitch ends with `rdy.ph/a/7Kq2`. Universal Links need a served
