@@ -66,3 +66,71 @@ Finally:
 •  Recommend the best five.
 •  Explain how each recommended idea scores against each judging criterion.
 •  Prioritise ideas that are unique, memorable, technically feasible in one day, and capable of impressing judges during a live demonstration rather than ideas that require extensive backend infrastructure.
+
+# Workflow Prompt
+
+@swornimk531 this will append to the main prompt from earlier:
+
+## Team Execution Plan
+
+Our team consists of:
+
+* 2 Engineering/Mathematics students
+* 1 Computer Science/Mathematics student
+* 2 Engineering/Master of Engineering students
+  After recommending the best five ideas, create a detailed execution plan for each idea assuming we have only 8 hours.
+  For each idea, include:
+
+### Team Roles
+
+Assign responsibilities to each of the five team members. The workload should be balanced and make good use of each person's strengths.
+For example:
+
+* Computer Science/Mathematics student: software architecture, backend, frontend integration, APIs, AI implementation, databases, deployment.
+* Engineering/Mathematics students: algorithms, mathematical modelling, optimisation, data analysis, research, testing, UI support.
+* Engineering/Master of Engineering students: system design, user experience, project coordination, presentation, research, technical documentation, software development where appropriate.
+
+### Timeline
+
+Break the project into realistic stages, for example:
+
+* Hour 0–1: Problem validation, planning, UI sketches, architecture.
+* Hour 1–3: Core MVP development.
+* Hour 3–5: Feature implementation and integration.
+* Hour 5–6: Testing, bug fixes, polish.
+* Hour 6–7: Prepare pitch, slides and demo.
+* Hour 7–8: Final testing, rehearsal and contingency fixes.
+
+### MVP Priorities
+
+Identify:
+
+* Must-have features
+* Nice-to-have features
+* Features to cut immediately if time runs short
+
+### Critical Path
+
+Explain which tasks are blocking others and what should be completed first to avoid bottlenecks.
+
+### Parallel Work
+
+Identify which tasks can be completed simultaneously by different team members to maximise productivity.
+
+### Risks
+
+List the biggest technical or time risks and suggest ways to mitigate them.
+
+### Deliverables
+
+At the end of the 8 hours, specify exactly what should be ready:
+
+* Working demo
+* Presentation slides
+* Pitch script
+* GitHub repository
+* Documentation
+* Prototype or mock-ups
+* Any supporting visuals
+  Assume our goal is not to build a finished product, but to maximise our score against the judging criteria by delivering the strongest possible MVP and presentation within the time limit.
+
