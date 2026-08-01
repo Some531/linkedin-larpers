@@ -17,6 +17,7 @@
 		793C62DD1BEF5A0EDEB1F2F5 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42831632607ECDECFF00C88 /* AppState.swift */; };
 		7F5CD6CAD9E95851AEE7CB6B /* FixtureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A832C5F92FA2100E529ACAF7 /* FixtureStore.swift */; };
 		8409FBBC556C00C5550F7F33 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E678C8BF4A28198D06B4548 /* Models.swift */; };
+		85A97B6A0F491E43E98D95A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AF3BAA574E1C48DC01D7518 /* Assets.xcassets */; };
 		9152E19E30511AF279F8F6D9 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71A030A37C66844D1E58CB7 /* APIClient.swift */; };
 		B7B18623635986050E21C2AD /* ChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CDC552B0B7E3E06CFE2365 /* ChecklistView.swift */; };
 		C8509A4D6F245CA42D1F6111 /* HouseholdProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C0126A124CB54F454DBEB1 /* HouseholdProfile.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		0A2C5E42FF3BD70BCD7A4231 /* HouseholdProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdProfileView.swift; sourceTree = "<group>"; };
 		16DAAF16B1A63B031C1D37FE /* HandaPH.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HandaPH.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AF3BAA574E1C48DC01D7518 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1DCD6334CCE3FE2CE9FD24C6 /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
 		30C0126A124CB54F454DBEB1 /* HouseholdProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdProfile.swift; sourceTree = "<group>"; };
 		36CDC552B0B7E3E06CFE2365 /* ChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistView.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 		B28EE2B1C78E87D172D742CD /* HandaPH */ = {
 			isa = PBXGroup;
 			children = (
+				1AF3BAA574E1C48DC01D7518 /* Assets.xcassets */,
 				A5A6B4573D08123BF6D4B07E /* Info.plist */,
 				2E63A10BF52DAED89B403420 /* App */,
 				481871B8F00C53AACDBD0303 /* Core */,
@@ -233,6 +236,7 @@
 			buildConfigurationList = B39CFBD6A0F5828EB28A0047 /* Build configuration list for PBXNativeTarget "HandaPH" */;
 			buildPhases = (
 				6014629BDD978C1A32B7EB4B /* Sources */,
+				20740D5A3A13EE6AE05513D3 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -296,6 +300,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		20740D5A3A13EE6AE05513D3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85A97B6A0F491E43E98D95A3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6014629BDD978C1A32B7EB4B /* Sources */ = {
