@@ -45,6 +45,17 @@ it answers directly from the on-device corpus, deterministically. Demo note:
 a key inside an app binary is hackathon-grade; production proxies through the
 backend.
 
+## Fake GPS for the demo
+
+Put the simulator in Tacloban City so location, the 1 km ring and walking
+routes behave as they would on the ground:
+
+```sh
+xcrun simctl location booted set 11.2433,125.0039
+```
+
+(Reset with `xcrun simctl location booted clear`.)
+
 ## Demo the deep link
 
 The SMS in the pitch ends with `rdy.ph/a/7Kq2`. Universal Links need a served
