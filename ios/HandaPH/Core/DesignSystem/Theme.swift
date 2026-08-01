@@ -321,4 +321,46 @@ extension View {
             .scrollContentBackground(.hidden)
             .background(Theme.background)
     }
+
+    /// Forces the brand-blue bars with light content on this screen —
+    /// belt-and-braces over the UIKit appearance, for hosts (like Map)
+    /// that otherwise render their bars translucent/white.
+    func brandBars() -> some View {
+        self
+            .toolbarBackground(Theme.brand, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarBackground(Theme.brand, for: .tabBar)
+            .toolbarBackground(.visible, for: .tabBar)
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbarColorScheme(.dark, for: .tabBar)
+    }
+
+    /// Replaces the system back chevron (which inherits the brand accent
+    /// and vanishes against the blue bar) with an explicit white one.
+    func whiteBackButton() -> some View {
+        modifier(WhiteBackButtonModifier())
+    }
+}
+
+private struct WhiteBackButtonModifier: ViewModifier {
+    @Environment(\.dismiss) private var dismiss
+
+    func body(content: Content) -> some View {
+        content
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.headline.weight(.semibold))
+                            .foregroundStyle(.white)
+                            .frame(width: Theme.minTapTarget - 8, height: Theme.minTapTarget - 8)
+                            .contentShape(Rectangle())
+                    }
+                    .accessibilityLabel("Back")
+                }
+            }
+    }
 }

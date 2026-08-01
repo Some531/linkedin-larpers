@@ -51,6 +51,7 @@ struct GlossaryView: View {
                 }
             }
             .themedScreen()
+            .brandBars()
             .navigationTitle(L10n.t(.glossaryTitle, appState.language))
             .searchable(text: $query, prompt: L10n.t(.searchPrompt, appState.language))
             .navigationDestination(for: String.self) { id in
@@ -118,5 +119,7 @@ struct GlossaryDetailView: View {
         }
         .themedScreen()
         .navigationBarTitleDisplayMode(.inline)
+        .brandBars()
+        .whiteBackButton()
     }
 }

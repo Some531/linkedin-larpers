@@ -57,9 +57,8 @@ struct AssistantView: View {
         HStack(spacing: 10) {
             Image(systemName: "sparkles")
                 .foregroundStyle(.white)
-            Text("Gabay · HandaPH")
+            Text("AI Assistant · PhilAIert")
                 .font(.footnote.monospaced().weight(.semibold))
-                .textCase(.uppercase)
                 .foregroundStyle(.white)
             Text("BETA")
                 .font(.caption2.monospaced().weight(.bold))
@@ -250,6 +249,6 @@ struct AssistantButton: View {
                 .background(Theme.brandGradient, in: Circle())
                 .shadow(color: Theme.brandDeep.opacity(0.4), radius: 8, y: 4)
         }
-        .accessibilityLabel("Gabay")
+        .accessibilityLabel("AI Assistant")
     }
 }

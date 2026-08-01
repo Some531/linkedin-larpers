@@ -79,6 +79,7 @@ struct ChecklistView: View {
                 .listRowBackground(Theme.card)
             }
             .themedScreen()
+            .brandBars()
             .navigationTitle(L10n.t(.planTitle, language))
         }
     }

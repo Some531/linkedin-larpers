@@ -77,6 +77,7 @@ struct AlertsListView: View {
                 }
             }
             .themedScreen()
+            .brandBars()
             .navigationTitle(L10n.t(.alertsTitle, appState.language))
             .sheet(isPresented: $showCheckIn) {
                 CheckInView()

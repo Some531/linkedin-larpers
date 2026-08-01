@@ -23,10 +23,17 @@ final class SmokeTests: XCTestCase {
         XCTAssertTrue(waray.waitForExistence(timeout: 5), "Language picker should show on first run")
         waray.tap()
 
-        // After selecting Waray the Continue button re-renders in Waray.
+        // After selecting Waray the whole flow re-renders in Waray.
         let continueButton = app.buttons["Padayon"]
         XCTAssertTrue(continueButton.waitForExistence(timeout: 5))
         continueButton.tap()
+
+        // Step 2: age band, in Waray, with a back button available.
+        XCTAssertTrue(app.staticTexts["Pira an imo edad?"].waitForExistence(timeout: 5),
+                      "Age form should show in Waray")
+        XCTAssertTrue(app.buttons["Balik"].exists, "Back button should exist on the age form")
+        app.buttons["Ubos han 40"].tap()
+        app.buttons["Padayon"].tap()
 
         XCTAssertTrue(app.staticTexts["Mga Alerto"].waitForExistence(timeout: 5),
                       "Alerts list should appear in Waray after onboarding")
@@ -137,7 +144,7 @@ final class SmokeTests: XCTestCase {
         app.launchArguments = ["-appLanguage", "en", "-forceOfflineAssistant", "1"]
         app.launch()
 
-        app.buttons["Gabay"].tap()
+        app.buttons["AI Assistant"].tap()
 
         let field = app.textFields.firstMatch
         XCTAssertTrue(field.waitForExistence(timeout: 5))

@@ -122,6 +122,8 @@ struct AlertDetailView: View {
         }
         .navigationTitle(hazardName.text)
         .navigationBarTitleDisplayMode(.inline)
+        .brandBars()
+        .whiteBackButton()
     }
 
     /// Everything TTS reads out, in order: headline then actions.

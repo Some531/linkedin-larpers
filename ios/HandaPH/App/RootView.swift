@@ -40,7 +40,7 @@ struct RootView: View {
             get: { !appState.hasChosenLanguage },
             set: { _ in }
         )) {
-            LanguagePickerView(isFirstRun: true)
+            OnboardingView()
         }
         // SMS deep link lands here regardless of which tab is open.
         .sheet(item: $appState.deepLinkedAlert) { alert in

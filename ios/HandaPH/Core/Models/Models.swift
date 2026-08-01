@@ -29,6 +29,21 @@ enum AppLanguage: String, CaseIterable, Codable, Identifiable {
         }
     }
 
+    /// A greeting in the language itself, shown under each option on the
+    /// first-run picker so speakers recognise their own language even if
+    /// they don't read its formal name.
+    var sampleGreeting: String {
+        switch self {
+        case .english: "Good day! How are you?"
+        case .tagalog: "Magandang araw! Kumusta ka?"
+        case .cebuano: "Maayong adlaw! Kumusta ka?"
+        case .ilocano: "Naimbag nga aldaw! Kumusta ka?"
+        case .hiligaynon: "Maayong adlaw! Kamusta ka?"
+        case .bikol: "Marhay na aldaw! Kumusta ka?"
+        case .waray: "Maupay nga adlaw! Kumusta ka?"
+        }
+    }
+
     /// BCP-47 code for AVSpeechSynthesizer. iOS ships no Cebuano/Waray/etc.
     /// voice, so all Philippine languages use the Filipino voice — an honest
     /// limitation we surface in the pitch rather than hide.

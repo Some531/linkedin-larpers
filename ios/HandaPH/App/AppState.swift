@@ -20,6 +20,12 @@ final class AppState: ObservableObject {
         didSet { UserDefaults.standard.set(autoRead, forKey: "autoRead") }
     }
 
+    /// Age band from onboarding ("u40" / "a40" / "s60"); 60+ turns on the
+    /// larger-text and read-aloud accessibility defaults automatically.
+    @Published var ageGroup: String {
+        didSet { UserDefaults.standard.set(ageGroup, forKey: "ageGroup") }
+    }
+
     @Published private var storedLanguage: String {
         didSet { UserDefaults.standard.set(storedLanguage, forKey: "appLanguage") }
     }
@@ -44,6 +50,7 @@ final class AppState: ObservableObject {
         let stored = UserDefaults.standard.string(forKey: "appLanguage") ?? ""
         largerText = UserDefaults.standard.bool(forKey: "largerText")
         autoRead = UserDefaults.standard.bool(forKey: "autoRead")
+        ageGroup = UserDefaults.standard.string(forKey: "ageGroup") ?? ""
         storedLanguage = stored
         hasChosenLanguage = !stored.isEmpty
     }

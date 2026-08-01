@@ -172,6 +172,7 @@ struct HazardMapView: View {
             }
             .navigationTitle(L10n.t(.mapTitle, appState.language))
             .navigationBarTitleDisplayMode(.inline)
+            .brandBars()
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {

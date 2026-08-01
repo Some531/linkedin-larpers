@@ -192,7 +192,7 @@ final class AssistantEngine: ObservableObject {
 
     private static func basePrompt(language: AppLanguage, context: String) -> String {
         """
-        You are Gabay, the in-app guide of HandaPH, a disaster-preparedness app \
+        You are the PhilAlert AI Assistant, the in-app guide of PhilAlert, a disaster-preparedness app \
         for the Philippines. You help users understand hazard terms and find \
         things in the app (tabs: Alerts, Map, Meanings, My Plan, Settings; the \
         Map holds evacuation centres and the household profile).

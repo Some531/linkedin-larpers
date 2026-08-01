@@ -49,6 +49,8 @@ enum L10n {
         case ligtasTitle, ligtasIntro, yourName, familyNumbers, ligtasSend, ligtasBody
         // Response layer & risk index
         case legendFood, emergencyContacts, riskIndex
+        // Onboarding
+        case back, chooseAge, chooseAgeBody, ageUnder40, age40to59, age60plus
     }
 
     /// Languages whose UI strings have not yet been reviewed by a community
@@ -126,13 +128,17 @@ enum L10n {
             .submit: "Submit",
             .autoRead: "Read alerts aloud automatically",
             .pictureGuide: "In pictures",
-            .ligtasTitle: "LIGTAS Check-in",
+            .ligtasTitle: "I'm Safe — tell my family",
             .ligtasIntro: "One tap tells your family you are safe — by ordinary SMS, so it reaches any phone, even without this app.",
             .yourName: "Your name",
             .familyNumbers: "Family numbers (comma-separated)",
-            .ligtasSend: "Send LIGTAS SMS",
-            .ligtasBody: "LIGTAS ✅ %@ is safe near %@. Sent from Handa.",
+            .ligtasSend: "Send the SMS",
+            .ligtasBody: "I'M SAFE ✅ %@ is safe near %@. Sent from PhilAlert.",
             .legendFood: "Food", .emergencyContacts: "Emergency numbers", .riskIndex: "Risk index",
+            .back: "Back",
+            .chooseAge: "How old are you?",
+            .chooseAgeBody: "The app adapts its text size and voice to suit you.",
+            .ageUnder40: "Under 40", .age40to59: "40 – 59", .age60plus: "60 or older",
         ],
         .tagalog: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulugan",
@@ -197,13 +203,17 @@ enum L10n {
             .submit: "Ipasa",
             .autoRead: "Awtomatikong basahin nang malakas ang mga alerto",
             .pictureGuide: "Sa larawan",
-            .ligtasTitle: "LIGTAS Check-in",
+            .ligtasTitle: "Ligtas Ako — sabihan ang pamilya",
             .ligtasIntro: "Isang pindot para malaman ng pamilya na ligtas ka — sa karaniwang SMS, kaya aabot sa kahit anong telepono, kahit walang app.",
             .yourName: "Pangalan mo",
             .familyNumbers: "Mga numero ng pamilya (paghiwalayin ng kuwit)",
-            .ligtasSend: "Ipadala ang LIGTAS SMS",
-            .ligtasBody: "LIGTAS ✅ Si %@ ay ligtas malapit sa %@. Mula sa Handa.",
+            .ligtasSend: "Ipadala ang SMS",
+            .ligtasBody: "LIGTAS AKO ✅ Si %@ ay ligtas malapit sa %@. Mula sa PhilAlert.",
             .legendFood: "Pagkain", .emergencyContacts: "Mga emergency na numero", .riskIndex: "Antas ng panganib",
+            .back: "Bumalik",
+            .chooseAge: "Ilang taon ka na?",
+            .chooseAgeBody: "Iaangkop ng app ang laki ng titik at boses para sa iyo.",
+            .ageUnder40: "Wala pang 40", .age40to59: "40 – 59", .age60plus: "60 pataas",
         ],
         .cebuano: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulogan",
@@ -223,6 +233,10 @@ enum L10n {
             .chooseLanguage: "Pilia ang imong pinulongan",
             .continueButton: "Padayon",
             .unverifiedChip: "Naghulat sa beripikasyon sa komunidad",
+            .back: "Balik",
+            .chooseAge: "Pila ang imong edad?",
+            .chooseAgeBody: "Ipahaom sa app ang gidak-on sa letra ug ang tingog para nimo.",
+            .ageUnder40: "Ubos sa 40", .age40to59: "40 – 59", .age60plus: "60 pataas",
         ],
         .waray: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulogan",
@@ -278,13 +292,17 @@ enum L10n {
             .submit: "Ipasa",
             .autoRead: "Awtomatiko nga basahon hin dako an mga alerto",
             .pictureGuide: "Ha ladawan",
-            .ligtasTitle: "LIGTAS Check-in",
+            .ligtasTitle: "Talwas Ako — sumati an pamilya",
             .ligtasIntro: "Usa ka pindot para mahibaruan han pamilya nga talwas ka — pinaagi han ordinaryo nga SMS, salit maabot ha bisan ano nga telepono, bisan waray app.",
             .yourName: "Imo ngaran",
             .familyNumbers: "Mga numero han pamilya (bulaga hin kuwit)",
-            .ligtasSend: "Ipadara an LIGTAS SMS",
-            .ligtasBody: "LIGTAS ✅ Hi %@ talwas harani ha %@. Tikang ha Handa.",
+            .ligtasSend: "Ipadara an SMS",
+            .ligtasBody: "TALWAS AKO ✅ Hi %@ talwas harani ha %@. Tikang ha PhilAlert.",
             .legendFood: "Pagkaon", .emergencyContacts: "Mga emergency nga numero", .riskIndex: "Grado han peligro",
+            .back: "Balik",
+            .chooseAge: "Pira an imo edad?",
+            .chooseAgeBody: "Iginpapahiuyon han app an kadako han letra ngan an boses para ha imo.",
+            .ageUnder40: "Ubos han 40", .age40to59: "40 – 59", .age60plus: "60 pataas",
         ],
     ]
 }

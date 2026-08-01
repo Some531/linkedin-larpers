@@ -30,7 +30,9 @@ targets:
     info:
       path: HandaPH/Info.plist
       properties:
-        CFBundleDisplayName: Handa
+        # Capital I in place of the second l — visually identical in a
+        # sans-serif face, and "AI" sits inside the name: Phil-AI-ert.
+        CFBundleDisplayName: PhilAIert
         UILaunchScreen: {}
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait

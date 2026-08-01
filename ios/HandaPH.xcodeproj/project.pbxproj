@@ -11,6 +11,7 @@
 		08E33F8ED9E896D5A50FBD88 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96042DB5684DB2DFD5DA7F56 /* L10n.swift */; };
 		13A28990119D3055D6D7FCCB /* HazardMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2CA4C4C395F575E6BF8560 /* HazardMapView.swift */; };
 		1DA67C63BD8AF97BBC9E329F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3719E9D48B76387598BCB2EA /* SettingsView.swift */; };
+		2DAB28869CF96CC60DF1B0A8 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5EAD4AB52F52D318CD15DE /* OnboardingView.swift */; };
 		439FD7C84EC1135A8A8C32AA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A9817A6B78AB819E163E1F /* RootView.swift */; };
 		44BC0E25355C1D8CA239FC28 /* HandaPHApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC067D063C5F51F29BA09B7 /* HandaPHApp.swift */; };
 		51EB28749C4B068707A535A9 /* HouseholdProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2C5E42FF3BD70BCD7A4231 /* HouseholdProfileView.swift */; };
@@ -52,6 +53,7 @@
 		36CDC552B0B7E3E06CFE2365 /* ChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistView.swift; sourceTree = "<group>"; };
 		3719E9D48B76387598BCB2EA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3E62CD2BEB8E84A8C06E6270 /* GlossaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossaryView.swift; sourceTree = "<group>"; };
+		5F5EAD4AB52F52D318CD15DE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		628876B8FBFB217058FB2619 /* SpeechToText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToText.swift; sourceTree = "<group>"; };
 		633D96B3C035342C89A33D43 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		7C66C0E0CEE9DEDC8BE4508B /* AssistantEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantEngine.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			children = (
 				F42831632607ECDECFF00C88 /* AppState.swift */,
 				BCC067D063C5F51F29BA09B7 /* HandaPHApp.swift */,
+				5F5EAD4AB52F52D318CD15DE /* OnboardingView.swift */,
 				B2A9817A6B78AB819E163E1F /* RootView.swift */,
 			);
 			path = App;
@@ -383,6 +386,7 @@
 				08E33F8ED9E896D5A50FBD88 /* L10n.swift in Sources */,
 				8409FBBC556C00C5550F7F33 /* Models.swift in Sources */,
 				8EE108BDC5DD951483FD890C /* OSMData.swift in Sources */,
+				2DAB28869CF96CC60DF1B0A8 /* OnboardingView.swift in Sources */,
 				439FD7C84EC1135A8A8C32AA /* RootView.swift in Sources */,
 				1DA67C63BD8AF97BBC9E329F /* SettingsView.swift in Sources */,
 				DC9F658CCB4E0C0F292EA96C /* SpeechService.swift in Sources */,
