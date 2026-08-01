@@ -10,7 +10,7 @@ import CoreLocation
 struct HazardMapView: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var profileStore: HouseholdProfileStore
-    @StateObject private var location = LocationProvider()
+    @EnvironmentObject private var location: LocationProvider
     @State private var camera: MapCameraPosition = .automatic
     @State private var hasSetInitialCamera = false
     @State private var selectedLandmark: Landmark?
@@ -24,7 +24,7 @@ struct HazardMapView: View {
     }
 
     private var risk: PersonalRisk {
-        RiskEngine.assess(alerts: FixtureStore.alerts, profile: profileStore.profile)
+        RiskEngine.assess(alerts: FixtureStore.alerts, profile: profileStore.profile, at: center)
     }
 
     var body: some View {
@@ -70,6 +70,9 @@ struct HazardMapView: View {
                                 .contentShape(Rectangle())
                         }
                         .accessibilityLabel(alert.headline.resolved(for: appState.language).text)
+                        // Hazards beyond the relevance radius stay visible
+                        // but recede — they are not YOUR hazard right now.
+                        .opacity(RiskEngine.isRelevant(alert, at: center) ? 1 : 0.45)
                     }
                 }
 

@@ -1,10 +1,23 @@
 import SwiftUI
+import CoreLocation
 
 struct AlertsListView: View {
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var location: LocationProvider
 
+    private var here: CLLocationCoordinate2D {
+        location.lastCoordinate ?? FixtureStore.fallbackCenter
+    }
+
+    /// Hazards near you first, then by severity — the radius decides what
+    /// "near" means (RiskEngine.relevanceRadius).
     private var alerts: [HazardAlert] {
-        FixtureStore.alerts.sorted { $0.severity > $1.severity }
+        FixtureStore.alerts.sorted { a, b in
+            let ra = RiskEngine.isRelevant(a, at: here)
+            let rb = RiskEngine.isRelevant(b, at: here)
+            if ra != rb { return ra }
+            return a.severity > b.severity
+        }
     }
 
     var body: some View {
@@ -20,7 +33,11 @@ struct AlertsListView: View {
                         LazyVStack(spacing: 14) {
                             ForEach(alerts) { alert in
                                 NavigationLink(value: alert.id) {
-                                    AlertCard(alert: alert, language: appState.language)
+                                    AlertCard(
+                                        alert: alert,
+                                        language: appState.language,
+                                        isNearby: RiskEngine.isRelevant(alert, at: here) && alert.coordinate != nil
+                                    )
                                 }
                                 .buttonStyle(.plain)
                             }
@@ -43,6 +60,7 @@ struct AlertsListView: View {
 struct AlertCard: View {
     let alert: HazardAlert
     let language: AppLanguage
+    var isNearby = false
 
     var body: some View {
         let headline = alert.headline.resolved(for: language)
@@ -67,9 +85,19 @@ struct AlertCard: View {
                 Text(headline.text)
                     .font(.title3.weight(.semibold))
                     .multilineTextAlignment(.leading)
-                Text(alert.areaName)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                HStack(spacing: 8) {
+                    Text(alert.areaName)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    if isNearby {
+                        Label(L10n.t(.nearYou, language), systemImage: "location.fill")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(Theme.brand)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 3)
+                            .background(Theme.brand.opacity(0.12), in: Capsule())
+                    }
+                }
                 TranslationStateChip(state: headline.state, language: language)
             }
             .padding(Theme.cardPadding)

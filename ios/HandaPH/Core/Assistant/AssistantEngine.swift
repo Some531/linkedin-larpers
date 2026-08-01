@@ -47,7 +47,10 @@ final class AssistantEngine: ObservableObject {
         turn.trace.append(.init(key: "route", value: matches.isEmpty ? "navigate · app" : "explain · hazard term"))
         turn.trace.append(.init(key: "retrieve", value: matches.isEmpty ? "no glossary match" : turn.groundedOn.joined(separator: ", ")))
 
-        if AnthropicClient.hasKey {
+        // -forceOfflineAssistant 1 (UI tests) pins the deterministic path
+        // even when a key is configured.
+        let forceOffline = UserDefaults.standard.bool(forKey: "forceOfflineAssistant")
+        if AnthropicClient.hasKey, !forceOffline {
             do {
                 let context = Self.contextBlock(matches: matches, language: language)
                 let text = try await client.complete(

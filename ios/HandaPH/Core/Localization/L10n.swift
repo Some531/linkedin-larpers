@@ -38,6 +38,8 @@ enum L10n {
         case youAsked, send, speak, listening
         // Routing
         case showRoute, endRoute, routeUnavailable
+        // Relevance
+        case nearYou, adviceInSurgeZone
     }
 
     /// Languages whose UI strings have not yet been reviewed by a community
@@ -104,6 +106,8 @@ enum L10n {
             .speak: "Speak", .listening: "Listening…",
             .showRoute: "Route", .endRoute: "End route",
             .routeUnavailable: "No route available offline — straight line shown.",
+            .nearYou: "Near you",
+            .adviceInSurgeZone: "You are INSIDE the storm-surge danger zone. Move out of it now — do not wait.",
         ],
         .tagalog: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulugan",
@@ -157,6 +161,8 @@ enum L10n {
             .speak: "Magsalita", .listening: "Nakikinig…",
             .showRoute: "Ruta", .endRoute: "Tapusin ang ruta",
             .routeUnavailable: "Walang rutang makuha nang offline — tuwid na linya ang ipinapakita.",
+            .nearYou: "Malapit sa inyo",
+            .adviceInSurgeZone: "NASA LOOB kayo ng mapanganib na sona ng daluyong. Umalis na ngayon — huwag maghintay.",
         ],
         .cebuano: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulogan",
@@ -220,6 +226,8 @@ enum L10n {
             .speak: "Pagyakan", .listening: "Namamati…",
             .showRoute: "Ruta", .endRoute: "Tapuson an ruta",
             .routeUnavailable: "Waray ruta nga makukuha hin offline — tul-id nga linya an iginpapakita.",
+            .nearYou: "Harani ha imo",
+            .adviceInSurgeZone: "AADA KA HA SULOD han peligroso nga sona han dako nga balod. Gawas na yana — ayaw paghulat.",
         ],
     ]
 }

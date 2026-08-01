@@ -30,6 +30,11 @@ final class SmokeTests: XCTestCase {
 
         XCTAssertTrue(app.staticTexts["Mga Alerto"].waitForExistence(timeout: 5),
                       "Alerts list should appear in Waray after onboarding")
+
+        // Relevance radius: the San Jose storm surge (~2 km away) carries a
+        // 'near you' chip; the region-wide advisory does not.
+        XCTAssertTrue(app.staticTexts["Harani ha imo"].firstMatch.waitForExistence(timeout: 5),
+                      "Nearby alert should be chipped 'near you'")
     }
 
     func testSmsDeepLinkOpensStormSurgeAlert() {
@@ -129,7 +134,7 @@ final class SmokeTests: XCTestCase {
 
     func testAssistantAnswersFromVerifiedCorpusOffline() {
         let app = XCUIApplication()
-        app.launchArguments = ["-appLanguage", "en"]
+        app.launchArguments = ["-appLanguage", "en", "-forceOfflineAssistant", "1"]
         app.launch()
 
         app.buttons["Gabay"].tap()
@@ -162,10 +167,13 @@ final class SmokeTests: XCTestCase {
         app.launch()
 
         app.tabBars.buttons["Meanings"].tap()
+        XCTAssertTrue(app.navigationBars["Meanings"].waitForExistence(timeout: 5))
 
         let searchField = app.searchFields.firstMatch
-        if !searchField.waitForExistence(timeout: 3) {
-            app.swipeDown() // reveal the collapsed search bar
+        // The search bar starts collapsed; swipe down until it is hittable.
+        for _ in 0..<3 where !(searchField.exists && searchField.isHittable) {
+            app.swipeDown()
+            _ = searchField.waitForExistence(timeout: 2)
         }
         XCTAssertTrue(searchField.waitForExistence(timeout: 5))
         searchField.tap()
