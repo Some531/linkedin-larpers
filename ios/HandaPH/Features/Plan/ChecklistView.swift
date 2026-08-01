@@ -31,7 +31,7 @@ struct ChecklistView: View {
                         }
                         .buttonStyle(.plain)
                         .accessibilityAddTraits(doneIDs.contains(item.id) ? .isSelected : [])
-                        .accessibilityHint("Double tap to mark as done")
+                        .accessibilityValue(L10n.t(doneIDs.contains(item.id) ? .doneStatus : .notDoneStatus, appState.language))
                     }
                 } header: {
                     Text(L10n.t(.planSubtitle, appState.language))

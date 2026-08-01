@@ -52,8 +52,9 @@ That opens the storm-surge alert detail directly — the SMS → app moment.
 - Dynamic Type throughout — no fixed font sizes; an extra "larger text"
   boost in Settings for elderly users on top of the system setting.
 - Severity is never colour alone: colour + emoji + SF Symbol + words.
-- Text-to-speech on every alert and glossary entry (AVSpeechSynthesizer,
-  `fil-PH` voice; Cebuano/Waray fall back to `fil-PH` — iOS ships no voice
-  for them, which is itself a finding for the pitch).
+- Text-to-speech on every alert and glossary entry (AVSpeechSynthesizer).
+  Stock iOS often has no Filipino voice installed at all — the app checks at
+  runtime, falls back to an English voice explicitly, and tells the user in
+  Settings. That gap is itself a finding for the pitch.
 - Tap targets ≥ 44pt, VoiceOver labels on all interactive elements.
 - Language chosen in-app at first launch, each language named in itself.

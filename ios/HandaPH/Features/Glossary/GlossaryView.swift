@@ -5,12 +5,35 @@ import SwiftUI
 /// must be answerable with the radio off.
 struct GlossaryView: View {
     @EnvironmentObject private var appState: AppState
+    @State private var query = ""
+
+    /// The brief's "chatbot", implemented as retrieval over a verified
+    /// corpus — matches the user's words against terms and explanations in
+    /// their language AND English, so "daluyong", "balod" and "storm surge"
+    /// all find the same entry. Works fully offline; cannot hallucinate.
+    private var results: [GlossaryTerm] {
+        let needle = query.trimmingCharacters(in: .whitespaces).lowercased()
+        guard !needle.isEmpty else { return FixtureStore.glossary }
+        return FixtureStore.glossary.filter { term in
+            let haystacks = [
+                term.term.resolved(for: appState.language).text,
+                term.term.values[.english] ?? "",
+                term.meaning.resolved(for: appState.language).text,
+                term.meaning.values[.english] ?? "",
+            ]
+            return haystacks.contains { $0.lowercased().contains(needle) }
+        }
+    }
 
     var body: some View {
         NavigationStack {
             List {
                 Section {
-                    ForEach(FixtureStore.glossary) { term in
+                    if results.isEmpty {
+                        Text(L10n.t(.noSearchResults, appState.language))
+                            .foregroundStyle(.secondary)
+                    }
+                    ForEach(results) { term in
                         NavigationLink(value: term.id) {
                             HStack(spacing: 12) {
                                 Text(term.hazard.emoji)
@@ -29,6 +52,7 @@ struct GlossaryView: View {
                 }
             }
             .navigationTitle(L10n.t(.glossaryTitle, appState.language))
+            .searchable(text: $query, prompt: L10n.t(.searchPrompt, appState.language))
             .navigationDestination(for: String.self) { id in
                 if let term = FixtureStore.glossary.first(where: { $0.id == id }) {
                     GlossaryDetailView(term: term)

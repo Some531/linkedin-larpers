@@ -42,12 +42,18 @@ final class AppState: ObservableObject {
     }
 
     /// Handles handaph://a/{token} (demo) and https://rdy.ph/a/{token}
-    /// (Universal Link, once the AASA file is served).
+    /// (Universal Link, once the AASA file is served). Scheme and host are
+    /// case-insensitive; www. is accepted on the https form.
+    /// An unknown token lands the user on the alerts list rather than a
+    /// dead end — the app opening at all is still the right outcome.
     func handle(url: URL) {
+        let scheme = url.scheme?.lowercased()
+        let host = url.host()?.lowercased()
         let token: String?
-        if url.scheme == "handaph", url.host == "a" {
+        if scheme == "handaph", host == "a" {
             token = url.pathComponents.dropFirst().first
-        } else if url.host == "rdy.ph", url.pathComponents.count >= 3, url.pathComponents[1] == "a" {
+        } else if host == "rdy.ph" || host == "www.rdy.ph",
+                  url.pathComponents.count >= 3, url.pathComponents[1] == "a" {
             token = url.pathComponents[2]
         } else {
             token = nil

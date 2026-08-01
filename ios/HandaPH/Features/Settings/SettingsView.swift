@@ -37,6 +37,13 @@ struct SettingsView: View {
                         Text(L10n.t(.speechRate, language))
                         Slider(value: $speech.rate, in: 0.3...0.55)
                             .accessibilityLabel(L10n.t(.speechRate, language))
+                            .accessibilityValue("\(Int(((speech.rate - 0.3) / 0.25) * 100))%")
+                    }
+
+                    if language != .english && !SpeechService.hasFilipinoVoice {
+                        Label(L10n.t(.voiceUnavailableNote, language), systemImage: "speaker.badge.exclamationmark")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
                     }
                 }
 
@@ -46,6 +53,10 @@ struct SettingsView: View {
                     Text("Alert content comes from official sources (PAGASA, PHIVOLCS) via a human-verified template bank. No text in this app is written by AI at alert time. Your location never leaves this phone.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
+                    // The app's own honesty rule applies to its own prose.
+                    if language != .english {
+                        TranslationStateChip(state: .untranslated, language: language)
+                    }
                 }
             }
             .navigationTitle(L10n.t(.settingsTitle, language))

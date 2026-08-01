@@ -106,21 +106,22 @@ struct SpeakButton: View {
     let language: AppLanguage
 
     var body: some View {
+        let speakingThis = speech.isSpeaking(text)
         Button {
-            if speech.isSpeaking {
+            if speakingThis {
                 speech.stop()
             } else {
                 speech.speak(text, language: language)
             }
         } label: {
             Label(
-                speech.isSpeaking ? L10n.t(.stopListening, language) : L10n.t(.listen, language),
-                systemImage: speech.isSpeaking ? "stop.circle.fill" : "speaker.wave.2.fill"
+                speakingThis ? L10n.t(.stopListening, language) : L10n.t(.listen, language),
+                systemImage: speakingThis ? "stop.circle.fill" : "speaker.wave.2.fill"
             )
             .font(.body.weight(.semibold))
             .frame(minHeight: Theme.minTapTarget)
         }
         .buttonStyle(.bordered)
-        .accessibilityHint("Reads the text aloud")
+        .accessibilityHint(L10n.t(.listenHint, language))
     }
 }

@@ -18,7 +18,12 @@ struct RootView: View {
         }
         // First launch: choose a language before anything else. Full screen,
         // cannot be swiped away — the choice is the app's entry contract.
-        .fullScreenCover(isPresented: .constant(!appState.hasChosenLanguage)) {
+        // Derived binding: dismissal happens by choosing a language, and a
+        // deep-linked alert queued during first run presents right after.
+        .fullScreenCover(isPresented: Binding(
+            get: { !appState.hasChosenLanguage },
+            set: { _ in }
+        )) {
             LanguagePickerView(isFirstRun: true)
         }
         // SMS deep link lands here regardless of which tab is open.

@@ -58,7 +58,9 @@ struct AlertCard: View {
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.secondary)
                     Spacer()
-                    Text(alert.issuedAt, style: .relative)
+                    // .named presentation renders "25 minutes ago", not a
+                    // bare "25 min" that could read as "in 25 minutes".
+                    Text(alert.issuedAt, format: .relative(presentation: .named))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }

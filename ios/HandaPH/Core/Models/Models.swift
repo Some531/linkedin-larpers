@@ -105,7 +105,7 @@ enum HazardType: String, Codable, CaseIterable, Identifiable {
         case .flashFlood: "cloud.heavyrain"
         case .landslide: "mountain.2"
         case .earthquake: "waveform.path.ecg"
-        case .tsunami: "water.waves.and.arrow.trianglehead.up"
+        case .tsunami: "water.waves.and.arrow.up"
         case .volcanicEruption: "mountain.2.fill"
         case .wildfire: "flame"
         case .drought: "sun.max.trianglebadge.exclamationmark"

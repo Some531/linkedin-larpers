@@ -10,6 +10,7 @@ struct HazardMapView: View {
     @EnvironmentObject private var appState: AppState
     @StateObject private var location = LocationProvider()
     @State private var camera: MapCameraPosition = .automatic
+    @State private var hasSetInitialCamera = false
 
     private var center: CLLocationCoordinate2D {
         location.lastCoordinate ?? FixtureStore.fallbackCenter
@@ -32,6 +33,9 @@ struct HazardMapView: View {
                             .foregroundStyle(.white)
                             .frame(width: 34, height: 34)
                             .background(color(for: landmark.kind), in: Circle())
+                            // Visual stays 34pt; tappable area meets 44pt HIG minimum.
+                            .frame(width: Theme.minTapTarget, height: Theme.minTapTarget)
+                            .contentShape(Rectangle())
                             .accessibilityLabel(landmark.name)
                     }
                 }
@@ -47,6 +51,10 @@ struct HazardMapView: View {
             }
             .navigationTitle(L10n.t(.mapTitle, appState.language))
             .onAppear {
+                // Runs on every return to this tab; don't discard the
+                // user's pan/zoom by resetting the camera again.
+                guard !hasSetInitialCamera else { return }
+                hasSetInitialCamera = true
                 location.requestAccess()
                 camera = .region(MKCoordinateRegion(
                     center: center,

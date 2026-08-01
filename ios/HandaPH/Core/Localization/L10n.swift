@@ -21,6 +21,9 @@ enum L10n {
         case chooseLanguage, chooseLanguageBody, continueButton
         case unverifiedChip, untranslatedChip
         case supersededNotice
+        case listenHint, doneStatus, notDoneStatus
+        case voiceUnavailableNote
+        case searchPrompt, noSearchResults
     }
 
     /// Languages whose UI strings have not yet been reviewed by a community
@@ -57,6 +60,11 @@ enum L10n {
             .unverifiedChip: "Awaiting community verification",
             .untranslatedChip: "Not yet translated — shown in English",
             .supersededNotice: "This alert has been replaced by a newer one.",
+            .listenHint: "Reads the text aloud",
+            .doneStatus: "Done", .notDoneStatus: "Not done yet",
+            .voiceUnavailableNote: "This iPhone has no Filipino voice installed, so read-aloud uses an English voice. The words are still in your language.",
+            .searchPrompt: "Search a word, e.g. storm surge",
+            .noSearchResults: "No match found. Try another word.",
         ],
         .tagalog: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulugan",
@@ -80,10 +88,20 @@ enum L10n {
             .unverifiedChip: "Hinihintay ang beripikasyon ng komunidad",
             .untranslatedChip: "Hindi pa naisalin — ipinapakita sa Ingles",
             .supersededNotice: "May mas bagong alerto na pumalit dito.",
+            .listenHint: "Binabasa nang malakas ang teksto",
+            .doneStatus: "Tapos na", .notDoneStatus: "Hindi pa tapos",
+            .voiceUnavailableNote: "Walang boses na Filipino ang iPhone na ito, kaya boses na Ingles ang gagamitin sa pagbasa. Nasa wika mo pa rin ang mga salita.",
+            .searchPrompt: "Maghanap ng salita, hal. daluyong",
+            .noSearchResults: "Walang nahanap. Subukan ang ibang salita.",
         ],
         .cebuano: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulogan",
             .tabPlan: "Akong Plano", .tabSettings: "Mga Setting",
+            .alertsTitle: "Mga Alerto", .noAlerts: "Walay alerto sa inyong lugar karon.",
+            .glossaryTitle: "Kahulogan", .glossarySubtitle: "Mga pulong bahin sa katalagman, gipasabot sa yano nga pinulongan.",
+            .planTitle: "Akong Plano", .planSubtitle: "Pangandam sa dili pa ang katalagman. Markahi ang nahuman na.",
+            .mapTitle: "Mapa", .settingsTitle: "Mga Setting",
+            .language: "Pinulongan", .largerText: "Mas dako nga letra", .speechRate: "Kapaspason sa pagsulti",
             .whatToDoNow: "Buhaton karon", .moreDetail: "Dugang detalye",
             .issuedBy: "Gikan sa", .listen: "Paminawa", .stopListening: "Hunong",
             .happeningNow: "NAGAKAHITABO NA", .expectedSoon: "UMAABOT NA",
@@ -98,6 +116,11 @@ enum L10n {
         .waray: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulogan",
             .tabPlan: "Akon Plano", .tabSettings: "Mga Setting",
+            .alertsTitle: "Mga Alerto", .noAlerts: "Waray alerto ha iyo lugar yana.",
+            .glossaryTitle: "Kahulogan", .glossarySubtitle: "Mga pulong mahitungod han kalamidad, ginsaysay hin simple nga yinaknan.",
+            .planTitle: "Akon Plano", .planSubtitle: "Pangandam antes han kalamidad. Markahi an nahuman na.",
+            .mapTitle: "Mapa", .settingsTitle: "Mga Setting",
+            .language: "Yinaknan", .largerText: "Mas dako nga letra", .speechRate: "Kapaspason han pagyakan",
             .whatToDoNow: "Buhata yana", .moreDetail: "Dugang nga detalye",
             .issuedBy: "Tikang ha", .listen: "Pamatia", .stopListening: "Undang",
             .happeningNow: "NAHITATABO NA", .expectedSoon: "TIARABOT NA",

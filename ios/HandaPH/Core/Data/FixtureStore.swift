@@ -169,6 +169,40 @@ enum FixtureStore {
                 .tagalog: "Kapag nakita ang mga senyales na ito, ilayo ang pamilya sa gulod at ipagbigay-alam agad sa barangay.",
             ])
         ),
+        GlossaryTerm(
+            id: "g-rainfall",
+            hazard: .flashFlood,
+            term: LocalizedText([
+                .english: "Yellow / Orange / Red rainfall warning",
+                .tagalog: "Yellow / Orange / Red na babala sa ulan",
+                .waray: "Yellow / Orange / Red nga pahamangno ha uran",
+            ]),
+            meaning: LocalizedText([
+                .english: "PAGASA's rain colour code. Yellow: heavy rain, flooding possible in low areas. Orange: flooding is likely. Red: severe flooding is expected — this is the most serious level.",
+                .tagalog: "Kulay na hudyat ng PAGASA para sa ulan. Yellow: malakas na ulan, posibleng bumaha sa mababang lugar. Orange: malamang bumaha. Red: inaasahan ang matinding baha — ito ang pinakamataas na antas.",
+            ]),
+            action: LocalizedText([
+                .english: "At Orange, prepare to leave low areas. At Red, evacuate low areas without waiting for water to arrive.",
+                .tagalog: "Sa Orange, maghandang umalis sa mababang lugar. Sa Red, lumikas agad nang hindi hinihintay ang tubig.",
+            ])
+        ),
+        GlossaryTerm(
+            id: "g-evac",
+            hazard: .typhoon,
+            term: LocalizedText([
+                .english: "Evacuation centre",
+                .tagalog: "Evacuation center / Sentro ng paglikas",
+                .waray: "Evacuation center / Sirungan",
+            ]),
+            meaning: LocalizedText([
+                .english: "A strong public building — usually a school, gym or barangay hall — where you and your family can stay safely during a disaster. It is free, and you do not need any documents to enter.",
+                .tagalog: "Matibay na pampublikong gusali — kadalasan paaralan, gym o barangay hall — kung saan ligtas na makakapanatili ang pamilya habang may sakuna. Libre ito at hindi kailangan ng anumang dokumento.",
+            ]),
+            action: LocalizedText([
+                .english: "Know your nearest evacuation centre before a disaster. See the Map tab — green markers are evacuation centres.",
+                .tagalog: "Alamin ang pinakamalapit na evacuation center bago ang sakuna. Tingnan ang Mapa — berde ang marka ng mga evacuation center.",
+            ])
+        ),
     ]
 
     static let checklist: [ChecklistItem] = [
