@@ -4,6 +4,7 @@ import CoreLocation
 struct AlertsListView: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var location: LocationProvider
+    @State private var showCheckIn = false
 
     private var here: CLLocationCoordinate2D {
         location.lastCoordinate ?? FixtureStore.fallbackCenter
@@ -48,6 +49,20 @@ struct AlertsListView: View {
             }
             .themedScreen()
             .navigationTitle(L10n.t(.alertsTitle, appState.language))
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showCheckIn = true
+                    } label: {
+                        Label("LIGTAS", systemImage: "checkmark.shield.fill")
+                            .labelStyle(.titleAndIcon)
+                            .font(.subheadline.weight(.bold))
+                    }
+                }
+            }
+            .sheet(isPresented: $showCheckIn) {
+                CheckInView()
+            }
             .navigationDestination(for: String.self) { id in
                 if let alert = alerts.first(where: { $0.id == id }) {
                     AlertDetailView(alert: alert)

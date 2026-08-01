@@ -1,4 +1,50 @@
 import Foundation
+import CoreLocation
+
+/// Everything Gabay may use to personalise an answer. Assembled on device;
+/// only the coarse summary strings are sent with an online request —
+/// never raw coordinates.
+struct UserSituation {
+    let areaName: String
+    let riskSummary: String
+    let householdSummary: String
+    let nearestEvac: String?
+    let inSurgeZone: Bool
+
+    @MainActor
+    static func current(profile: HouseholdProfile, at location: CLLocationCoordinate2D, language: AppLanguage) -> UserSituation {
+        let risk = RiskEngine.assess(alerts: FixtureStore.alerts, profile: profile, at: location)
+        let riskText: String
+        if let alert = risk.drivingAlert {
+            riskText = "\(risk.severity.rawValue.uppercased()) — \(alert.hazard.rawValue), \(alert.phase.rawValue), \(alert.areaName)"
+        } else {
+            riskText = "no active alert nearby"
+        }
+        var household: [String] = []
+        if profile.hasElderly { household.append("elderly member") }
+        if profile.hasYoungChildren { household.append("young children") }
+        if profile.hasLimitedMobility { household.append("limited mobility") }
+        if profile.nearCoastOrRiver { household.append("home near coast/river") }
+        if profile.singleStorey { household.append("single-storey house") }
+
+        let here = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        let evac = FixtureStore.allLandmarks
+            .filter { $0.kind == .evacuationCenter }
+            .map { lm -> (Landmark, CLLocationDistance) in
+                (lm, here.distance(from: CLLocation(latitude: lm.coordinate.latitude, longitude: lm.coordinate.longitude)))
+            }
+            .min { $0.1 < $1.1 }
+        let evacText = evac.map { "\($0.0.name), \(Int($0.1)) m away (~\(max(1, Int($0.1) / 80)) min walk)" }
+
+        return UserSituation(
+            areaName: "Tacloban City area",
+            riskSummary: riskText,
+            householdSummary: household.isEmpty ? "no special factors recorded" : household.joined(separator: ", "),
+            nearestEvac: evacText,
+            inSurgeZone: RiskEngine.contains(polygon: FixtureStore.surgeZone, point: location)
+        )
+    }
+}
 
 /// One question → answer exchange, including the visible trace — the Flux
 /// pattern from Modulo Flow: the user watches route → retrieve → answer
@@ -39,7 +85,7 @@ final class AssistantEngine: ObservableObject {
 
     private let client = AnthropicClient()
 
-    func ask(_ question: String, language: AppLanguage) async {
+    func ask(_ question: String, language: AppLanguage, situation: UserSituation? = nil) async {
         let q = question.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !q.isEmpty, !isWorking else { return }
         isWorking = true
@@ -59,7 +105,7 @@ final class AssistantEngine: ObservableObject {
             do {
                 let context = Self.contextBlock(matches: matches, language: language)
                 let text = try await client.complete(
-                    system: Self.systemPrompt(language: language, context: context),
+                    system: Self.systemPrompt(language: language, context: context, situation: situation),
                     user: q
                 )
                 turn.answer = text
@@ -77,6 +123,10 @@ final class AssistantEngine: ObservableObject {
             let meaning = best.meaning.resolved(for: language).text
             let action = best.action.resolved(for: language).text
             turn.answer = "\(meaning)\n\n\(action)"
+        } else if let evac = situation?.nearestEvac,
+                  Self.isWhereToGoQuestion(q) {
+            // Deterministic location-aware answer: nearest evacuation centre.
+            turn.answer = "\(L10n.t(.legendEvacuation, language)): \(evac)"
         } else {
             turn.answer = L10n.t(.assistantNoMatch, language)
         }
@@ -117,7 +167,30 @@ final class AssistantEngine: ObservableObject {
         return parts.joined(separator: "\n\n")
     }
 
-    private static func systemPrompt(language: AppLanguage, context: String) -> String {
+    /// "Where do I go / where is it safe" in the supported languages.
+    static func isWhereToGoQuestion(_ q: String) -> Bool {
+        let needles = ["where", "evac", "saan", "ligtas", "diin", "asa", "makadto", "pupunta", "talwas", "safe"]
+        let lower = q.lowercased()
+        return needles.contains { lower.contains($0) }
+    }
+
+    private static func systemPrompt(language: AppLanguage, context: String, situation: UserSituation?) -> String {
+        var situationBlock = ""
+        if let s = situation {
+            situationBlock = """
+
+            USER SITUATION (use this to personalise; recommend the nearest \
+            evacuation centre by name when relevant):
+            - Location: \(s.areaName)\(s.inSurgeZone ? " — currently INSIDE the storm-surge hazard zone" : "")
+            - Current personal risk: \(s.riskSummary)
+            - Household: \(s.householdSummary)
+            - Nearest evacuation centre: \(s.nearestEvac ?? "unknown")
+            """
+        }
+        return basePrompt(language: language, context: context) + situationBlock
+    }
+
+    private static func basePrompt(language: AppLanguage, context: String) -> String {
         """
         You are Gabay, the in-app guide of HandaPH, a disaster-preparedness app \
         for the Philippines. You help users understand hazard terms and find \

@@ -145,9 +145,12 @@ struct SeverityBanner: View {
 }
 
 /// Honest-translation chip (docs/architecture.md §4: verification_state).
+/// Tappable: readers can suggest better wording — the community-verified
+/// translation loop, where CALD users are authors, not just audience.
 struct TranslationStateChip: View {
     let state: TranslationState
     let language: AppLanguage
+    @State private var showSuggestion = false
 
     var body: some View {
         switch state {
@@ -161,12 +164,122 @@ struct TranslationStateChip: View {
     }
 
     private func chip(text: String, symbol: String) -> some View {
-        Label(text, systemImage: symbol)
+        Button {
+            showSuggestion = true
+        } label: {
+            HStack(spacing: 6) {
+                Label(text, systemImage: symbol)
+                Image(systemName: "pencil.line")
+            }
             .font(.footnote)
             .foregroundStyle(.secondary)
             .padding(.horizontal, 10)
             .padding(.vertical, 5)
             .background(Theme.surface2, in: Capsule())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("\(text). \(L10n.t(.suggestWording, language))")
+        .sheet(isPresented: $showSuggestion) {
+            SuggestionSheet(language: language)
+                .presentationDetents([.medium])
+        }
+    }
+}
+
+/// Community wording suggestions, queued locally; the backend reviewer
+/// queue picks these up in production.
+struct SuggestionSheet: View {
+    let language: AppLanguage
+    @Environment(\.dismiss) private var dismiss
+    @State private var text = ""
+    @State private var submitted = false
+
+    var body: some View {
+        NavigationStack {
+            VStack(alignment: .leading, spacing: 14) {
+                if submitted {
+                    Label(L10n.t(.suggestionThanks, language), systemImage: "checkmark.seal.fill")
+                        .font(.body.weight(.medium))
+                        .foregroundStyle(Theme.brand)
+                } else {
+                    Text(L10n.t(.suggestionPlaceholder, language))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    TextEditor(text: $text)
+                        .frame(minHeight: 110)
+                        .padding(8)
+                        .background(Theme.card, in: RoundedRectangle(cornerRadius: Theme.cornerRadius))
+                    Button {
+                        var queue = UserDefaults.standard.stringArray(forKey: "translationSuggestions") ?? []
+                        queue.append("[\(language.rawValue)] \(text)")
+                        UserDefaults.standard.set(queue, forKey: "translationSuggestions")
+                        submitted = true
+                    } label: {
+                        Text(L10n.t(.submit, language))
+                            .font(.body.weight(.semibold))
+                            .frame(maxWidth: .infinity, minHeight: Theme.minTapTarget)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(text.trimmingCharacters(in: .whitespaces).isEmpty)
+                }
+                Spacer()
+            }
+            .padding()
+            .background(Theme.background)
+            .navigationTitle(L10n.t(.suggestWording, language))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(L10n.t(.continueButton, language)) { dismiss() }
+                }
+            }
+        }
+    }
+}
+
+/// Wordless what-to-do strip — meaning carried by pictograms where
+/// language cannot (the brief's "use of symbols").
+struct PictogramStrip: View {
+    let hazard: HazardType
+
+    private var sequence: [String] {
+        switch hazard {
+        case .stormSurge, .tsunami:
+            ["water.waves", "figure.run", "arrow.up.right", "building.2.fill"]
+        case .flashFlood:
+            ["cloud.heavyrain.fill", "arrow.up.to.line", "figure.run", "building.2.fill"]
+        case .earthquake:
+            ["waveform.path.ecg", "arrow.down.circle.fill", "shield.lefthalf.filled", "hand.raised.fill"]
+        case .typhoon, .tornado:
+            ["hurricane", "figure.run", "house.fill", "checkmark.circle.fill"]
+        case .landslide:
+            ["mountain.2.fill", "figure.run", "arrow.left.arrow.right", "checkmark.circle.fill"]
+        case .volcanicEruption:
+            ["mountain.2.fill", "facemask.fill", "figure.run", "building.2.fill"]
+        case .wildfire:
+            ["flame.fill", "figure.run", "arrow.down.left", "checkmark.circle.fill"]
+        case .drought:
+            ["sun.max.fill", "drop.fill", "square.stack.3d.up.fill", "checkmark.circle.fill"]
+        }
+    }
+
+    var body: some View {
+        HStack(spacing: 6) {
+            ForEach(Array(sequence.enumerated()), id: \.offset) { index, symbol in
+                Image(systemName: symbol)
+                    .font(.title3.weight(.bold))
+                    .foregroundStyle(.white)
+                    .frame(width: 46, height: 46)
+                    .background(Theme.brandGradient, in: RoundedRectangle(cornerRadius: 12))
+                if index < sequence.count - 1 {
+                    Image(systemName: "chevron.right")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(.secondary)
+                }
+            }
+            Spacer()
+        }
+        .accessibilityHidden(true) // decorative for VoiceOver; text carries meaning
     }
 }
 

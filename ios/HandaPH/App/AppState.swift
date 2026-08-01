@@ -14,6 +14,12 @@ final class AppState: ObservableObject {
         didSet { UserDefaults.standard.set(largerText, forKey: "largerText") }
     }
 
+    /// Audio-first mode: alert details read themselves aloud on open —
+    /// for low-literacy and elderly users, voice is the primary medium.
+    @Published var autoRead: Bool {
+        didSet { UserDefaults.standard.set(autoRead, forKey: "autoRead") }
+    }
+
     @Published private var storedLanguage: String {
         didSet { UserDefaults.standard.set(storedLanguage, forKey: "appLanguage") }
     }
@@ -37,6 +43,7 @@ final class AppState: ObservableObject {
     init() {
         let stored = UserDefaults.standard.string(forKey: "appLanguage") ?? ""
         largerText = UserDefaults.standard.bool(forKey: "largerText")
+        autoRead = UserDefaults.standard.bool(forKey: "autoRead")
         storedLanguage = stored
         hasChosenLanguage = !stored.isEmpty
     }

@@ -42,6 +42,11 @@ enum L10n {
         case nearYou, adviceInSurgeZone
         // Plan sections & ETA
         case planScenario, planHousehold, planGeneral, arrive
+        // Trusted messenger, suggestions, audio-first, pictograms
+        case endorsedByBarangay, suggestWording, suggestionPlaceholder, suggestionThanks, submit
+        case autoRead, pictureGuide
+        // LIGTAS check-in
+        case ligtasTitle, ligtasIntro, yourName, familyNumbers, ligtasSend, ligtasBody
     }
 
     /// Languages whose UI strings have not yet been reviewed by a community
@@ -112,6 +117,19 @@ enum L10n {
             .adviceInSurgeZone: "You are INSIDE the storm-surge danger zone. Move out of it now — do not wait.",
             .planScenario: "Do now", .planHousehold: "For your household", .planGeneral: "For everyone",
             .arrive: "arrive",
+            .endorsedByBarangay: "Confirmed by your barangay",
+            .suggestWording: "Suggest better wording",
+            .suggestionPlaceholder: "How would you say this in your community? Your suggestion goes to a community verifier.",
+            .suggestionThanks: "Salamat! A community verifier will review your suggestion.",
+            .submit: "Submit",
+            .autoRead: "Read alerts aloud automatically",
+            .pictureGuide: "In pictures",
+            .ligtasTitle: "LIGTAS Check-in",
+            .ligtasIntro: "One tap tells your family you are safe — by ordinary SMS, so it reaches any phone, even without this app.",
+            .yourName: "Your name",
+            .familyNumbers: "Family numbers (comma-separated)",
+            .ligtasSend: "Send LIGTAS SMS",
+            .ligtasBody: "LIGTAS ✅ %@ is safe near %@. Sent from Handa.",
         ],
         .tagalog: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulugan",
@@ -169,6 +187,19 @@ enum L10n {
             .adviceInSurgeZone: "NASA LOOB kayo ng mapanganib na sona ng daluyong. Umalis na ngayon — huwag maghintay.",
             .planScenario: "Gawin ngayon", .planHousehold: "Para sa inyong sambahayan", .planGeneral: "Para sa lahat",
             .arrive: "dating",
+            .endorsedByBarangay: "Kinumpirma ng inyong barangay",
+            .suggestWording: "Magmungkahi ng mas magandang salita",
+            .suggestionPlaceholder: "Paano ito sasabihin sa inyong komunidad? Mapupunta ang mungkahi sa community verifier.",
+            .suggestionThanks: "Salamat! Susuriin ng community verifier ang inyong mungkahi.",
+            .submit: "Ipasa",
+            .autoRead: "Awtomatikong basahin nang malakas ang mga alerto",
+            .pictureGuide: "Sa larawan",
+            .ligtasTitle: "LIGTAS Check-in",
+            .ligtasIntro: "Isang pindot para malaman ng pamilya na ligtas ka — sa karaniwang SMS, kaya aabot sa kahit anong telepono, kahit walang app.",
+            .yourName: "Pangalan mo",
+            .familyNumbers: "Mga numero ng pamilya (paghiwalayin ng kuwit)",
+            .ligtasSend: "Ipadala ang LIGTAS SMS",
+            .ligtasBody: "LIGTAS ✅ Si %@ ay ligtas malapit sa %@. Mula sa Handa.",
         ],
         .cebuano: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulogan",
@@ -236,6 +267,19 @@ enum L10n {
             .adviceInSurgeZone: "AADA KA HA SULOD han peligroso nga sona han dako nga balod. Gawas na yana — ayaw paghulat.",
             .planScenario: "Buhata yana", .planHousehold: "Para ha iyo panimalay", .planGeneral: "Para ha ngatanan",
             .arrive: "abot",
+            .endorsedByBarangay: "Ginkumpirma han iyo barangay",
+            .suggestWording: "Pagsuherir hin mas maupay nga pulong",
+            .suggestionPlaceholder: "Paonan-o ini sasabihon ha iyo komunidad? Makadto an suhestyon ha community verifier.",
+            .suggestionThanks: "Salamat! Susulngon han community verifier an imo suhestyon.",
+            .submit: "Ipasa",
+            .autoRead: "Awtomatiko nga basahon hin dako an mga alerto",
+            .pictureGuide: "Ha ladawan",
+            .ligtasTitle: "LIGTAS Check-in",
+            .ligtasIntro: "Usa ka pindot para mahibaruan han pamilya nga talwas ka — pinaagi han ordinaryo nga SMS, salit maabot ha bisan ano nga telepono, bisan waray app.",
+            .yourName: "Imo ngaran",
+            .familyNumbers: "Mga numero han pamilya (bulaga hin kuwit)",
+            .ligtasSend: "Ipadara an LIGTAS SMS",
+            .ligtasBody: "LIGTAS ✅ Hi %@ talwas harani ha %@. Tikang ha Handa.",
         ],
     ]
 }

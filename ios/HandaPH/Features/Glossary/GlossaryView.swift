@@ -106,6 +106,13 @@ struct GlossaryDetailView: View {
                 .padding(Theme.cardPadding)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(.green.opacity(0.12), in: RoundedRectangle(cornerRadius: Theme.cornerRadius))
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(L10n.t(.pictureGuide, language))
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    PictogramStrip(hazard: term.hazard)
+                }
             }
             .padding()
         }

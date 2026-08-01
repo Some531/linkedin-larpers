@@ -5,6 +5,8 @@ import SwiftUI
 /// blocks, staged trace rows, then the answer. HandaPH palette throughout.
 struct AssistantView: View {
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var profileStore: HouseholdProfileStore
+    @EnvironmentObject private var location: LocationProvider
     @StateObject private var engine = AssistantEngine()
     @StateObject private var voice = SpeechToText()
     @State private var draft = ""
@@ -135,7 +137,12 @@ struct AssistantView: View {
         voice.stop()
         let question = draft
         draft = ""
-        Task { await engine.ask(question, language: appState.language) }
+        let situation = UserSituation.current(
+            profile: profileStore.profile,
+            at: location.lastCoordinate ?? FixtureStore.fallbackCenter,
+            language: appState.language
+        )
+        Task { await engine.ask(question, language: appState.language, situation: situation) }
     }
 }
 

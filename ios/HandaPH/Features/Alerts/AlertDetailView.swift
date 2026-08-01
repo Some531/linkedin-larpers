@@ -5,6 +5,7 @@ import SwiftUI
 /// receive → understand → act, in reading order.
 struct AlertDetailView: View {
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var speech: SpeechService
     let alert: HazardAlert
 
     var body: some View {
@@ -64,6 +65,14 @@ struct AlertDetailView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(Theme.card, in: RoundedRectangle(cornerRadius: Theme.cornerRadius))
 
+                // Wordless version of the same instruction.
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(L10n.t(.pictureGuide, language))
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    PictogramStrip(hazard: alert.hazard)
+                }
+
                 VStack(alignment: .leading, spacing: 8) {
                     Text(L10n.t(.moreDetail, language))
                         .font(.headline)
@@ -80,10 +89,37 @@ struct AlertDetailView: View {
                     Label(alert.issuedBy, systemImage: "checkmark.seal.fill")
                         .font(.subheadline.weight(.semibold))
                 }
+
+                // Trusted-messenger co-sign: a known local name vouching
+                // for the alert — the best-evidenced believe-step lever.
+                if let endorsedBy = alert.endorsedBy {
+                    HStack(spacing: 10) {
+                        Image(systemName: "person.crop.circle.badge.checkmark")
+                            .font(.title2)
+                            .foregroundStyle(Theme.brand)
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text(L10n.t(.endorsedByBarangay, language))
+                                .font(.footnote)
+                                .foregroundStyle(.secondary)
+                            Text(endorsedBy)
+                                .font(.subheadline.weight(.semibold))
+                        }
+                    }
+                    .padding(12)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Theme.brand.opacity(0.1), in: RoundedRectangle(cornerRadius: Theme.cornerRadius))
+                    .accessibilityElement(children: .combine)
+                }
             }
             .padding()
         }
         .themedScreen()
+        .onAppear {
+            // Audio-first mode: the alert reads itself out on open.
+            if appState.autoRead {
+                speech.speak(spokenSummary(language: language), language: headline.language)
+            }
+        }
         .navigationTitle(hazardName.text)
         .navigationBarTitleDisplayMode(.inline)
     }

@@ -33,6 +33,11 @@ struct SettingsView: View {
                     Toggle(L10n.t(.largerText, language), isOn: $appState.largerText)
                         .frame(minHeight: Theme.minTapTarget - 12)
 
+                    Toggle(isOn: $appState.autoRead) {
+                        Label(L10n.t(.autoRead, language), systemImage: "speaker.wave.3.fill")
+                    }
+                    .frame(minHeight: Theme.minTapTarget - 12)
+
                     VStack(alignment: .leading) {
                         Text(L10n.t(.speechRate, language))
                         Slider(value: $speech.rate, in: 0.3...0.55)
@@ -50,6 +55,7 @@ struct SettingsView: View {
                 Section(L10n.t(.about, language)) {
                     LabeledContent("App", value: "Handa — UQ Tech for Change 2026")
                     LabeledContent("Team", value: "linkedin-larpers")
+                    LabeledContent("Map POIs", value: "© OpenStreetMap contributors (ODbL)")
                     Text("Alert content comes from official sources (PAGASA, PHIVOLCS) via a human-verified template bank. No text in this app is written by AI at alert time. Your location never leaves this phone.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)

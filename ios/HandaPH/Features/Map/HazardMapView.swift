@@ -76,8 +76,9 @@ struct HazardMapView: View {
                     }
                 }
 
-                // Landmarks — tapping shows the bottom detail card.
-                ForEach(FixtureStore.landmarks) { landmark in
+                // Landmarks (curated + OpenStreetMap extract) — tapping
+                // shows the bottom detail card.
+                ForEach(FixtureStore.allLandmarks) { landmark in
                     Annotation(landmark.name, coordinate: landmark.coordinate) {
                         Button {
                             selectedLandmark = landmark
@@ -104,6 +105,17 @@ struct HazardMapView: View {
             .mapControls {
                 MapUserLocationButton()
                 MapCompass()
+            }
+            .overlay(alignment: .bottomLeading) {
+                // ODbL attribution for the bundled POI extract.
+                Text("POI data © OpenStreetMap contributors")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(.regularMaterial, in: Capsule())
+                    .padding(.leading, 8)
+                    .padding(.bottom, 2)
             }
             .safeAreaInset(edge: .top) {
                 PersonalRiskBanner(risk: risk) {

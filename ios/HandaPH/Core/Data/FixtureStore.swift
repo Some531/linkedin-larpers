@@ -50,6 +50,7 @@ enum FixtureStore {
                 .waray: "Ginlalauman han PAGASA nga masaka an tubig han dagat hin 3 tubtob 4 ka metro ha baybayon han San Jose tubtob alas 6 han kulop. Sugad ini han tubig han Bagyo nga Yolanda. Malunod an mga balay nga harani ha dagat hin labaw ha ulo.",
             ]),
             issuedBy: "PAGASA, via Tacloban City DRRMO",
+            endorsedBy: "Kap. Maria Santos — Barangay Captain, San Jose",
             latitude: 11.2286, longitude: 125.0245
         ),
         HazardAlert(
@@ -287,6 +288,15 @@ enum FixtureStore {
             ])),
         ],
     ]
+
+    /// Every landmark the map shows: curated fixtures plus the real
+    /// OpenStreetMap extract (OSMData), deduplicated by name.
+    static let allLandmarks: [Landmark] = {
+        var combined = landmarks
+        let names = Set(landmarks.map { $0.name.lowercased().prefix(18) })
+        combined += OSMData.landmarks.filter { !names.contains($0.name.lowercased().prefix(18)) }
+        return combined
+    }()
 
     /// Landmarks around the fixture area (San Jose district, Tacloban).
     /// Coordinates are approximate demo values, not survey data.

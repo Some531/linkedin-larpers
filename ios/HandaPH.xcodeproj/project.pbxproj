@@ -19,8 +19,10 @@
 		7F5CD6CAD9E95851AEE7CB6B /* FixtureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A832C5F92FA2100E529ACAF7 /* FixtureStore.swift */; };
 		8409FBBC556C00C5550F7F33 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E678C8BF4A28198D06B4548 /* Models.swift */; };
 		85A97B6A0F491E43E98D95A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AF3BAA574E1C48DC01D7518 /* Assets.xcassets */; };
+		8EE108BDC5DD951483FD890C /* OSMData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69163ACBE47D56C4174AE39 /* OSMData.swift */; };
 		9152E19E30511AF279F8F6D9 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71A030A37C66844D1E58CB7 /* APIClient.swift */; };
 		AA77D2C3FBCE03369A5DD19A /* SpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628876B8FBFB217058FB2619 /* SpeechToText.swift */; };
+		AE96C09864DD8EDC741704F4 /* CheckInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E4521D11DFDB180035BEED /* CheckInView.swift */; };
 		B7B18623635986050E21C2AD /* ChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CDC552B0B7E3E06CFE2365 /* ChecklistView.swift */; };
 		C8509A4D6F245CA42D1F6111 /* HouseholdProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C0126A124CB54F454DBEB1 /* HouseholdProfile.swift */; };
 		D0ECE04843EECF9DC4415187 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B69C88BD3C96FD4FEF943A /* SmokeTests.swift */; };
@@ -53,6 +55,7 @@
 		628876B8FBFB217058FB2619 /* SpeechToText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToText.swift; sourceTree = "<group>"; };
 		633D96B3C035342C89A33D43 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		7C66C0E0CEE9DEDC8BE4508B /* AssistantEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantEngine.swift; sourceTree = "<group>"; };
+		88E4521D11DFDB180035BEED /* CheckInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInView.swift; sourceTree = "<group>"; };
 		8E678C8BF4A28198D06B4548 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		96042DB5684DB2DFD5DA7F56 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		9B2CA4C4C395F575E6BF8560 /* HazardMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HazardMapView.swift; sourceTree = "<group>"; };
@@ -60,6 +63,7 @@
 		A71A030A37C66844D1E58CB7 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		A832C5F92FA2100E529ACAF7 /* FixtureStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureStore.swift; sourceTree = "<group>"; };
 		B2A9817A6B78AB819E163E1F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		B69163ACBE47D56C4174AE39 /* OSMData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSMData.swift; sourceTree = "<group>"; };
 		BCC067D063C5F51F29BA09B7 /* HandaPHApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandaPHApp.swift; sourceTree = "<group>"; };
 		C297C5138730694D10ABDD05 /* HandaPHUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = HandaPHUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3B69C88BD3C96FD4FEF943A /* SmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeTests.swift; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 			children = (
 				2BE12B1D2F84E486A183A898 /* Alerts */,
 				94CB5EED4B5C8E7262660B6A /* Assistant */,
+				53A3C3C68E3A9DD6AF8BDA35 /* CheckIn */,
 				EDB90326E9D61BAA9365E840 /* Glossary */,
 				3532FEA7823C2F2F6F4F853A /* Map */,
 				B0A2D0A20493B69617979D02 /* Plan */,
@@ -149,6 +154,14 @@
 				BEE92BCAC4DDF9A9E45D52FF /* Speech */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		53A3C3C68E3A9DD6AF8BDA35 /* CheckIn */ = {
+			isa = PBXGroup;
+			children = (
+				88E4521D11DFDB180035BEED /* CheckInView.swift */,
+			);
+			path = CheckIn;
 			sourceTree = "<group>";
 		};
 		689DAE5B52DD260AD6653B86 /* Assistant */ = {
@@ -235,6 +248,7 @@
 			children = (
 				A71A030A37C66844D1E58CB7 /* APIClient.swift */,
 				A832C5F92FA2100E529ACAF7 /* FixtureStore.swift */,
+				B69163ACBE47D56C4174AE39 /* OSMData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -358,6 +372,7 @@
 				793C62DD1BEF5A0EDEB1F2F5 /* AppState.swift in Sources */,
 				F3AEB86B34DAD24A9A3B47D6 /* AssistantEngine.swift in Sources */,
 				59A1CD2589136F18FDF44837 /* AssistantView.swift in Sources */,
+				AE96C09864DD8EDC741704F4 /* CheckInView.swift in Sources */,
 				B7B18623635986050E21C2AD /* ChecklistView.swift in Sources */,
 				7F5CD6CAD9E95851AEE7CB6B /* FixtureStore.swift in Sources */,
 				D12ED2F04C41B44682BE1DD8 /* GlossaryView.swift in Sources */,
@@ -367,6 +382,7 @@
 				51EB28749C4B068707A535A9 /* HouseholdProfileView.swift in Sources */,
 				08E33F8ED9E896D5A50FBD88 /* L10n.swift in Sources */,
 				8409FBBC556C00C5550F7F33 /* Models.swift in Sources */,
+				8EE108BDC5DD951483FD890C /* OSMData.swift in Sources */,
 				439FD7C84EC1135A8A8C32AA /* RootView.swift in Sources */,
 				1DA67C63BD8AF97BBC9E329F /* SettingsView.swift in Sources */,
 				DC9F658CCB4E0C0F292EA96C /* SpeechService.swift in Sources */,

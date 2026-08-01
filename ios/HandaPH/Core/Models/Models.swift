@@ -201,6 +201,9 @@ struct HazardAlert: Identifiable, Codable {
     let issuedBy: String
     /// Set when a newer alert replaces this one (the Grenfell lesson).
     var supersededByID: String?
+    /// Trusted-messenger co-sign: a named local figure (barangay captain,
+    /// parish, DRRMO officer) who confirmed this alert to their community.
+    var endorsedBy: String?
     /// Optional point for the map marker (region-wide alerts have none).
     /// Stored as raw doubles because CLLocationCoordinate2D is not Codable.
     var latitude: Double?
