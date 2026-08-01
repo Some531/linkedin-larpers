@@ -40,6 +40,8 @@ enum L10n {
         case showRoute, endRoute, routeUnavailable
         // Relevance
         case nearYou, adviceInSurgeZone
+        // Plan sections & ETA
+        case planScenario, planHousehold, planGeneral, arrive
     }
 
     /// Languages whose UI strings have not yet been reviewed by a community
@@ -108,6 +110,8 @@ enum L10n {
             .routeUnavailable: "No route available offline — straight line shown.",
             .nearYou: "Near you",
             .adviceInSurgeZone: "You are INSIDE the storm-surge danger zone. Move out of it now — do not wait.",
+            .planScenario: "Do now", .planHousehold: "For your household", .planGeneral: "For everyone",
+            .arrive: "arrive",
         ],
         .tagalog: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulugan",
@@ -163,6 +167,8 @@ enum L10n {
             .routeUnavailable: "Walang rutang makuha nang offline — tuwid na linya ang ipinapakita.",
             .nearYou: "Malapit sa inyo",
             .adviceInSurgeZone: "NASA LOOB kayo ng mapanganib na sona ng daluyong. Umalis na ngayon — huwag maghintay.",
+            .planScenario: "Gawin ngayon", .planHousehold: "Para sa inyong sambahayan", .planGeneral: "Para sa lahat",
+            .arrive: "dating",
         ],
         .cebuano: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulogan",
@@ -228,6 +234,8 @@ enum L10n {
             .routeUnavailable: "Waray ruta nga makukuha hin offline — tul-id nga linya an iginpapakita.",
             .nearYou: "Harani ha imo",
             .adviceInSurgeZone: "AADA KA HA SULOD han peligroso nga sona han dako nga balod. Gawas na yana — ayaw paghulat.",
+            .planScenario: "Buhata yana", .planHousehold: "Para ha iyo panimalay", .planGeneral: "Para ha ngatanan",
+            .arrive: "abot",
         ],
     ]
 }

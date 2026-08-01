@@ -13,8 +13,18 @@ enum Theme {
 
     // MARK: Palette
 
-    /// Deep teal — buttons, links, selected tabs, the assistant.
-    static let brand = Color(red: 0.055, green: 0.35, blue: 0.39)
+    /// Vivid ocean blue — buttons, links, selected tabs, the assistant.
+    static let brand = Color(red: 0.075, green: 0.44, blue: 0.66)
+
+    /// Deep teal partner tone; with `brand` it forms the app's gradient.
+    static let brandDeep = Color(red: 0.045, green: 0.31, blue: 0.37)
+
+    /// Signature blue→teal gradient for hero surfaces (assistant header,
+    /// floating button). Severity surfaces never use it.
+    static let brandGradient = LinearGradient(
+        colors: [brand, brandDeep],
+        startPoint: .topLeading, endPoint: .bottomTrailing
+    )
 
     /// Warm sand screen background (dark: deep ocean).
     static var background: Color {
@@ -34,12 +44,12 @@ enum Theme {
         })
     }
 
-    /// Subtle surface for chips and secondary panels.
+    /// Subtle blue-beige surface for chips and secondary panels.
     static var surface2: Color {
         Color(UIColor { trait in
             trait.userInterfaceStyle == .dark
-                ? UIColor(red: 0.12, green: 0.21, blue: 0.25, alpha: 1)
-                : UIColor(red: 0.93, green: 0.905, blue: 0.855, alpha: 1)
+                ? UIColor(red: 0.12, green: 0.21, blue: 0.27, alpha: 1)
+                : UIColor(red: 0.905, green: 0.895, blue: 0.845, alpha: 1)
         })
     }
 

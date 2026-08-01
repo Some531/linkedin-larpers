@@ -234,6 +234,60 @@ enum FixtureStore {
         ])),
     ]
 
+    /// Items surfaced only for matching household profiles (Plan page).
+    static let profileChecklist: [(applies: (HouseholdProfile) -> Bool, item: ChecklistItem)] = [
+        ({ $0.hasElderly }, ChecklistItem(id: "p-elderly", text: LocalizedText([
+            .english: "Pack a go-bag for the elderly: one week of medicines, the medicine list, glasses, IDs.",
+            .tagalog: "Maghanda ng go-bag para sa matanda: isang linggong gamot, listahan ng gamot, salamin, mga ID.",
+        ]))),
+        ({ $0.hasYoungChildren }, ChecklistItem(id: "p-children", text: LocalizedText([
+            .english: "Pack milk or food, nappies and one comfort item per child.",
+            .tagalog: "Maghanda ng gatas o pagkain, lampin at isang paboritong laruan bawat bata.",
+        ]))),
+        ({ $0.hasLimitedMobility }, ChecklistItem(id: "p-mobility", text: LocalizedText([
+            .english: "Agree who helps the person with limited mobility evacuate — and practise the route with them once.",
+            .tagalog: "Pagkasunduan kung sino ang tutulong sa may kapansanan sa paglikas — at ensayuhin ang ruta kasama sila.",
+        ]))),
+        ({ $0.nearCoastOrRiver }, ChecklistItem(id: "p-coast", text: LocalizedText([
+            .english: "Your home is near water: know your walking route to high ground and how many minutes it takes.",
+            .tagalog: "Malapit sa tubig ang bahay: alamin ang ruta paakyat sa mataas na lugar at ilang minuto ito.",
+        ]))),
+        ({ $0.singleStorey }, ChecklistItem(id: "p-single", text: LocalizedText([
+            .english: "Your house has one storey: identify a strong two-storey building you can reach within 10 minutes.",
+            .tagalog: "Isang palapag ang bahay: tukuyin ang matibay na two-storey na gusali na maaabot sa loob ng 10 minuto.",
+        ]))),
+    ]
+
+    /// Items surfaced while a hazard of this type is active (Plan page).
+    static let hazardChecklist: [HazardType: [ChecklistItem]] = [
+        .stormSurge: [
+            ChecklistItem(id: "h-surge-1", text: LocalizedText([
+                .english: "Charge every phone and powerbank NOW, while there is still power.",
+                .tagalog: "I-charge ang lahat ng cellphone at powerbank NGAYON, habang may kuryente pa.",
+            ])),
+            ChecklistItem(id: "h-surge-2", text: LocalizedText([
+                .english: "Decide the exact moment your family leaves — before the wind gets strong, not after.",
+                .tagalog: "Pagpasyahan kung anong oras aalis ang pamilya — bago lumakas ang hangin, hindi pagkatapos.",
+            ])),
+        ],
+        .flashFlood: [
+            ChecklistItem(id: "h-flood-1", text: LocalizedText([
+                .english: "Move documents and valuables above knee height tonight.",
+                .tagalog: "Iakyat ang mga dokumento at mahahalagang gamit nang lampas-tuhod ngayong gabi.",
+            ])),
+        ],
+        .earthquake: [
+            ChecklistItem(id: "h-quake-1", text: LocalizedText([
+                .english: "Practise drop–cover–hold with the whole family once today.",
+                .tagalog: "Ensayuhin ang dapa–takip–kapit kasama ang buong pamilya ngayong araw.",
+            ])),
+            ChecklistItem(id: "h-quake-2", text: LocalizedText([
+                .english: "Move heavy objects off high shelves, especially above beds.",
+                .tagalog: "Ibaba ang mabibigat na bagay mula sa matataas na istante, lalo na sa itaas ng mga kama.",
+            ])),
+        ],
+    ]
+
     /// Landmarks around the fixture area (San Jose district, Tacloban).
     /// Coordinates are approximate demo values, not survey data.
     static let landmarks: [Landmark] = [

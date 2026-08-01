@@ -316,14 +316,33 @@ struct LandmarkDetailCard: View {
     let onRoute: () -> Void
     let onClose: () -> Void
 
+    /// Real walking ETA from MKDirections, fetched when the card appears —
+    /// the Google Maps moment: you see time + arrival before committing.
+    @State private var etaSeconds: TimeInterval?
+
     private var distanceMetres: Int {
         let a = CLLocation(latitude: from.latitude, longitude: from.longitude)
         let b = CLLocation(latitude: landmark.coordinate.latitude, longitude: landmark.coordinate.longitude)
         return Int(a.distance(from: b))
     }
 
-    /// ~80 m/min: a conservative walking pace for mixed-mobility households.
-    private var walkMinutes: Int { max(1, distanceMetres / 80) }
+    /// Real ETA when available; ~80 m/min conservative estimate otherwise.
+    private var walkMinutes: Int {
+        if let etaSeconds { return max(1, Int(etaSeconds / 60)) }
+        return max(1, distanceMetres / 80)
+    }
+
+    private var arrival: Date { Date().addingTimeInterval(etaSeconds ?? Double(walkMinutes * 60)) }
+
+    private func fetchETA() async {
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: from))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: landmark.coordinate))
+        request.transportType = .walking
+        if let response = try? await MKDirections(request: request).calculateETA() {
+            etaSeconds = response.expectedTravelTime
+        }
+    }
 
     var body: some View {
         let language = appState.language
@@ -342,6 +361,9 @@ struct LandmarkDetailCard: View {
                     Text("\(kindLabel) · \(distanceMetres) m · \(walkMinutes) \(L10n.t(.walkSuffix, language))")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
+                    Text("\(L10n.t(.arrive, language)) \(arrival, format: .dateTime.hour().minute())")
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(Theme.brand)
                 }
                 Spacer()
                 Button(action: onClose) {
@@ -385,6 +407,7 @@ struct LandmarkDetailCard: View {
         }
         .padding(Theme.cardPadding)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 20))
+        .task(id: landmark.id) { await fetchETA() }
     }
 
     private var kindColor: Color {
@@ -440,7 +463,7 @@ struct RouteBar: View {
                     Text(target.name)
                         .font(.subheadline.weight(.semibold))
                         .lineLimit(1)
-                    Text("\(distanceMetres) m · \(walkMinutes) \(L10n.t(.walkSuffix, language))")
+                    Text("\(distanceMetres) m · \(walkMinutes) \(L10n.t(.walkSuffix, language)) · \(L10n.t(.arrive, language)) \(Date().addingTimeInterval(route?.expectedTravelTime ?? Double(walkMinutes * 60)), format: .dateTime.hour().minute())")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }

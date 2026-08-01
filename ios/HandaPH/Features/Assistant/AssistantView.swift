@@ -74,7 +74,7 @@ struct AssistantView: View {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
-        .background(Theme.brand)
+        .background(Theme.brandGradient)
     }
 
     private func introCard(_ language: AppLanguage) -> some View {
@@ -240,8 +240,8 @@ struct AssistantButton: View {
                 .font(.title2.weight(.semibold))
                 .foregroundStyle(.white)
                 .frame(width: 56, height: 56)
-                .background(Theme.brand, in: Circle())
-                .shadow(color: .black.opacity(0.25), radius: 8, y: 4)
+                .background(Theme.brandGradient, in: Circle())
+                .shadow(color: Theme.brandDeep.opacity(0.4), radius: 8, y: 4)
         }
         .accessibilityLabel("Gabay")
     }
