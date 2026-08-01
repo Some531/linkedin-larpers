@@ -24,6 +24,14 @@ enum L10n {
         case listenHint, doneStatus, notDoneStatus
         case voiceUnavailableNote
         case searchPrompt, noSearchResults
+        // Map & personalised risk
+        case yourArea, noActiveRisk, directions, walkSuffix
+        case legendHospital, legendEvacuation, legendBarangay
+        case adviceLeaveEarlier, adviceChildren, adviceCoast, adviceSingleStorey
+        // Household profile
+        case profileTitle, profileSubtitle
+        case profileElderly, profileChildren, profileMobility, profileCoast, profileSingleStorey
+        case privacyNote
     }
 
     /// Languages whose UI strings have not yet been reviewed by a community
@@ -65,6 +73,20 @@ enum L10n {
             .voiceUnavailableNote: "This iPhone has no Filipino voice installed, so read-aloud uses an English voice. The words are still in your language.",
             .searchPrompt: "Search a word, e.g. storm surge",
             .noSearchResults: "No match found. Try another word.",
+            .yourArea: "YOUR AREA", .noActiveRisk: "No active danger in your area. Prepare while it is calm.",
+            .directions: "Directions", .walkSuffix: "min walk",
+            .legendHospital: "Hospital", .legendEvacuation: "Evacuation", .legendBarangay: "Barangay hall",
+            .adviceLeaveEarlier: "Someone in your household needs more time — leave EARLIER than the general advice.",
+            .adviceChildren: "Bring water, food and medicine for the children. Carry them across moving water.",
+            .adviceCoast: "Your home is near the coast or river — do not wait for the water to be visible.",
+            .adviceSingleStorey: "Your house has one storey — going upstairs is not an option. Go to the evacuation centre.",
+            .profileTitle: "My Household", .profileSubtitle: "Used only to personalise your risk and actions.",
+            .profileElderly: "Elderly (60+) in household",
+            .profileChildren: "Young children (under 5)",
+            .profileMobility: "Someone with limited mobility",
+            .profileCoast: "House near coast or river",
+            .profileSingleStorey: "Single-storey house",
+            .privacyNote: "This stays on your phone only. It is never sent anywhere.",
         ],
         .tagalog: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulugan",
@@ -93,6 +115,20 @@ enum L10n {
             .voiceUnavailableNote: "Walang boses na Filipino ang iPhone na ito, kaya boses na Ingles ang gagamitin sa pagbasa. Nasa wika mo pa rin ang mga salita.",
             .searchPrompt: "Maghanap ng salita, hal. daluyong",
             .noSearchResults: "Walang nahanap. Subukan ang ibang salita.",
+            .yourArea: "ANG INYONG LUGAR", .noActiveRisk: "Walang aktibong panganib sa inyong lugar. Maghanda habang tahimik.",
+            .directions: "Direksyon", .walkSuffix: "min na lakad",
+            .legendHospital: "Ospital", .legendEvacuation: "Evacuation", .legendBarangay: "Barangay hall",
+            .adviceLeaveEarlier: "May kasama kayong nangangailangan ng mas maraming oras — umalis nang MAS MAAGA kaysa sa pangkalahatang payo.",
+            .adviceChildren: "Magdala ng tubig, pagkain at gamot para sa mga bata. Buhatin sila sa umaagos na tubig.",
+            .adviceCoast: "Malapit sa dagat o ilog ang inyong bahay — huwag hintaying makita ang tubig.",
+            .adviceSingleStorey: "Isang palapag lang ang inyong bahay — hindi puwedeng umakyat. Pumunta sa evacuation center.",
+            .profileTitle: "Ang Aming Sambahayan", .profileSubtitle: "Ginagamit lamang para gawing personal ang panganib at payo.",
+            .profileElderly: "May matanda (60+) sa bahay",
+            .profileChildren: "May maliliit na bata (wala pang 5)",
+            .profileMobility: "May hirap maglakad nang mabilis",
+            .profileCoast: "Bahay malapit sa dagat o ilog",
+            .profileSingleStorey: "Isang palapag lang ang bahay",
+            .privacyNote: "Nananatili ito sa inyong telepono lamang. Hindi ito ipinapadala kahit saan.",
         ],
         .cebuano: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulogan",
@@ -131,6 +167,20 @@ enum L10n {
             .chooseLanguage: "Pilia an imo yinaknan",
             .continueButton: "Padayon",
             .unverifiedChip: "Naghuhulat han beripikasyon han komunidad",
+            .yourArea: "AN IYO LUGAR", .noActiveRisk: "Waray aktibo nga peligro ha iyo lugar. Pangandam samtang mamingaw.",
+            .directions: "Direksyon", .walkSuffix: "min nga paglakat",
+            .legendHospital: "Ospital", .legendEvacuation: "Evacuation", .legendBarangay: "Barangay hall",
+            .adviceLeaveEarlier: "May kaupod kamo nga nagkikinahanglan hin mas damo nga oras — paggawas hin MAS AGA kaysa han kabug-osan nga sagdon.",
+            .adviceChildren: "Pagdara hin tubig, pagkaon ngan tambal para ha kabataan. Sakwata hira ha naga-agos nga tubig.",
+            .adviceCoast: "Harani ha dagat o salog an iyo balay — ayaw hulata nga makita an tubig.",
+            .adviceSingleStorey: "Usa la ka andana an iyo balay — diri puydi sumaka. Kadto ha evacuation center.",
+            .profileTitle: "An Amon Panimalay", .profileSubtitle: "Gingagamit la para himuon nga personal an peligro ngan sagdon.",
+            .profileElderly: "May edaran (60+) ha balay",
+            .profileChildren: "May gudti nga kabataan (ubos 5)",
+            .profileMobility: "May nakukurian maglakat hin madagmit",
+            .profileCoast: "Balay harani ha dagat o salog",
+            .profileSingleStorey: "Usa la ka andana an balay",
+            .privacyNote: "Nagpapabilin ini ha imo telepono la. Diri ini iginpapadara bisan diin.",
         ],
     ]
 }

@@ -59,6 +59,67 @@ final class SmokeTests: XCTestCase {
         add(attachment)
     }
 
+    func testMapPersonalisedRiskAndMarkerCard() {
+        let app = XCUIApplication()
+        app.launchArguments = ["-appLanguage", "war"]
+        app.launch()
+
+        app.tabBars.buttons["Mapa"].tap()
+
+        // Personalised risk banner shows for the active storm-surge alert.
+        let banner = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS 'AN IYO LUGAR'")
+        ).firstMatch
+        XCTAssertTrue(banner.waitForExistence(timeout: 5), "Personal risk banner should be on the map")
+
+        // Open the household profile and mark an elderly member.
+        app.buttons["An Amon Panimalay"].tap()
+        let elderlyToggle = app.switches["👵, May edaran (60+) ha balay"].firstMatch
+        XCTAssertTrue(elderlyToggle.waitForExistence(timeout: 5))
+        setSwitch(elderlyToggle, to: true)
+        app.buttons["Padayon"].tap()
+
+        // The banner now carries the leave-earlier advice for that household.
+        let advice = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS 'MAS AGA'")
+        ).firstMatch
+        XCTAssertTrue(advice.waitForExistence(timeout: 5),
+                      "Elderly-household advice should appear after profile change")
+
+        // Tap an evacuation-centre marker; the detail card offers directions.
+        let marker = app.buttons["Tacloban City Convention Center"].firstMatch
+        XCTAssertTrue(marker.waitForExistence(timeout: 5), "Evacuation marker should be on screen")
+        marker.tap()
+        XCTAssertTrue(app.buttons["Direksyon"].waitForExistence(timeout: 5),
+                      "Marker card should offer walking directions")
+
+        let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        attachment.name = "map-personalised-risk-waray"
+        attachment.lifetime = .keepAlways
+        add(attachment)
+
+        // Reset the toggle so the test is repeatable on the same simulator.
+        app.buttons["An Amon Panimalay"].tap()
+        if elderlyToggle.waitForExistence(timeout: 3) { setSwitch(elderlyToggle, to: false) }
+        app.buttons["Padayon"].tap()
+    }
+
+    /// Taps a SwiftUI Toggle until its value matches, retrying once with a
+    /// coordinate tap on the switch knob — plain .tap() can land during the
+    /// sheet presentation animation and miss.
+    private func setSwitch(_ element: XCUIElement, to on: Bool) {
+        let want = on ? "1" : "0"
+        for attempt in 0..<3 where (element.value as? String) != want {
+            if attempt == 0 {
+                element.tap()
+            } else {
+                element.coordinate(withNormalizedOffset: CGVector(dx: 0.93, dy: 0.5)).tap()
+            }
+            _ = XCTWaiter.wait(for: [XCTestExpectation(description: "settle")], timeout: 0.6)
+        }
+        XCTAssertEqual(element.value as? String, want, "Switch should be \(on ? "on" : "off")")
+    }
+
     func testGlossarySearchFindsStormSurge() {
         let app = XCUIApplication()
         app.launchArguments = ["-appLanguage", "en"]

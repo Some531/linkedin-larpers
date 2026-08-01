@@ -49,7 +49,8 @@ enum FixtureStore {
                 .tagalog: "Inaasahan ng PAGASA na tataas ang tubig-dagat ng 3 hanggang 4 na metro sa baybayin ng San Jose hanggang 6 PM. Katulad ito ng tubig noong Bagyong Yolanda. Lulubog ang mga bahay malapit sa dagat nang lampas sa ulo.",
                 .waray: "Ginlalauman han PAGASA nga masaka an tubig han dagat hin 3 tubtob 4 ka metro ha baybayon han San Jose tubtob alas 6 han kulop. Sugad ini han tubig han Bagyo nga Yolanda. Malunod an mga balay nga harani ha dagat hin labaw ha ulo.",
             ]),
-            issuedBy: "PAGASA, via Tacloban City DRRMO"
+            issuedBy: "PAGASA, via Tacloban City DRRMO",
+            latitude: 11.2286, longitude: 125.0245
         ),
         HazardAlert(
             id: "alert-002",
@@ -80,7 +81,8 @@ enum FixtureStore {
                 .english: "PAGASA forecasts 100 to 200 mm of rain over Leyte in the next 12 hours. Rivers may overflow after midnight. Barangay officials will sound three long bell rings if you must evacuate.",
                 .tagalog: "Inaasahan ng PAGASA ang 100 hanggang 200 mm ng ulan sa Leyte sa susunod na 12 oras. Maaaring umapaw ang mga ilog pagkalipas ng hatinggabi. Tatlong mahabang tunog ng kampana ang hudyat ng barangay kung kailangang lumikas.",
             ]),
-            issuedBy: "PAGASA, via Leyte PDRRMO"
+            issuedBy: "PAGASA, via Leyte PDRRMO",
+            latitude: 11.1575, longitude: 124.9908
         ),
         HazardAlert(
             id: "alert-003",
@@ -248,4 +250,15 @@ enum FixtureStore {
     static func alert(forToken token: String) -> HazardAlert? {
         alerts.first { $0.token == token }
     }
+
+    /// Approximate storm-surge inundation band along the San Jose coast,
+    /// standing in for a PHIVOLCS/Project NOAH hazard layer. Demo geometry,
+    /// not survey data.
+    static let surgeZone: [CLLocationCoordinate2D] = [
+        CLLocationCoordinate2D(latitude: 11.2380, longitude: 125.0080),
+        CLLocationCoordinate2D(latitude: 11.2340, longitude: 125.0330),
+        CLLocationCoordinate2D(latitude: 11.2220, longitude: 125.0340),
+        CLLocationCoordinate2D(latitude: 11.2180, longitude: 125.0200),
+        CLLocationCoordinate2D(latitude: 11.2240, longitude: 125.0090),
+    ]
 }

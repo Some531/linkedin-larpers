@@ -13,11 +13,13 @@
 		1DA67C63BD8AF97BBC9E329F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3719E9D48B76387598BCB2EA /* SettingsView.swift */; };
 		439FD7C84EC1135A8A8C32AA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A9817A6B78AB819E163E1F /* RootView.swift */; };
 		44BC0E25355C1D8CA239FC28 /* HandaPHApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC067D063C5F51F29BA09B7 /* HandaPHApp.swift */; };
+		51EB28749C4B068707A535A9 /* HouseholdProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2C5E42FF3BD70BCD7A4231 /* HouseholdProfileView.swift */; };
 		793C62DD1BEF5A0EDEB1F2F5 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42831632607ECDECFF00C88 /* AppState.swift */; };
 		7F5CD6CAD9E95851AEE7CB6B /* FixtureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A832C5F92FA2100E529ACAF7 /* FixtureStore.swift */; };
 		8409FBBC556C00C5550F7F33 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E678C8BF4A28198D06B4548 /* Models.swift */; };
 		9152E19E30511AF279F8F6D9 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71A030A37C66844D1E58CB7 /* APIClient.swift */; };
 		B7B18623635986050E21C2AD /* ChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CDC552B0B7E3E06CFE2365 /* ChecklistView.swift */; };
+		C8509A4D6F245CA42D1F6111 /* HouseholdProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C0126A124CB54F454DBEB1 /* HouseholdProfile.swift */; };
 		D0ECE04843EECF9DC4415187 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B69C88BD3C96FD4FEF943A /* SmokeTests.swift */; };
 		D12ED2F04C41B44682BE1DD8 /* GlossaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E62CD2BEB8E84A8C06E6270 /* GlossaryView.swift */; };
 		DC9F658CCB4E0C0F292EA96C /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCD6334CCE3FE2CE9FD24C6 /* SpeechService.swift */; };
@@ -36,8 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A2C5E42FF3BD70BCD7A4231 /* HouseholdProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdProfileView.swift; sourceTree = "<group>"; };
 		16DAAF16B1A63B031C1D37FE /* HandaPH.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HandaPH.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DCD6334CCE3FE2CE9FD24C6 /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
+		30C0126A124CB54F454DBEB1 /* HouseholdProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdProfile.swift; sourceTree = "<group>"; };
 		36CDC552B0B7E3E06CFE2365 /* ChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistView.swift; sourceTree = "<group>"; };
 		3719E9D48B76387598BCB2EA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3E62CD2BEB8E84A8C06E6270 /* GlossaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossaryView.swift; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				9B2CA4C4C395F575E6BF8560 /* HazardMapView.swift */,
+				0A2C5E42FF3BD70BCD7A4231 /* HouseholdProfileView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 				1A692EF8FCC7752781E258C1 /* DesignSystem */,
 				09B82B8E9F7B1604DAF64531 /* Localization */,
 				BEE0CEB4A50992C4DF6EEF72 /* Models */,
+				FBB9899B9739FD96AFACD105 /* Risk */,
 				BEE92BCAC4DDF9A9E45D52FF /* Speech */,
 			);
 			path = Core;
@@ -209,6 +215,14 @@
 				3E62CD2BEB8E84A8C06E6270 /* GlossaryView.swift */,
 			);
 			path = Glossary;
+			sourceTree = "<group>";
+		};
+		FBB9899B9739FD96AFACD105 /* Risk */ = {
+			isa = PBXGroup;
+			children = (
+				30C0126A124CB54F454DBEB1 /* HouseholdProfile.swift */,
+			);
+			path = Risk;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,6 +311,8 @@
 				D12ED2F04C41B44682BE1DD8 /* GlossaryView.swift in Sources */,
 				44BC0E25355C1D8CA239FC28 /* HandaPHApp.swift in Sources */,
 				13A28990119D3055D6D7FCCB /* HazardMapView.swift in Sources */,
+				C8509A4D6F245CA42D1F6111 /* HouseholdProfile.swift in Sources */,
+				51EB28749C4B068707A535A9 /* HouseholdProfileView.swift in Sources */,
 				08E33F8ED9E896D5A50FBD88 /* L10n.swift in Sources */,
 				8409FBBC556C00C5550F7F33 /* Models.swift in Sources */,
 				439FD7C84EC1135A8A8C32AA /* RootView.swift in Sources */,

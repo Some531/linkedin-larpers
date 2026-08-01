@@ -2,18 +2,26 @@ import SwiftUI
 import MapKit
 import CoreLocation
 
-/// Live map: user location, ~1 km radius ring, hospitals and evacuation
-/// centres highlighted (README Features). MapKit for the zero-dependency
-/// first build; the planned swap is MapLibre Native + offline PMTiles
-/// (docs/architecture.md §3) — this file is the only one that changes.
+/// Live map, redesigned per the Figma spec (HandaPH — Map & Personalised
+/// Risk) and Hamza's SafeSignal concept: a personalised risk banner over the
+/// map, a hazard-zone overlay, tappable colour-coded markers with a bottom
+/// detail card, and a legend. MapKit for the zero-dependency build; the
+/// planned swap is MapLibre Native + offline PMTiles — this file is the seam.
 struct HazardMapView: View {
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var profileStore: HouseholdProfileStore
     @StateObject private var location = LocationProvider()
     @State private var camera: MapCameraPosition = .automatic
     @State private var hasSetInitialCamera = false
+    @State private var selectedLandmark: Landmark?
+    @State private var showProfile = false
 
     private var center: CLLocationCoordinate2D {
         location.lastCoordinate ?? FixtureStore.fallbackCenter
+    }
+
+    private var risk: PersonalRisk {
+        RiskEngine.assess(alerts: FixtureStore.alerts, profile: profileStore.profile)
     }
 
     var body: some View {
@@ -21,22 +29,58 @@ struct HazardMapView: View {
             Map(position: $camera) {
                 UserAnnotation()
 
+                // Hazard layer: storm-surge inundation band (fixture geometry
+                // standing in for a PHIVOLCS / Project NOAH layer).
+                MapPolygon(coordinates: FixtureStore.surgeZone)
+                    .foregroundStyle(.red.opacity(0.15))
+                    .stroke(.red.opacity(0.6), lineWidth: 2)
+
                 // ~1 km awareness radius around the user (or fixture centre).
                 MapCircle(center: center, radius: 1000)
                     .foregroundStyle(.blue.opacity(0.08))
                     .stroke(.blue.opacity(0.6), lineWidth: 2)
 
+                // Alert markers — tapping opens the full alert detail.
+                ForEach(FixtureStore.alerts.filter { $0.coordinate != nil }) { alert in
+                    Annotation(alert.hazard.name.resolved(for: appState.language).text,
+                               coordinate: alert.coordinate!) {
+                        Button {
+                            appState.deepLinkedAlert = alert
+                        } label: {
+                            Text(alert.hazard.emoji)
+                                .font(.title3)
+                                .frame(width: 36, height: 36)
+                                .background(Theme.color(for: alert.severity), in: Circle())
+                                .overlay(Circle().strokeBorder(.white, lineWidth: 2))
+                                .frame(width: Theme.minTapTarget, height: Theme.minTapTarget)
+                                .contentShape(Rectangle())
+                        }
+                        .accessibilityLabel(alert.headline.resolved(for: appState.language).text)
+                    }
+                }
+
+                // Landmarks — tapping shows the bottom detail card.
                 ForEach(FixtureStore.landmarks) { landmark in
                     Annotation(landmark.name, coordinate: landmark.coordinate) {
-                        Image(systemName: landmark.kind.symbolName)
-                            .font(.callout.weight(.bold))
-                            .foregroundStyle(.white)
-                            .frame(width: 34, height: 34)
-                            .background(color(for: landmark.kind), in: Circle())
-                            // Visual stays 34pt; tappable area meets 44pt HIG minimum.
-                            .frame(width: Theme.minTapTarget, height: Theme.minTapTarget)
-                            .contentShape(Rectangle())
-                            .accessibilityLabel(landmark.name)
+                        Button {
+                            selectedLandmark = landmark
+                        } label: {
+                            Image(systemName: landmark.kind.symbolName)
+                                .font(.callout.weight(.bold))
+                                .foregroundStyle(.white)
+                                .frame(width: 34, height: 34)
+                                .background(color(for: landmark.kind), in: Circle())
+                                .overlay(
+                                    Circle().strokeBorder(
+                                        selectedLandmark?.id == landmark.id ? color(for: landmark.kind) : .clear,
+                                        lineWidth: 3
+                                    )
+                                    .padding(-5)
+                                )
+                                .frame(width: Theme.minTapTarget, height: Theme.minTapTarget)
+                                .contentShape(Rectangle())
+                        }
+                        .accessibilityLabel(landmark.name)
                     }
                 }
             }
@@ -44,12 +88,42 @@ struct HazardMapView: View {
                 MapUserLocationButton()
                 MapCompass()
             }
-            .safeAreaInset(edge: .bottom) {
-                if location.isDenied {
-                    locationDeniedNotice
+            .safeAreaInset(edge: .top) {
+                PersonalRiskBanner(risk: risk) {
+                    if let alert = risk.drivingAlert { appState.deepLinkedAlert = alert }
                 }
             }
+            .safeAreaInset(edge: .bottom) {
+                VStack(spacing: 8) {
+                    if location.isDenied {
+                        locationDeniedNotice
+                    }
+                    if let landmark = selectedLandmark {
+                        LandmarkDetailCard(landmark: landmark, from: center) {
+                            selectedLandmark = nil
+                        }
+                    } else {
+                        legend
+                    }
+                }
+                .padding(.horizontal, 8)
+                .padding(.bottom, 4)
+            }
             .navigationTitle(L10n.t(.mapTitle, appState.language))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showProfile = true
+                    } label: {
+                        Label(L10n.t(.profileTitle, appState.language), systemImage: "person.2.fill")
+                    }
+                }
+            }
+            .sheet(isPresented: $showProfile) {
+                HouseholdProfileView()
+                    .presentationDetents([.medium, .large])
+            }
             .onAppear {
                 // Runs on every return to this tab; don't discard the
                 // user's pan/zoom by resetting the camera again.
@@ -58,11 +132,33 @@ struct HazardMapView: View {
                 location.requestAccess()
                 camera = .region(MKCoordinateRegion(
                     center: center,
-                    latitudinalMeters: 3000,
-                    longitudinalMeters: 3000
+                    latitudinalMeters: 3500,
+                    longitudinalMeters: 3500
                 ))
             }
         }
+    }
+
+    private var legend: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                legendChip(symbol: "cross.fill", tint: .red, text: L10n.t(.legendHospital, appState.language))
+                legendChip(symbol: "figure.walk.arrival", tint: .green, text: L10n.t(.legendEvacuation, appState.language))
+                legendChip(symbol: "building.columns.fill", tint: .indigo, text: L10n.t(.legendBarangay, appState.language))
+            }
+            .padding(.horizontal, 4)
+        }
+    }
+
+    private func legendChip(symbol: String, tint: Color, text: String) -> some View {
+        Label {
+            Text(text).font(.footnote.weight(.semibold))
+        } icon: {
+            Image(systemName: symbol).foregroundStyle(tint)
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 7)
+        .background(.regularMaterial, in: Capsule())
     }
 
     private var locationDeniedNotice: some View {
@@ -76,7 +172,6 @@ struct HazardMapView: View {
         .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: Theme.cornerRadius))
-        .padding()
     }
 
     private func color(for kind: Landmark.Kind) -> Color {
@@ -87,6 +182,163 @@ struct HazardMapView: View {
         }
     }
 }
+
+// MARK: - Personalised risk banner
+
+/// The Figma design's top banner: severity + phase for YOUR area, plus the
+/// advice lines the household profile makes relevant. Tapping opens the
+/// driving alert.
+struct PersonalRiskBanner: View {
+    @EnvironmentObject private var appState: AppState
+    let risk: PersonalRisk
+    let onTap: () -> Void
+
+    var body: some View {
+        let language = appState.language
+        Button(action: onTap) {
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(spacing: 8) {
+                    Text(risk.severity.emoji)
+                    Text("\(L10n.t(.yourArea, language)): \(severityLabel(language))")
+                        .font(.subheadline.weight(.heavy))
+                    Spacer()
+                    if risk.drivingAlert != nil {
+                        Text(phaseLabel(language))
+                            .font(.caption.weight(.bold))
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 3)
+                            .background(.thinMaterial, in: Capsule())
+                    }
+                }
+                if risk.drivingAlert == nil {
+                    Text(L10n.t(.noActiveRisk, language))
+                        .font(.footnote)
+                } else {
+                    ForEach(risk.adviceKeys.prefix(2), id: \.self) { key in
+                        Label(L10n.t(key, language), systemImage: "person.crop.circle.badge.exclamationmark")
+                            .font(.footnote.weight(.medium))
+                            .multilineTextAlignment(.leading)
+                    }
+                }
+            }
+            .foregroundStyle(Theme.textColor(on: risk.severity))
+            .padding(12)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Theme.color(for: risk.severity), in: RoundedRectangle(cornerRadius: Theme.cornerRadius))
+        }
+        .buttonStyle(.plain)
+        .padding(.horizontal, 8)
+        .padding(.top, 4)
+        .accessibilityElement(children: .combine)
+    }
+
+    private func severityLabel(_ language: AppLanguage) -> String {
+        switch risk.severity {
+        case .danger: L10n.t(.severityDanger, language)
+        case .warning: L10n.t(.severityWarning, language)
+        case .advisory: L10n.t(.severityAdvisory, language)
+        }
+    }
+
+    private func phaseLabel(_ language: AppLanguage) -> String {
+        switch risk.phase {
+        case .prepare: L10n.t(.prepare, language)
+        case .expectedSoon: L10n.t(.expectedSoon, language)
+        case .happeningNow: L10n.t(.happeningNow, language)
+        case .allClear: L10n.t(.allClear, language)
+        }
+    }
+}
+
+// MARK: - Landmark detail card
+
+/// Bottom card shown when a marker is tapped: distance, walking time,
+/// walking directions (hands off to Apple Maps), and text-to-speech.
+struct LandmarkDetailCard: View {
+    @EnvironmentObject private var appState: AppState
+    @Environment(\.openURL) private var openURL
+    let landmark: Landmark
+    let from: CLLocationCoordinate2D
+    let onClose: () -> Void
+
+    private var distanceMetres: Int {
+        let a = CLLocation(latitude: from.latitude, longitude: from.longitude)
+        let b = CLLocation(latitude: landmark.coordinate.latitude, longitude: landmark.coordinate.longitude)
+        return Int(a.distance(from: b))
+    }
+
+    /// ~80 m/min: a conservative walking pace for mixed-mobility households.
+    private var walkMinutes: Int { max(1, distanceMetres / 80) }
+
+    var body: some View {
+        let language = appState.language
+        let kindLabel = kindText(language)
+
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .top, spacing: 10) {
+                Image(systemName: landmark.kind.symbolName)
+                    .font(.callout.weight(.bold))
+                    .foregroundStyle(.white)
+                    .frame(width: 40, height: 40)
+                    .background(kindColor, in: Circle())
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(landmark.name)
+                        .font(.headline)
+                    Text("\(kindLabel) · \(distanceMetres) m · \(walkMinutes) \(L10n.t(.walkSuffix, language))")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+                Spacer()
+                Button(action: onClose) {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title2)
+                        .foregroundStyle(.secondary)
+                        .frame(width: Theme.minTapTarget, height: Theme.minTapTarget)
+                }
+                .accessibilityLabel("Close")
+            }
+
+            HStack(spacing: 10) {
+                Button {
+                    let c = landmark.coordinate
+                    if let url = URL(string: "http://maps.apple.com/?daddr=\(c.latitude),\(c.longitude)&dirflg=w") {
+                        openURL(url)
+                    }
+                } label: {
+                    Label(L10n.t(.directions, language), systemImage: "figure.walk")
+                        .font(.body.weight(.semibold))
+                        .frame(minHeight: Theme.minTapTarget)
+                }
+                .buttonStyle(.borderedProminent)
+
+                SpeakButton(
+                    text: "\(landmark.name). \(kindLabel). \(distanceMetres) m, \(walkMinutes) \(L10n.t(.walkSuffix, language)).",
+                    language: language
+                )
+            }
+        }
+        .padding(Theme.cardPadding)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 20))
+    }
+
+    private var kindColor: Color {
+        switch landmark.kind {
+        case .hospital: .red
+        case .evacuationCenter: .green
+        case .barangayHall: .indigo
+        }
+    }
+
+    private func kindText(_ language: AppLanguage) -> String {
+        switch landmark.kind {
+        case .hospital: L10n.t(.legendHospital, language)
+        case .evacuationCenter: L10n.t(.legendEvacuation, language)
+        case .barangayHall: L10n.t(.legendBarangay, language)
+        }
+    }
+}
+
+// MARK: - Location
 
 /// Thin Core Location wrapper. Location never leaves the device
 /// (docs/architecture.md §8) — nothing here talks to the network.
