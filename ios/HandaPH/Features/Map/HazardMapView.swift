@@ -239,6 +239,9 @@ struct HazardMapView: View {
                 }
             }
             .padding(.horizontal, 4)
+            // Trailing clearance so the last chip can scroll out from under
+            // the floating assistant button.
+            .padding(.trailing, 72)
         }
     }
 

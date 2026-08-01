@@ -7,6 +7,7 @@ struct AssistantView: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var profileStore: HouseholdProfileStore
     @EnvironmentObject private var location: LocationProvider
+    @Environment(\.dismiss) private var dismiss
     @StateObject private var engine = AssistantEngine()
     @StateObject private var voice = SpeechToText()
     @State private var draft = ""
@@ -72,6 +73,16 @@ struct AssistantView: View {
                  : (AnthropicClient.hasKey ? "Claude" : L10n.t(.assistantOfflineBadge, language)))
                 .font(.caption.monospaced())
                 .foregroundStyle(.white.opacity(0.85))
+            // Explicit close: elders may not know the swipe-down gesture.
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.title3)
+                    .foregroundStyle(.white.opacity(0.9))
+                    .frame(width: Theme.minTapTarget - 12, height: Theme.minTapTarget - 12)
+            }
+            .accessibilityLabel("Close")
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)

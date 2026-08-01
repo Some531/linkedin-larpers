@@ -230,8 +230,16 @@ struct SuggestionSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(L10n.t(.continueButton, language)) { dismiss() }
-                        .tint(.white)
+                    // Icon, not text: language-independent close affordance.
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.title3)
+                            .foregroundStyle(.white)
+                            .frame(width: Theme.minTapTarget - 8, height: Theme.minTapTarget - 8)
+                    }
+                    .accessibilityLabel("Close")
                 }
             }
         }
