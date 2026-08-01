@@ -35,7 +35,9 @@ enum L10n {
         // Assistant (Gabay)
         case assistantIntro, assistantOffline, assistantOfflineBadge
         case assistantPlaceholder, assistantWorking, assistantNoMatch
-        case youAsked, send
+        case youAsked, send, speak, listening
+        // Routing
+        case showRoute, endRoute, routeUnavailable
     }
 
     /// Languages whose UI strings have not yet been reviewed by a community
@@ -99,6 +101,9 @@ enum L10n {
             .assistantNoMatch: "I don't have verified content about that. Check the Alerts tab for current warnings, or ask your barangay officials.",
             .youAsked: "You asked",
             .send: "Send",
+            .speak: "Speak", .listening: "Listening…",
+            .showRoute: "Route", .endRoute: "End route",
+            .routeUnavailable: "No route available offline — straight line shown.",
         ],
         .tagalog: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulugan",
@@ -149,6 +154,9 @@ enum L10n {
             .assistantNoMatch: "Wala akong beripikadong nilalaman tungkol diyan. Tingnan ang Mga Alerto para sa kasalukuyang babala, o magtanong sa barangay.",
             .youAsked: "Tinanong mo",
             .send: "Ipadala",
+            .speak: "Magsalita", .listening: "Nakikinig…",
+            .showRoute: "Ruta", .endRoute: "Tapusin ang ruta",
+            .routeUnavailable: "Walang rutang makuha nang offline — tuwid na linya ang ipinapakita.",
         ],
         .cebuano: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulogan",
@@ -209,6 +217,9 @@ enum L10n {
             .assistantNoMatch: "Waray ako beripikado nga sulod mahitungod hito. Kitaa an Mga Alerto para han pahamangno yana, o pakiana ha barangay.",
             .youAsked: "Iginpakiana mo",
             .send: "Ipadara",
+            .speak: "Pagyakan", .listening: "Namamati…",
+            .showRoute: "Ruta", .endRoute: "Tapuson an ruta",
+            .routeUnavailable: "Waray ruta nga makukuha hin offline — tul-id nga linya an iginpapakita.",
         ],
     ]
 }

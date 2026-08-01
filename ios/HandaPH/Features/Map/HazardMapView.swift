@@ -15,6 +15,9 @@ struct HazardMapView: View {
     @State private var hasSetInitialCamera = false
     @State private var selectedLandmark: Landmark?
     @State private var showProfile = false
+    @State private var activeRoute: MKRoute?
+    @State private var routeTarget: Landmark?
+    @State private var routeIsFallback = false
 
     private var center: CLLocationCoordinate2D {
         location.lastCoordinate ?? FixtureStore.fallbackCenter
@@ -39,6 +42,16 @@ struct HazardMapView: View {
                 MapCircle(center: center, radius: 1000)
                     .foregroundStyle(.blue.opacity(0.08))
                     .stroke(.blue.opacity(0.6), lineWidth: 2)
+
+                // Active walking route (Google Maps-style in-app navigation).
+                if let activeRoute {
+                    MapPolyline(activeRoute.polyline)
+                        .stroke(Theme.brand, style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                } else if routeIsFallback, let target = routeTarget {
+                    // Offline fallback: straight dashed line, honestly labelled.
+                    MapPolyline(coordinates: [center, target.coordinate])
+                        .stroke(Theme.brand, style: StrokeStyle(lineWidth: 4, lineCap: .round, dash: [8, 8]))
+                }
 
                 // Alert markers — tapping opens the full alert detail.
                 ForEach(FixtureStore.alerts.filter { $0.coordinate != nil }) { alert in
@@ -99,10 +112,21 @@ struct HazardMapView: View {
                     if location.isDenied {
                         locationDeniedNotice
                     }
-                    if let landmark = selectedLandmark {
-                        LandmarkDetailCard(landmark: landmark, from: center) {
-                            selectedLandmark = nil
+                    if let target = routeTarget {
+                        RouteBar(
+                            target: target,
+                            route: activeRoute,
+                            isFallback: routeIsFallback,
+                            from: center
+                        ) {
+                            endRoute()
                         }
+                    } else if let landmark = selectedLandmark {
+                        LandmarkDetailCard(landmark: landmark, from: center, onRoute: {
+                            Task { await startRoute(to: landmark) }
+                        }, onClose: {
+                            selectedLandmark = nil
+                        })
                     } else {
                         legend
                     }
@@ -138,6 +162,32 @@ struct HazardMapView: View {
                 ))
             }
         }
+    }
+
+    /// Google Maps-style in-app route: MKDirections walking route when the
+    /// network allows; a straight dashed line with a distance estimate when
+    /// it doesn't (offline is the normal case in the response phase).
+    private func startRoute(to landmark: Landmark) async {
+        selectedLandmark = nil
+        routeTarget = landmark
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: center))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: landmark.coordinate))
+        request.transportType = .walking
+        if let route = try? await MKDirections(request: request).calculate().routes.first {
+            activeRoute = route
+            routeIsFallback = false
+            camera = .rect(route.polyline.boundingMapRect.insetBy(dx: -600, dy: -600))
+        } else {
+            activeRoute = nil
+            routeIsFallback = true
+        }
+    }
+
+    private func endRoute() {
+        activeRoute = nil
+        routeTarget = nil
+        routeIsFallback = false
     }
 
     private var legend: some View {
@@ -260,6 +310,7 @@ struct LandmarkDetailCard: View {
     @Environment(\.openURL) private var openURL
     let landmark: Landmark
     let from: CLLocationCoordinate2D
+    let onRoute: () -> Void
     let onClose: () -> Void
 
     private var distanceMetres: Int {
@@ -300,12 +351,8 @@ struct LandmarkDetailCard: View {
             }
 
             HStack(spacing: 10) {
-                Button {
-                    let c = landmark.coordinate
-                    if let url = URL(string: "http://maps.apple.com/?daddr=\(c.latitude),\(c.longitude)&dirflg=w") {
-                        openURL(url)
-                    }
-                } label: {
+                // In-app route, drawn on this map.
+                Button(action: onRoute) {
                     Label(L10n.t(.directions, language), systemImage: "figure.walk")
                         .font(.body.weight(.semibold))
                         .frame(minHeight: Theme.minTapTarget)
@@ -316,6 +363,21 @@ struct LandmarkDetailCard: View {
                     text: "\(landmark.name). \(kindLabel). \(distanceMetres) m, \(walkMinutes) \(L10n.t(.walkSuffix, language)).",
                     language: language
                 )
+
+                Spacer()
+
+                // Hand off to Apple Maps for turn-by-turn voice guidance.
+                Button {
+                    let c = landmark.coordinate
+                    if let url = URL(string: "http://maps.apple.com/?daddr=\(c.latitude),\(c.longitude)&dirflg=w") {
+                        openURL(url)
+                    }
+                } label: {
+                    Image(systemName: "arrow.triangle.turn.up.right.circle")
+                        .font(.title2)
+                        .frame(width: Theme.minTapTarget, height: Theme.minTapTarget)
+                }
+                .accessibilityLabel("Apple Maps")
             }
         }
         .padding(Theme.cardPadding)
@@ -336,6 +398,67 @@ struct LandmarkDetailCard: View {
         case .evacuationCenter: L10n.t(.legendEvacuation, language)
         case .barangayHall: L10n.t(.legendBarangay, language)
         }
+    }
+}
+
+// MARK: - Route bar
+
+/// Compact bar while a route is active: destination, distance, walking
+/// time, end button. Replaces the card/legend — one thing on screen at a
+/// time.
+struct RouteBar: View {
+    @EnvironmentObject private var appState: AppState
+    let target: Landmark
+    let route: MKRoute?
+    let isFallback: Bool
+    let from: CLLocationCoordinate2D
+    let onEnd: () -> Void
+
+    private var distanceMetres: Int {
+        if let route { return Int(route.distance) }
+        let a = CLLocation(latitude: from.latitude, longitude: from.longitude)
+        let b = CLLocation(latitude: target.coordinate.latitude, longitude: target.coordinate.longitude)
+        return Int(a.distance(from: b))
+    }
+
+    private var walkMinutes: Int {
+        if let route { return max(1, Int(route.expectedTravelTime / 60)) }
+        return max(1, distanceMetres / 80)
+    }
+
+    var body: some View {
+        let language = appState.language
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 10) {
+                Image(systemName: "figure.walk")
+                    .font(.title3.weight(.bold))
+                    .foregroundStyle(Theme.brand)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(target.name)
+                        .font(.subheadline.weight(.semibold))
+                        .lineLimit(1)
+                    Text("\(distanceMetres) m · \(walkMinutes) \(L10n.t(.walkSuffix, language))")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+                Spacer()
+                Button(action: onEnd) {
+                    Text(L10n.t(.endRoute, language))
+                        .font(.subheadline.weight(.semibold))
+                        .padding(.horizontal, 12)
+                        .frame(minHeight: 36)
+                }
+                .buttonStyle(.bordered)
+            }
+            if isFallback {
+                Label(L10n.t(.routeUnavailable, language), systemImage: "wifi.slash")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding(12)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: Theme.cornerRadius))
+        .accessibilityElement(children: .combine)
     }
 }
 

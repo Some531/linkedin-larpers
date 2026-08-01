@@ -35,6 +35,10 @@
 	<string>1</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Handa uses your location to show hazards, hospitals and evacuation centres near you, and to personalise flood and storm-surge risk. Your location never leaves this phone.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Handa uses the microphone so you can ask the assistant questions by voice instead of typing.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Handa converts your voice into text for the assistant. On-device recognition is used where available.</string>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UISupportedInterfaceOrientations</key>

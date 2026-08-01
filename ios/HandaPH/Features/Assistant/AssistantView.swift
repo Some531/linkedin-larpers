@@ -6,6 +6,7 @@ import SwiftUI
 struct AssistantView: View {
     @EnvironmentObject private var appState: AppState
     @StateObject private var engine = AssistantEngine()
+    @StateObject private var voice = SpeechToText()
     @State private var draft = ""
     @FocusState private var inputFocused: Bool
 
@@ -85,13 +86,29 @@ struct AssistantView: View {
 
     private func inputBar(_ language: AppLanguage) -> some View {
         HStack(spacing: 10) {
-            TextField(L10n.t(.assistantPlaceholder, language), text: $draft, axis: .vertical)
+            TextField(
+                voice.isRecording ? L10n.t(.listening, language) : L10n.t(.assistantPlaceholder, language),
+                text: $draft, axis: .vertical
+            )
                 .lineLimit(1...3)
                 .focused($inputFocused)
                 .padding(.horizontal, 14)
                 .padding(.vertical, 10)
                 .background(Theme.card, in: RoundedRectangle(cornerRadius: 22))
                 .onSubmit(send)
+                .onChange(of: voice.transcript) {
+                    if !voice.transcript.isEmpty { draft = voice.transcript }
+                }
+            Button {
+                voice.toggle(language: language)
+            } label: {
+                Image(systemName: voice.isRecording ? "waveform.circle.fill" : "mic.circle.fill")
+                    .font(.system(size: 34))
+                    .foregroundStyle(voice.isRecording ? Color.red : Theme.brand)
+                    .frame(width: Theme.minTapTarget, height: Theme.minTapTarget)
+                    .symbolEffect(.pulse, isActive: voice.isRecording)
+            }
+            .accessibilityLabel(L10n.t(.speak, language))
             Button(action: send) {
                 Image(systemName: "arrow.up.circle.fill")
                     .font(.system(size: 34))
@@ -107,6 +124,7 @@ struct AssistantView: View {
     }
 
     private func send() {
+        voice.stop()
         let question = draft
         draft = ""
         Task { await engine.ask(question, language: appState.language) }

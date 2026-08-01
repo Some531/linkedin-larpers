@@ -90,8 +90,15 @@ final class SmokeTests: XCTestCase {
         let marker = app.buttons["Tacloban City Convention Center"].firstMatch
         XCTAssertTrue(marker.waitForExistence(timeout: 5), "Evacuation marker should be on screen")
         marker.tap()
-        XCTAssertTrue(app.buttons["Direksyon"].waitForExistence(timeout: 5),
+        let routeButton = app.buttons["Direksyon"].firstMatch
+        XCTAssertTrue(routeButton.waitForExistence(timeout: 5),
                       "Marker card should offer walking directions")
+
+        // In-app route: bar appears with an end button (route or fallback).
+        routeButton.tap()
+        let endRoute = app.buttons["Tapuson an ruta"].firstMatch
+        XCTAssertTrue(endRoute.waitForExistence(timeout: 10), "Route bar should appear")
+        endRoute.tap()
 
         let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
         attachment.name = "map-personalised-risk-waray"
