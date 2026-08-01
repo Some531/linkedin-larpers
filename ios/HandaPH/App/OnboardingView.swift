@@ -53,6 +53,7 @@ struct OnboardingView: View {
             }
             .padding(.top, 32)
 
+            ScrollViewReader { proxy in
             ScrollView {
                 VStack(spacing: 10) {
                     ForEach(AppLanguage.allCases) { lang in
@@ -87,9 +88,28 @@ struct OnboardingView: View {
                         .accessibilityLabel(lang.nativeName)
                         .accessibilityHint(lang.sampleGreeting)
                         .accessibilityAddTraits(selectedLanguage == lang ? .isSelected : [])
+                        .id(lang)
                     }
                 }
                 .padding(.horizontal)
+                .padding(.bottom, 8)
+            }
+            .scrollIndicators(.visible)
+            // Elders may not notice a thin scroll bar: an explicit, large
+            // "more below" arrow scrolls the remaining languages into view.
+            .overlay(alignment: .bottomTrailing) {
+                Button {
+                    withAnimation { proxy.scrollTo(AppLanguage.allCases.last, anchor: .bottom) }
+                } label: {
+                    Image(systemName: "chevron.down.circle.fill")
+                        .font(.system(size: 40))
+                        .foregroundStyle(.white, Theme.brand)
+                        .shadow(color: .black.opacity(0.2), radius: 4, y: 2)
+                }
+                .padding(.trailing, 18)
+                .padding(.bottom, 6)
+                .accessibilityLabel("More languages")
+            }
             }
 
             continueButton(enabled: selectedLanguage != nil) { step = 1 }
