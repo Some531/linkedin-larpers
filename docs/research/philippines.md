@@ -363,7 +363,140 @@ what "Problem Definition supported by evidence" is asking for.
 
 ---
 
-## 8. The pitch line
+## 8. Evidence from the team's uploaded reports
+
+Three reports were added to `Phillipines reports/`. They sharpen the case considerably.
+
+### 8.1 World Risk Poll analysis (Chong et al., IJDRR 2025) **[peer-reviewed]**
+
+Analysis of the 2021 and 2023 Lloyd's Register Foundation / Gallup World Risk Poll data
+for the Philippines (n≈2,003 per wave, 17 regions).
+
+- **The risk perception paradox.** The Philippines recorded the **highest resilience
+  score of all 193 countries** in the 2021 World Risk Poll — while remaining the world's
+  most at-risk nation. High risk perception and self-reported resilience **do not equal
+  immunity**. Perfect framing for a pitch: the problem is not that Filipinos are
+  unaware, and any solution premised on "raising awareness" misreads the evidence.
+- **Region 8 (Eastern Visayas) had the lowest resilience index in the country in 2021
+  (67.93) and fell further to 61.76 by 2023** — attributed to poverty, limited
+  infrastructure, frequent hazard exposure and *ongoing recovery struggles from typhoon
+  impacts*. **This is Tacloban. Twelve years after Haiyan, the region is measurably the
+  least resilient in the Philippines and still declining.** This is the single strongest
+  quantitative argument for choosing Eastern Visayas as the target community.
+- **Region 7 (Central Visayas — Cebu) dropped sharply, 70.99 → 63.88.** Note this
+  predates both the 2025 Cebu earthquake and Typhoon Tino.
+- Resilience declined almost everywhere between 2021 and 2023 — rural 70.87 → 66.41,
+  urban 71.76 → 67.04, poorest quintile 65.71 → 63.59.
+- Regions that **improved** — Caraga (65.23 → 70.21) and Bicol (68.93 → 71.78) — did so
+  through **community-based DRR initiatives and stronger local–national collaboration**.
+  Community-led approaches are the measured success factor, not a nice idea.
+- The WRP's household resilience measure explicitly includes **access to communication**
+  (a cell phone or the internet) as a core indicator.
+- Rural communities "depend on local knowledge networks and community-based coping
+  strategies"; urban areas "lean on formal institutional responses". One design will not
+  serve both.
+- Direct support for our thesis: *"There are still differences in how risk information is
+  converted into practical preparedness which are frequently caused by uneven regional
+  and governmental assistance. This highlights how important it is to use regionally
+  specific risk strategies for communication."*
+- **`bayanihan`** — the Filipino tradition of communal mutual aid — is named as the
+  cultural mechanism underlying community resilience. Worth building on explicitly, and a
+  strong candidate for naming the product.
+
+### 8.2 World Bank CCDR background paper (PH-11, 2023) **[institutional]**
+
+- **~60% of the land area and at least 74% of Filipinos are vulnerable to multiple
+  hazards.** An average of **20 typhoons** a year; **18 destructive earthquakes in
+  40 years**.
+- **"The Big One"** — a M7.2 earthquake on the West Valley Fault — is modelled to cause
+  **~48,000 fatalities and USD 48 billion in losses**, directly damaging a third of Metro
+  Manila.
+- **Typhoon Odette (2021) affected 11 million people**, damaged **2 million housing
+  units — double Yolanda's housing damage** — with damage and loss around PHP 281 billion
+  (USD 5.6 billion).
+- **Around one million Filipinos are impoverished by disasters every year.** The poor
+  live disproportionately in floodplains, riverbanks, steep slopes and coastal areas.
+- Annual economic losses ~1.2% of GDP; up to **4.6% of GDP** in an extreme year like 2013.
+- Legal architecture: **DRRM Act (RA 10121, 2010)** and the **Local Government Code
+  (RA 7160, 1991)**; LGUs must maintain a Local DRRM Office and allocate **5% of
+  estimated revenue** to the LDRRM Fund. **There is money and a legal mandate at the local
+  level** — which matters for the "how would this actually operate" question.
+- Identified national weaknesses: fragmentation, weak coordination, slow post-disaster
+  needs assessment, and a recommendation to **use open platforms linked to existing data
+  systems such as GeoRiskPH**.
+
+### 8.3 CFE-DM Philippines Disaster Management Reference Handbook (March 2025) **[institutional]**
+
+The most operationally useful of the three. Key facts:
+
+**Early warning coverage — the headline gap**
+- In 2019, **1,368 LGUs had operating early warning systems, out of a potential ~43,000**
+  regional, provincial, city, municipal and barangay units. Roughly **3% coverage.**
+- The handbook confirms Haiyan "killed 6,300" and that significant EWS improvements
+  followed, likely contributing to reduced loss of life in Odette — so the system *can*
+  improve when the failure is correctly diagnosed.
+
+**The channels that actually run the last mile**
+- Mobile providers are **legally required to carry disaster alerts** (RA 10639).
+- But at local level, LGUs and LDRRMCs warn "via SMS and social media, **but also via
+  emergency vehicles with megaphones or community or church bells**". The real last mile
+  is analogue, and a solution that ignores it is not describing the Philippines.
+- DICT operates an **Emergency Warning Broadcast System** using digital, broadcast and
+  terrestrial formats — including **vacant television frequencies in rural areas where
+  the mobile-cellular spectrum has gaps.**
+- The handbook states the problem in our exact terms: *"SMS blast messages are likely to
+  be more reliable and scalable although they only allow **one-way communication**. Gaps
+  left in the mobile-cellular network and the **feedback loop for communities to pass
+  information back to decision-makers** will mean a strong case for continuing to develop
+  the role of traditional media."* **This is an official document identifying the missing
+  return path — the thing we propose to build.**
+
+**Connectivity and devices — hard architectural constraints**
+- 117.4 million mobile connections (>99% nominal), **but many remote and underserved
+  communities still have no mobile-cellular service**, while urban users hold multiple
+  subscriptions — the headline number conceals the gap.
+- **22,834 cell sites (2023)** — against Vietnam's 90,000.
+- **Only ~18% of households have home internet**, and an estimated **65% of the country
+  lacks easy web access** due to connectivity and cost. Mobile broadband costs **2.04% of
+  monthly GNI per capita** against a **<2% affordability threshold**; fixed is 11.56%.
+- **Apple devices are 12.66% of handsets; Android is ~87%.** Directly relevant to the
+  iOS-only decision — see [`../architecture.md`](../architecture.md) §11.
+- Inter-island **submarine cables** are expensive and vulnerable; seismic activity cuts
+  power, towers and cables across whole swathes of the country.
+- 5% of households have no electricity at all; 57% of household energy comes from biomass.
+- Reach of traditional channels remains high: **85% watch TV, 63% listen to broadcast
+  radio**, and both use English *and local languages*.
+
+**Trust and misinformation**
+- **64% of Filipino internet users are concerned about "real" versus "fake" information
+  online**, and the handbook documents "disinformation-for-hire" firms in the 2022
+  elections. Message provenance is a functional requirement, not a nicety.
+
+**Existing platforms we must know about**
+- **GeoRiskPH** (PHIVOLCS-led, multi-agency): **HazardHunterPH** (hazard assessment for a
+  given location — seismic, volcanic, hydrometeorological), **GeoAnalyticsPH**,
+  **FaultFinder** (distance from a user's location to the nearest active fault).
+  `georisk.gov.ph`. **This is the risk-determination data source the brief asks for.**
+- **PAGASA** — flood dashboard for 18 river basins; disseminates via SMS, radio, TV,
+  email, social and print. `pagasa.dost.gov.ph`.
+- **PHIVOLCS** — 92 seismic sensors, 32 tsunami monitoring stations, TEWS at
+  `tews.dost.gov.ph`.
+- **PhilAWARE** (OCD + Pacific Disaster Center) — impact-based forecasting with tailored
+  notifications; **password-protected**, so not publicly integrable.
+- **MapaKalamidad.ph** — crowd-sourced, social-media-powered live disaster map with an
+  **AI chatbot**, reports verified before display, with a mobile app. **The closest prior
+  art to parts of our idea. Acknowledge and differentiate — see architecture §10.**
+- **Dynaslope** (PHIVOLCS) — community landslide EWS where **local committees use mobile
+  messaging and local leaders issue the alerts**. Proof the trusted-messenger model
+  already works in the Philippines.
+- **IBFPh / MH-IBF-EWS** — PAGASA's Green Climate Fund project to communicate **"what the
+  weather will do rather than what the weather will be"**, 2022–2027, target areas
+  including **Leyte**. Our approach is aligned with where the national system is already
+  heading.
+
+---
+
+## 9. The pitch line
 
 > In 2013, PAGASA correctly forecast Typhoon Haiyan and issued warnings. People received
 > them. Over 6,000 died anyway — because the warnings said **"storm surge"**, a term

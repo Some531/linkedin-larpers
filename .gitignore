@@ -1,0 +1,6 @@
+.DS_Store
+.env
+ios/HandaPH.xcodeproj/xcuserdata/
+ios/HandaPH.xcodeproj/project.xcworkspace/xcuserdata/
+DerivedData/
+*.xcresult

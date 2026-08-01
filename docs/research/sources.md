@@ -209,6 +209,37 @@ reporting of an underlying inquiry.
 - arXiv — [An open data and geo-based information system for Philippine disaster risk](https://arxiv.org/pdf/2201.12544)
 - Green Climate Fund — [Philippines country case study report, March 2025](https://ieu.greenclimate.fund/sites/default/files/document/ips-evaluation-philippines-ccs-top-2.pdf)
 
+## Team-supplied reports (in `Phillipines reports/`)
+
+These are primary/institutional sources held locally — prefer them over news summaries.
+
+- **Chong, R.M.B., Tangunan, D.N., Toyado, D.M. & Elegado, A.F.K. (2025).** "Evolving
+  disaster resilience in the Philippines: Insights from the 2021 and 2023 World Risk Poll
+  on socio-economic, regional, and systemic factors." *International Journal of Disaster
+  Risk Reduction* 121, 105415. CC BY. https://doi.org/10.1016/j.ijdrr.2025.105415 —
+  *(regional resilience indices incl. Region 8 lowest/declining; risk perception paradox;
+  `bayanihan`; rural vs urban coping). Data archived at https://zenodo.org/records/14558115*
+- **World Bank (2023).** *Disaster Risk Management in the Philippines*, Philippines
+  Country Climate and Development Report Background Paper PH-11 — *(74% of Filipinos and
+  60% of land area exposed; "The Big One" 48,000 fatalities / USD48bn; Odette 11m affected
+  and 2m housing units; ~1m Filipinos impoverished by disasters annually; RA 10121 and
+  RA 7160; 5% LDRRMF; GeoRiskPH recommendation).*
+- **Center for Excellence in Disaster Management & Humanitarian Assistance (March 2025).**
+  *Philippines Disaster Management Reference Handbook.* ISBN 978-1-955429-63-4.
+  https://www.cfe-dmha.org — *(1,368 of ~43,000 LGUs with operating EWS; megaphones and
+  church bells as last mile; the one-way SMS / missing feedback loop statement; 22,834 cell
+  sites; ~18% household internet and ~65% without easy web access; broadband affordability;
+  **Apple 12.66% vs Android ~87% of handsets**; 64% concerned about fake information;
+  GeoRiskPH / HazardHunterPH / FaultFinder / PhilAWARE / MapaKalamidad.ph / Dynaslope /
+  IBFPh).*
+
+Referenced platforms:
+- GeoRiskPH — https://www.georisk.gov.ph
+- PAGASA — https://www.pagasa.dost.gov.ph (flood dashboard: `/flood`)
+- PHIVOLCS — https://www.phivolcs.dost.gov.ph · TEWS — https://tews.dost.gov.ph
+- NDRRMC — https://ndrrmc.gov.ph · DROMIC — https://dromic.dswd.gov.ph
+- OpenStreetMap — https://www.openstreetmap.org
+
 ---
 
 ## Gaps to close before the pitch
