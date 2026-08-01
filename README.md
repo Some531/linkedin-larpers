@@ -15,3 +15,30 @@ Delivery and Presentation: 20%
 # Pre-brief requirements
 
 The solution will require a technology solution that addresses a particular theme, the backend and frontend will be created separately, then merged together.
+
+# Filipino Dialects
+Tagalog
+Cebuano (Bisaya/Binisaya)
+Ilocano (Ilokano)
+Hiligaynon (Ilonggo)
+Bikol (Central Bikol / Bicolano)
+
+# Disasters - Consider emergency protocols for each disaster
+Typhoons - storm surges, heavy rainfall, winds
+
+Flash floods, triggered by other disasters
+
+Landslides, in mountainous, deforested, or steep areas
+
+Earthquakes - Frequent small ones, rarer large ones. 
+
+Tsunamis
+
+Volcanic Eruoptions
+
+Wildfires, during dry season
+
+Droughts
+
+Tornadoes
+
