@@ -231,6 +231,7 @@ struct SuggestionSheet: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(L10n.t(.continueButton, language)) { dismiss() }
+                        .tint(.white)
                 }
             }
         }

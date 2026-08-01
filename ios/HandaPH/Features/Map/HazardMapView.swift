@@ -76,6 +76,27 @@ struct HazardMapView: View {
                     }
                 }
 
+                // Response-phase layer: NGO/DSWD feeding sites appear only
+                // while a serious hazard is active near the user.
+                if risk.severity >= .warning {
+                    ForEach(FixtureStore.foodShelters) { shelter in
+                        Annotation(shelter.name, coordinate: shelter.coordinate) {
+                            Button {
+                                selectedLandmark = shelter
+                            } label: {
+                                Image(systemName: shelter.kind.symbolName)
+                                    .font(.callout.weight(.bold))
+                                    .foregroundStyle(.white)
+                                    .frame(width: 34, height: 34)
+                                    .background(.orange, in: Circle())
+                                    .frame(width: Theme.minTapTarget, height: Theme.minTapTarget)
+                                    .contentShape(Rectangle())
+                            }
+                            .accessibilityLabel(shelter.name)
+                        }
+                    }
+                }
+
                 // Landmarks (curated + OpenStreetMap extract) — tapping
                 // shows the bottom detail card.
                 ForEach(FixtureStore.allLandmarks) { landmark in
@@ -157,6 +178,7 @@ struct HazardMapView: View {
                         showProfile = true
                     } label: {
                         Label(L10n.t(.profileTitle, appState.language), systemImage: "person.2.fill")
+                            .foregroundStyle(.white)
                     }
                 }
             }
@@ -211,6 +233,9 @@ struct HazardMapView: View {
                 legendChip(symbol: "cross.fill", tint: .red, text: L10n.t(.legendHospital, appState.language))
                 legendChip(symbol: "figure.walk.arrival", tint: .green, text: L10n.t(.legendEvacuation, appState.language))
                 legendChip(symbol: "building.columns.fill", tint: .indigo, text: L10n.t(.legendBarangay, appState.language))
+                if risk.severity >= .warning {
+                    legendChip(symbol: "fork.knife", tint: .orange, text: L10n.t(.legendFood, appState.language))
+                }
             }
             .padding(.horizontal, 4)
         }
@@ -245,6 +270,7 @@ struct HazardMapView: View {
         case .hospital: .red
         case .evacuationCenter: .green
         case .barangayHall: .indigo
+        case .foodShelter: .orange
         }
     }
 }
@@ -280,6 +306,9 @@ struct PersonalRiskBanner: View {
                     Text(L10n.t(.noActiveRisk, language))
                         .font(.footnote)
                 } else {
+                    Text("\(L10n.t(.riskIndex, language)): \(risk.score)/100")
+                        .font(.caption.weight(.semibold))
+                        .opacity(0.9)
                     ForEach(risk.adviceKeys.prefix(2), id: \.self) { key in
                         Label(L10n.t(key, language), systemImage: "person.crop.circle.badge.exclamationmark")
                             .font(.footnote.weight(.medium))
@@ -376,6 +405,13 @@ struct LandmarkDetailCard: View {
                     Text("\(L10n.t(.arrive, language)) \(arrival, format: .dateTime.hour().minute())")
                         .font(.footnote.weight(.semibold))
                         .foregroundStyle(Theme.brand)
+                    if let source = landmark.source {
+                        // Named provenance builds the trust the open map
+                        // borrows from its partners.
+                        Label(source, systemImage: "checkmark.seal")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                 }
                 Spacer()
                 Button(action: onClose) {
@@ -427,6 +463,7 @@ struct LandmarkDetailCard: View {
         case .hospital: .red
         case .evacuationCenter: .green
         case .barangayHall: .indigo
+        case .foodShelter: .orange
         }
     }
 
@@ -435,6 +472,7 @@ struct LandmarkDetailCard: View {
         case .hospital: L10n.t(.legendHospital, language)
         case .evacuationCenter: L10n.t(.legendEvacuation, language)
         case .barangayHall: L10n.t(.legendBarangay, language)
+        case .foodShelter: L10n.t(.legendFood, language)
         }
     }
 }

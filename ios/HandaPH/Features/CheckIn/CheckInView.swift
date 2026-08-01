@@ -76,6 +76,7 @@ struct CheckInView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(L10n.t(.continueButton, language)) { dismiss() }
+                        .tint(.white)
                 }
             }
             .sheet(isPresented: $showComposer) {

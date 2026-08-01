@@ -241,12 +241,15 @@ struct ChecklistItem: Identifiable, Codable {
 struct Landmark: Identifiable {
     enum Kind: String {
         case hospital, evacuationCenter, barangayHall
+        /// NGO/DSWD feeding sites — response-phase only.
+        case foodShelter
 
         var symbolName: String {
             switch self {
             case .hospital: "cross.fill"
             case .evacuationCenter: "figure.walk.arrival"
             case .barangayHall: "building.columns.fill"
+            case .foodShelter: "fork.knife"
             }
         }
     }
@@ -255,4 +258,15 @@ struct Landmark: Identifiable {
     let name: String
     let kind: Kind
     let coordinate: CLLocationCoordinate2D
+    /// Who stands behind this point ("© OpenStreetMap contributors",
+    /// "Philippine Red Cross", "DSWD") — credibility is part of the data.
+    var source: String?
+}
+
+/// A region-appropriate emergency number, selected by the user's area.
+struct EmergencyContact: Identifiable {
+    let id: String
+    let label: String
+    let number: String
+    let organisation: String
 }

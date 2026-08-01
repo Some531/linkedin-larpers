@@ -47,6 +47,8 @@ enum L10n {
         case autoRead, pictureGuide
         // LIGTAS check-in
         case ligtasTitle, ligtasIntro, yourName, familyNumbers, ligtasSend, ligtasBody
+        // Response layer & risk index
+        case legendFood, emergencyContacts, riskIndex
     }
 
     /// Languages whose UI strings have not yet been reviewed by a community
@@ -130,6 +132,7 @@ enum L10n {
             .familyNumbers: "Family numbers (comma-separated)",
             .ligtasSend: "Send LIGTAS SMS",
             .ligtasBody: "LIGTAS ✅ %@ is safe near %@. Sent from Handa.",
+            .legendFood: "Food", .emergencyContacts: "Emergency numbers", .riskIndex: "Risk index",
         ],
         .tagalog: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulugan",
@@ -200,6 +203,7 @@ enum L10n {
             .familyNumbers: "Mga numero ng pamilya (paghiwalayin ng kuwit)",
             .ligtasSend: "Ipadala ang LIGTAS SMS",
             .ligtasBody: "LIGTAS ✅ Si %@ ay ligtas malapit sa %@. Mula sa Handa.",
+            .legendFood: "Pagkain", .emergencyContacts: "Mga emergency na numero", .riskIndex: "Antas ng panganib",
         ],
         .cebuano: [
             .tabAlerts: "Mga Alerto", .tabMap: "Mapa", .tabGlossary: "Kahulogan",
@@ -280,6 +284,7 @@ enum L10n {
             .familyNumbers: "Mga numero han pamilya (bulaga hin kuwit)",
             .ligtasSend: "Ipadara an LIGTAS SMS",
             .ligtasBody: "LIGTAS ✅ Hi %@ talwas harani ha %@. Tikang ha Handa.",
+            .legendFood: "Pagkaon", .emergencyContacts: "Mga emergency nga numero", .riskIndex: "Grado han peligro",
         ],
     ]
 }

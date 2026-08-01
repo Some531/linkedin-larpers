@@ -37,6 +37,7 @@ struct HouseholdProfileView: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button(L10n.t(.continueButton, language)) { dismiss() }
+                        .tint(.white)
                 }
             }
         }

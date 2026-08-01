@@ -5,8 +5,9 @@ struct HandaPHApp: App {
     init() {
         // Blue-beige identity, made unmissable: brand-blue navigation bars
         // with white titles, deep-blue tab bar. Content stays on sand.
+        // One blue for both bars, so top and bottom read as one frame.
         let brand = UIColor(red: 0.075, green: 0.44, blue: 0.66, alpha: 1)
-        let deep = UIColor(red: 0.045, green: 0.28, blue: 0.42, alpha: 1)
+        let deep = brand
 
         let nav = UINavigationBarAppearance()
         nav.configureWithOpaqueBackground()

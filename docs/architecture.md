@@ -480,3 +480,39 @@ a screen recording as a fallback.
    time cost. Recommend: design it, screenshot it, don't build it.
 4. **SMS provider** — Twilio (reliable, instant) versus a PH-local provider (authentic
    sender ID, slower to set up). Recommend Twilio for the demo, and say why in one line.
+
+## 15. Personal risk quantification
+
+The banner's number is not a vibe — it is `R = min(1, H · P · E · V)`,
+taken as the maximum over all currently relevant alerts, displayed ×100.
+
+| Term | Meaning | Values | Data source |
+| --- | --- | --- | --- |
+| **H** | Hazard intensity | danger 1.0 · warning 0.6 · advisory 0.3 | Official alert classification (PAGASA/PHIVOLCS via CAP) |
+| **P** | Proximity decay | e^(−d / 10 km); region-wide alerts 0.5 | Alert centroid vs user location (on device) |
+| **E** | Exposure | inside mapped hazard zone ×1.5 · self-reported near-coast ×1.25 · else ×1.0 | Hazard polygons — demo geometry standing in for Project NOAH inundation / DEM elevation layers over OSM base data |
+| **V** | Household vulnerability | 1 + 0.15·elderly + 0.15·limited-mobility + 0.10·children<5 + 0.10·single-storey, capped 1.5 | Self-reported household profile, stored on device only |
+
+Bands: **R ≥ 0.75 → danger**, **R ≥ 0.35 → warning**, else advisory.
+Worked example (demo fixture): storm-surge *danger* alert 2.3 km away,
+elderly household member → R = 1.0 × e^(−0.23) × 1.0 × 1.15 = **0.91 →
+danger, index 91**. Same alert, same distance, no vulnerability factors →
+0.79. Standing inside the surge polygon forces E = 1.5 → clamps to 1.0.
+
+Why this shape: H and P are the *general* reasoning any warning system
+has; E and V are the *specific* data only this app holds — measured
+geography and volunteered demographics. The multiplication is the point:
+the same official alert lands differently on different households, and
+the formula makes that difference explicit, explainable, and computable
+offline in microseconds. E's zone test is ray-cast point-in-polygon; in
+production the polygons come from Project NOAH / LiDAR DEM (elevation),
+so "your house is 2 m above sea level" enters through E without the user
+reporting anything.
+
+Open data in the chain today: OSM POIs (Overpass extract, ODbL) drive
+evacuation-centre proximity in advice and the assistant's "where do I go";
+the surge polygon is the placeholder for NOAH/DEM layers. Response-phase
+credibility comes from *named* partner layers — Red Cross/DSWD/Caritas
+feeding sites and LGU-configured emergency numbers — each rendered with
+its source attached, because provenance is what makes an open map
+believable to a community that has been burned by rumours before.

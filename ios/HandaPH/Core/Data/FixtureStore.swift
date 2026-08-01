@@ -315,6 +315,32 @@ enum FixtureStore {
         alerts.first { $0.token == token }
     }
 
+    /// Response-phase feeding sites, attributed to the operating NGO/agency
+    /// — partner-published data lends the open map its credibility.
+    /// Demo positions; production ingests the Red Cross/DSWD response feeds.
+    static let foodShelters: [Landmark] = [
+        Landmark(id: "f-1", name: "Red Cross Feeding Site — Tacloban Chapter", kind: .foodShelter,
+                 coordinate: CLLocationCoordinate2D(latitude: 11.2405, longitude: 125.0005),
+                 source: "Philippine Red Cross"),
+        Landmark(id: "f-2", name: "DSWD Community Kitchen — Brgy 91 Abucay", kind: .foodShelter,
+                 coordinate: CLLocationCoordinate2D(latitude: 11.2224, longitude: 124.9909),
+                 source: "DSWD"),
+        Landmark(id: "f-3", name: "Caritas Feeding Point — San Jose Parish", kind: .foodShelter,
+                 coordinate: CLLocationCoordinate2D(latitude: 11.2311, longitude: 125.0142),
+                 source: "Caritas Philippines"),
+    ]
+
+    /// Emergency numbers for the user's area. National numbers are real
+    /// and publicly listed; the local DRRMO line is a demo placeholder the
+    /// LGU would configure.
+    static func emergencyContacts(near _: CLLocationCoordinate2D) -> [EmergencyContact] {
+        [
+            EmergencyContact(id: "e-911", label: "911", number: "911", organisation: "National Emergency Hotline"),
+            EmergencyContact(id: "e-143", label: "143", number: "143", organisation: "Philippine Red Cross"),
+            EmergencyContact(id: "e-cdrrmo", label: "CDRRMO", number: "0532321234", organisation: "Tacloban City DRRMO (demo number)"),
+        ]
+    }
+
     /// Approximate storm-surge inundation band along the San Jose coast,
     /// standing in for a PHIVOLCS/Project NOAH hazard layer. Demo geometry,
     /// not survey data.

@@ -48,7 +48,7 @@ final class SmokeTests: XCTestCase {
         // won't once rdy.ph serves its AASA file.
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
         let openButton = springboard.buttons["Open"]
-        if openButton.waitForExistence(timeout: 5) {
+        if openButton.waitForExistence(timeout: 12) {
             openButton.tap()
         }
 

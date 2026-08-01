@@ -32,6 +32,35 @@ struct AlertsListView: View {
                 } else {
                     ScrollView {
                         LazyVStack(spacing: 14) {
+                            // LIGTAS check-in: large, first, unmissable —
+                            // the panic-moment action gets the top slot.
+                            Button {
+                                showCheckIn = true
+                            } label: {
+                                HStack(spacing: 12) {
+                                    Image(systemName: "checkmark.shield.fill")
+                                        .font(.title2)
+                                    Text(L10n.t(.ligtasTitle, appState.language))
+                                        .font(.headline)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .font(.subheadline.weight(.bold))
+                                }
+                                .foregroundStyle(.white)
+                                .padding(Theme.cardPadding)
+                                .frame(minHeight: 56)
+                                .background(
+                                    LinearGradient(colors: [.green, Color(red: 0.1, green: 0.55, blue: 0.35)],
+                                                   startPoint: .top, endPoint: .bottom),
+                                    in: RoundedRectangle(cornerRadius: Theme.cornerRadius)
+                                )
+                            }
+                            .accessibilityHint(L10n.t(.ligtasIntro, appState.language))
+
+                            // Region-appropriate emergency numbers — one
+                            // tap to call, no searching mid-disaster.
+                            EmergencyContactsRow(contacts: FixtureStore.emergencyContacts(near: here))
+
                             ForEach(alerts) { alert in
                                 NavigationLink(value: alert.id) {
                                     AlertCard(
@@ -49,17 +78,6 @@ struct AlertsListView: View {
             }
             .themedScreen()
             .navigationTitle(L10n.t(.alertsTitle, appState.language))
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showCheckIn = true
-                    } label: {
-                        Label("LIGTAS", systemImage: "checkmark.shield.fill")
-                            .labelStyle(.titleAndIcon)
-                            .font(.subheadline.weight(.bold))
-                    }
-                }
-            }
             .sheet(isPresented: $showCheckIn) {
                 CheckInView()
             }
@@ -67,6 +85,42 @@ struct AlertsListView: View {
                 if let alert = alerts.first(where: { $0.id == id }) {
                     AlertDetailView(alert: alert)
                 }
+            }
+        }
+    }
+}
+
+/// Tappable call chips for the user's area (README/Settings note which
+/// numbers are national vs LGU-configured).
+struct EmergencyContactsRow: View {
+    @EnvironmentObject private var appState: AppState
+    @Environment(\.openURL) private var openURL
+    let contacts: [EmergencyContact]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(L10n.t(.emergencyContacts, appState.language))
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(.secondary)
+            HStack(spacing: 8) {
+                ForEach(contacts) { contact in
+                    Button {
+                        if let url = URL(string: "tel://\(contact.number)") { openURL(url) }
+                    } label: {
+                        HStack(spacing: 6) {
+                            Image(systemName: "phone.fill")
+                            Text(contact.label)
+                                .fontWeight(.bold)
+                        }
+                        .font(.subheadline)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 14)
+                        .frame(minHeight: Theme.minTapTarget)
+                        .background(Color.red.gradient, in: Capsule())
+                    }
+                    .accessibilityLabel("\(contact.organisation), \(contact.label)")
+                }
+                Spacer()
             }
         }
     }
