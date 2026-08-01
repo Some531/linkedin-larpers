@@ -72,6 +72,7 @@ Cebuano (Bisaya/Binisaya)
 Ilocano (Ilokano)
 Hiligaynon (Ilonggo)
 Bikol (Central Bikol / Bicolano)
+Waray (Waray-Waray / Winaray) — Eastern Visayas; the language community hit hardest by Typhoon Haiyan and the region with the lowest resilience index in the country
 
 # Disasters - Consider emergency protocols for each disaster
 Typhoons - storm surges, heavy rainfall, winds
