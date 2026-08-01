@@ -12,10 +12,14 @@ struct AssistantTurn: Identifiable {
 
     let id = UUID()
     let question: String
+    /// Kept for logging/debugging; no longer rendered in the UI.
     var trace: [TraceStep] = []
     var answer: String = ""
     /// Names of the verified entries that grounded the answer.
     var groundedOn: [String] = []
+    /// IDs of the glossary entries behind the answer — rendered as
+    /// tappable learn-more cards under it.
+    var groundedTermIDs: [String] = []
     /// True when the answer came from the on-device corpus (offline path).
     var isLocal = false
 }
@@ -44,6 +48,7 @@ final class AssistantEngine: ObservableObject {
         var turn = AssistantTurn(question: q)
         let matches = Self.retrieve(q, language: language)
         turn.groundedOn = matches.map { $0.term.resolved(for: language).text }
+        turn.groundedTermIDs = matches.map(\.id)
         turn.trace.append(.init(key: "route", value: matches.isEmpty ? "navigate · app" : "explain · hazard term"))
         turn.trace.append(.init(key: "retrieve", value: matches.isEmpty ? "no glossary match" : turn.groundedOn.joined(separator: ", ")))
 
@@ -130,6 +135,8 @@ final class AssistantEngine: ObservableObject {
         3. Answer in the user's language: \(language.nativeName). Use short, \
         plain sentences a stressed reader can follow. No jargon.
         4. Keep answers under 120 words.
+        5. Plain text only — no markdown, no asterisks, no bullet symbols, \
+        no headers. The app renders your words verbatim.
 
         VERIFIED CONTENT:
         \(context.isEmpty ? "(none matched)" : context)

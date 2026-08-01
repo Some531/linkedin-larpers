@@ -152,8 +152,10 @@ final class SmokeTests: XCTestCase {
         ).firstMatch
         XCTAssertTrue(answer.waitForExistence(timeout: 8),
                       "Assistant should answer from the verified glossary offline")
-        XCTAssertTrue(app.staticTexts["retrieve"].firstMatch.exists,
-                      "Trace should show the retrieve stage")
+        // Learn-more card links the answer to the verified glossary entry.
+        XCTAssertTrue(app.buttons.matching(
+            NSPredicate(format: "label CONTAINS 'Storm surge'")
+        ).firstMatch.exists, "Answer should carry a learn-more glossary card")
 
         let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
         attachment.name = "gabay-assistant-offline"

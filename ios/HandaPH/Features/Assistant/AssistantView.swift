@@ -13,6 +13,7 @@ struct AssistantView: View {
     var body: some View {
         let language = appState.language
 
+        NavigationStack {
         VStack(spacing: 0) {
             header(language)
 
@@ -41,6 +42,13 @@ struct AssistantView: View {
             inputBar(language)
         }
         .background(Theme.background)
+        .toolbar(.hidden, for: .navigationBar)
+        .navigationDestination(for: String.self) { termID in
+            if let term = FixtureStore.glossary.first(where: { $0.id == termID }) {
+                GlossaryDetailView(term: term)
+            }
+        }
+        }
     }
 
     private func header(_ language: AppLanguage) -> some View {
@@ -152,30 +160,47 @@ private struct TurnView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Theme.surface2)
 
-            // Trace — the visible receipt that the answer is grounded.
-            VStack(alignment: .leading, spacing: 6) {
-                ForEach(turn.trace) { step in
-                    HStack(alignment: .top, spacing: 10) {
-                        Text(step.key)
-                            .font(.caption.monospaced().weight(.semibold))
-                            .foregroundStyle(Theme.brand)
-                            .frame(width: 64, alignment: .leading)
-                        Text(step.value)
-                            .font(.caption.monospaced())
-                            .foregroundStyle(.secondary)
-                    }
-                }
-            }
-            .padding(.horizontal, Theme.cardPadding)
-            .padding(.vertical, 10)
-
-            Divider()
-
-            // Answer
+            // Answer — rendered through AttributedString so any markdown
+            // the model emits (e.g. **bold**) displays properly instead of
+            // showing raw asterisks.
             VStack(alignment: .leading, spacing: 10) {
-                Text(turn.answer)
+                Text(attributedAnswer)
                     .font(.body)
                     .textSelection(.enabled)
+
+                // Learn-more visuals: the verified entries behind this
+                // answer, tappable through to the illustrated glossary page.
+                if !turn.groundedTermIDs.isEmpty {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 8) {
+                            ForEach(turn.groundedTermIDs, id: \.self) { id in
+                                if let term = FixtureStore.glossary.first(where: { $0.id == id }) {
+                                    NavigationLink(value: term.id) {
+                                        HStack(spacing: 8) {
+                                            HazardIcon(hazard: term.hazard, size: 30)
+                                            VStack(alignment: .leading, spacing: 0) {
+                                                Text(term.term.resolved(for: language).text)
+                                                    .font(.footnote.weight(.semibold))
+                                                    .foregroundStyle(.primary)
+                                                Text(L10n.t(.whatItIs, language))
+                                                    .font(.caption2)
+                                                    .foregroundStyle(.secondary)
+                                            }
+                                            Image(systemName: "chevron.right")
+                                                .font(.caption2)
+                                                .foregroundStyle(.secondary)
+                                        }
+                                        .padding(.horizontal, 10)
+                                        .padding(.vertical, 8)
+                                        .background(Theme.surface2, in: RoundedRectangle(cornerRadius: 12))
+                                    }
+                                    .buttonStyle(.plain)
+                                }
+                            }
+                        }
+                    }
+                }
+
                 HStack {
                     SpeakButton(text: turn.answer, language: language)
                     Spacer()
@@ -194,6 +219,14 @@ private struct TurnView: View {
             RoundedRectangle(cornerRadius: Theme.cornerRadius)
                 .strokeBorder(Theme.brand.opacity(0.15), lineWidth: 1)
         )
+    }
+
+    /// Markdown-aware rendering with a plain-text fallback.
+    private var attributedAnswer: AttributedString {
+        (try? AttributedString(
+            markdown: turn.answer,
+            options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace)
+        )) ?? AttributedString(turn.answer)
     }
 }
 
