@@ -41,7 +41,9 @@ SLIDE 5 · FIRST OPEN (onboarding GIF)  (~25s)
 - The age step: the app adapts to HER (60+ = bigger text, alerts read aloud).
 - Key idea to voice: accessibility is the entry door, not a settings menu.
 
-SLIDE 6 · RECEIVE (SMS → alert GIF + alert detail)  (~30s)
+SLIDE 6 · RECEIVE (SMS arriving GIF + alerts GIF)  (~30s)
+- Left GIF is the money shot: the PAGASA-ALERT text arrives, one tap on the
+  link opens the exact alert. Time your words to that tap.
 - The moment that matters: an alert arrives as a plain SMS — works on any
   phone, no app required, no data required.
 - One tap opens the exact alert: severity, place, three numbered actions.
