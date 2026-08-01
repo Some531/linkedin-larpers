@@ -32,8 +32,23 @@ struct AlertsListView: View {
                 } else {
                     ScrollView {
                         LazyVStack(spacing: 14) {
-                            // LIGTAS check-in: large, first, unmissable —
-                            // the panic-moment action gets the top slot.
+                            // Region-appropriate emergency numbers — one
+                            // tap to call, no searching mid-disaster.
+                            EmergencyContactsRow(contacts: FixtureStore.emergencyContacts(near: here))
+
+                            ForEach(alerts) { alert in
+                                NavigationLink(value: alert.id) {
+                                    AlertCard(
+                                        alert: alert,
+                                        language: appState.language,
+                                        isNearby: RiskEngine.isRelevant(alert, at: here) && alert.coordinate != nil
+                                    )
+                                }
+                                .buttonStyle(.plain)
+                            }
+
+                            // "I'm Safe" family SMS — useful after reading
+                            // the alerts, so it closes the list.
                             Button {
                                 showCheckIn = true
                             } label: {
@@ -56,21 +71,6 @@ struct AlertsListView: View {
                                 )
                             }
                             .accessibilityHint(L10n.t(.ligtasIntro, appState.language))
-
-                            // Region-appropriate emergency numbers — one
-                            // tap to call, no searching mid-disaster.
-                            EmergencyContactsRow(contacts: FixtureStore.emergencyContacts(near: here))
-
-                            ForEach(alerts) { alert in
-                                NavigationLink(value: alert.id) {
-                                    AlertCard(
-                                        alert: alert,
-                                        language: appState.language,
-                                        isNearby: RiskEngine.isRelevant(alert, at: here) && alert.coordinate != nil
-                                    )
-                                }
-                                .buttonStyle(.plain)
-                            }
                         }
                         .padding()
                     }
