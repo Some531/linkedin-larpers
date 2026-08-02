@@ -50,6 +50,47 @@ targets:
           - CFBundleURLName: ph.rdy.handa
             CFBundleURLSchemes: [handaph]
         ANTHROPIC_API_KEY: $(ANTHROPIC_API_KEY)
+  # Demo build for real-iPhone demos: identical app, but location is
+  # hardcoded to Tacloban (DEMO_FIXED_LOCATION) so the risk index and map
+  # don't collapse to the phone's real position, and the SMS deep-link URL
+  # scheme is not registered. Installs alongside the real app (own bundle id).
+  PhilAlert:
+    type: application
+    platform: iOS
+    configFiles:
+      Debug: Config/Secrets.xcconfig
+      Release: Config/Secrets.xcconfig
+    settings:
+      base:
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        PRODUCT_BUNDLE_IDENTIFIER: ph.rdy.handa.demo
+      configs:
+        Debug:
+          SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG DEMO_FIXED_LOCATION
+        Release:
+          SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEMO_FIXED_LOCATION
+    sources:
+      - path: HandaPH
+        excludes:
+          - Info.plist
+    info:
+      path: PhilAlert/Info.plist
+      properties:
+        CFBundleDisplayName: PhilAIert
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        NSLocationWhenInUseUsageDescription: >-
+          Handa uses your location to show hazards, hospitals and evacuation
+          centres near you, and to personalise flood and storm-surge risk.
+          Your location never leaves this phone.
+        NSMicrophoneUsageDescription: >-
+          Handa uses the microphone so you can ask the assistant questions
+          by voice instead of typing.
+        NSSpeechRecognitionUsageDescription: >-
+          Handa converts your voice into text for the assistant. On-device
+          recognition is used where available.
+        ANTHROPIC_API_KEY: $(ANTHROPIC_API_KEY)
   HandaPHUITests:
     type: bundle.ui-testing
     platform: iOS

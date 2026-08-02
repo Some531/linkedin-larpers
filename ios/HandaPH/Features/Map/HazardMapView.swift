@@ -557,9 +557,18 @@ final class LocationProvider: NSObject, ObservableObject, CLLocationManagerDeleg
         super.init()
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        #if DEMO_FIXED_LOCATION
+        // Demo target only: pin the device to Tacloban so risk, map and
+        // assistant behave as in the warning zone regardless of where the
+        // demo phone physically is. Core Location is never consulted.
+        lastCoordinate = FixtureStore.fallbackCenter
+        #endif
     }
 
     func requestAccess() {
+        #if DEMO_FIXED_LOCATION
+        return
+        #else
         switch manager.authorizationStatus {
         case .notDetermined:
             manager.requestWhenInUseAuthorization()
@@ -570,9 +579,13 @@ final class LocationProvider: NSObject, ObservableObject, CLLocationManagerDeleg
         @unknown default:
             break
         }
+        #endif
     }
 
     nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        #if DEMO_FIXED_LOCATION
+        return
+        #else
         let status = manager.authorizationStatus
         Task { @MainActor in
             switch status {
@@ -585,13 +598,18 @@ final class LocationProvider: NSObject, ObservableObject, CLLocationManagerDeleg
                 break
             }
         }
+        #endif
     }
 
     nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        #if DEMO_FIXED_LOCATION
+        return
+        #else
         guard let coordinate = locations.last?.coordinate else { return }
         Task { @MainActor in
             self.lastCoordinate = coordinate
         }
+        #endif
     }
 
     nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
