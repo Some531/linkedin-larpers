@@ -30,7 +30,25 @@ struct HazardMapView: View {
     var body: some View {
         NavigationStack {
             Map(position: $camera) {
+                #if DEMO_FIXED_LOCATION
+                // Demo target: Core Location is off, so UserAnnotation would
+                // never render. Draw the "you are here" dot at the pinned
+                // Tacloban coordinate instead.
+                Annotation("", coordinate: center) {
+                    ZStack {
+                        Circle()
+                            .fill(.blue.opacity(0.25))
+                            .frame(width: 44, height: 44)
+                        Circle()
+                            .fill(.blue)
+                            .frame(width: 18, height: 18)
+                            .overlay(Circle().strokeBorder(.white, lineWidth: 3))
+                    }
+                    .allowsHitTesting(false)
+                }
+                #else
                 UserAnnotation()
+                #endif
 
                 // Hazard layer: storm-surge inundation band (fixture geometry
                 // standing in for a PHIVOLCS / Project NOAH layer).
