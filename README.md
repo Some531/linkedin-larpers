@@ -37,7 +37,7 @@ Focus on hard-to-reach communities (culturally and linguistically), as they do n
 - Warning fatigue can lead to reduced effectiveness, as well as information overload
 - *Refrain from AI-slop!*
 
-A key consideration is the fact that being physically close is not enough and that lack of online presence can predispose these individuals to risks. 
+A key consideration is the fact that being physically close is not enough and that lack of online presence and clarity can predispose these individuals to risks. 
 
 #### Phases: 
 - Prevention (avoid before it happens)
